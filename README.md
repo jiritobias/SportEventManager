@@ -7,4 +7,4 @@ Team No. 4
 - Petra Halová
 - Martin Ondo-Eštok
 - Martin Šmíd
-- Jiří Tobiáš
+- Jiří Tobiáš (team leader)
