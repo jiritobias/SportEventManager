@@ -7,20 +7,7 @@ import java.util.List;
 /**
  * @author Martin Šmíd
  */
-public interface SportDao {
-
-    /**
-     * Creates a record of Sport object in DB
-     * @param sport Sport object to be created
-     */
-    void create(Sport sport);
-
-    /**
-     * Removes a Sport object from DB
-     * @param sport Sport object to be deleted
-     */
-    void delete(Sport sport);
-
+public interface SportDao extends BaseDao<Sport>{
     /**
      * Finds a Sport object by its ID
      * @param id ID of the Sport object
