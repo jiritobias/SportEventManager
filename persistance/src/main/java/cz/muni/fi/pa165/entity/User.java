@@ -5,6 +5,9 @@ import cz.muni.fi.pa165.enums.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -37,6 +40,9 @@ public class User {
     private Role role;
 
     private Gendre gendre;
+
+    @ManyToMany
+    private Set<Competition> competitions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -100,5 +106,21 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Gendre getGendre() {
+        return gendre;
+    }
+
+    public void setGendre(Gendre gendre) {
+        this.gendre = gendre;
+    }
+
+    public Set<Competition> getCompetitions() {
+        return competitions;
+    }
+
+    public void setCompetitions(Set<Competition> competitions) {
+        this.competitions = competitions;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    private EntityManager em;
+    protected EntityManager em;
 
     @Override
     public void create(User entity) {
