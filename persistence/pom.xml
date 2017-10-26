@@ -14,11 +14,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>eshop-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <scope>test</scope>
