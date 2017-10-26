@@ -11,8 +11,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 import static org.testng.Assert.assertEquals;
 
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
@@ -32,7 +32,7 @@ public class BaseDaoImplTest extends AbstractTestNGSpringContextTests {
         baseDao.create(sport);
 
         List<Sport> all = baseDao.findAll();
-        assertThat(all.size(), is(1));
+        assertThat(all.size() == 1);
 
         Sport first = all.get(0);
         assertEquals(first, sport);
