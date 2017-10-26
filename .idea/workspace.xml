@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b0dd0be-083d-4a37-a2a3-18cfd7e7ab2c" name="Default" comment="generalization">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/persistence.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Sporteventmanager.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/persistance.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/BaseDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/BaseDaoImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportDaoImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportsMenDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportsMenDaoImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/UserDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/UserDaoImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/Competition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/Sport.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/User.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Gendre.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Role.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sport-event-manager.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test" afterPath="" />
+    <list default="true" id="0b0dd0be-083d-4a37-a2a3-18cfd7e7ab2c" name="Default" comment="project setting">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/parent.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/InMemoryDatabaseSpring.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/MainJavaSe.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/PersistenceSampleApplicationContext.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Sport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Gendre.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Role.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/main/resources/META-INF/persistence.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/persistence/ContainerManagedEntityManagerTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/test/resources/logback-test.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/persistance/src/main/java/Main.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -89,7 +91,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SportsMenDao.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SportsMenDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -99,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserDaoImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserDaoImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="323">
+              <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -580,7 +582,7 @@
       <workItem from="1508931326019" duration="1512000" />
       <workItem from="1509004196018" duration="2542000" />
       <workItem from="1509025984823" duration="2746000" />
-      <workItem from="1509030615001" duration="1443000" />
+      <workItem from="1509030615001" duration="1613000" />
     </task>
     <task id="LOCAL-00001" summary="project creation">
       <created>1507991497543</created>
@@ -617,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509006331938</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="project setting">
+      <created>1509035450562</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1509035450562</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -641,7 +650,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13393000" />
+    <option name="totallyTimeSpent" value="13563000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
@@ -649,6 +658,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32943678" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -674,7 +684,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -694,7 +703,8 @@
     <MESSAGE value="sportsmen first" />
     <MESSAGE value="update sportsmen" />
     <MESSAGE value="generalization" />
-    <option name="LAST_COMMIT_MESSAGE" value="generalization" />
+    <MESSAGE value="project setting" />
+    <option name="LAST_COMMIT_MESSAGE" value="project setting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -814,14 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -858,6 +860,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding />
         </state>
       </provider>
