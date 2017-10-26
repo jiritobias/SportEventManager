@@ -5,5 +5,5 @@ import cz.muni.fi.pa165.entity.User;
 
 public interface SportsMenDao extends UserDao {
 
-    public void addToCompetition(Competition competition, User user);
+    void addToCompetition(Competition competition, User user);
 }
