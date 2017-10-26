@@ -5,8 +5,9 @@ import cz.fi.muni.pa165.enums.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,21 +26,35 @@ public class User {
     @Pattern(regexp = EMAIL_REGEX)
     @NotNull
     private String email;
+
     @NotNull
+    @Column
     private String firstname;
+
     @NotNull
+    @Column
     private String lastname;
 
+    @Column
+    private Date birthdate;
+
     @Pattern(regexp = "\\+?\\d+")
+    @Column
     private String phone;
 
     @NotNull
+    @Column
     private String address;
 
     @NotNull
+    @Enumerated
+    @Column
     private Role role;
 
+    @Column
+    @Enumerated
     private Gendre gendre;
+
 
     @ManyToMany
     private Set<Competition> competitions = new HashSet<>();
@@ -117,10 +132,14 @@ public class User {
     }
 
     public Set<Competition> getCompetitions() {
-        return competitions;
+        return Collections.unmodifiableSet(competitions);
     }
 
     public void setCompetitions(Set<Competition> competitions) {
         this.competitions = competitions;
+    }
+
+    public void removeFromCompetition(Competition competition) {
+        this.competitions.remove(competition);
     }
 }
