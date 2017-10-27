@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
+import org.hibernate.annotations.Columns;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

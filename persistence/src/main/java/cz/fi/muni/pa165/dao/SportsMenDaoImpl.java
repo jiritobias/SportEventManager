@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Competition;
-import cz.fi.muni.pa165.entity.Team;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.stereotype.Repository;
@@ -37,16 +36,6 @@ public class SportsMenDaoImpl extends UserDaoImpl implements SportsMenDao {
 
         sportsMan.removeFromCompetition(competition);
         entityManager.merge(sportsMan);
-    }
-
-    @Override
-    public void addToTeam(Team team, User sportsMan) {
-        throw new UnsupportedOperationException("Not implemented yet!"); // TODO
-    }
-
-    @Override
-    public void removeFromTeam(Team team, User sportsMan) {
-        throw new UnsupportedOperationException("Not implemented yet!"); // TODO
     }
 
     @Override
