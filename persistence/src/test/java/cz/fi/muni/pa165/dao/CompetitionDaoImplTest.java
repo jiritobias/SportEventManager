@@ -3,6 +3,8 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.enums.Gendre;
+import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -30,20 +32,20 @@ public class CompetitionDaoImplTest {
         competition.setSport(sport);
 
         User sportman = new User();
-//        sportman.setFirstname("Martin");
-//        sportman.setLastname("Novy");
-//        sportman.setEmail("test@test.com");
-//        sportman.setAddress("address");
-//        sportman.setGendre(Gendre.MEN);
-//        sportman.setRole(Role.SPORTSMEN);
+        sportman.setFirstname("Martin");
+        sportman.setLastname("Novy");
+        sportman.setEmail("test@test.com");
+        sportman.setAddress("address");
+        sportman.setGendre(Gendre.MEN);
+        sportman.setRole(Role.SPORTSMEN);
 
         User sportwoman = new User();
-//        sportwoman.setFirstname("Pavla");
-//        sportwoman.setLastname("Stara");
-//        sportwoman.setEmail("abc@test.com");
-//        sportwoman.setAddress("place");
-//        sportwoman.setGendre(Gendre.WOMAN);
-//        sportwoman.setRole(Role.SPORTSMEN);
+        sportwoman.setFirstname("Pavla");
+        sportwoman.setLastname("Stara");
+        sportwoman.setEmail("abc@test.com");
+        sportwoman.setAddress("place");
+        sportwoman.setGendre(Gendre.WOMAN);
+        sportwoman.setRole(Role.SPORTSMEN);
 
         competition.addSportman(sportman);
         competition.addSportman(sportwoman);
