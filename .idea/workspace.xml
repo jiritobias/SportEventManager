@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0b0dd0be-083d-4a37-a2a3-18cfd7e7ab2c" name="Default" comment="sportsman + simple tests">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Sport.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Sport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java" afterPath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java" afterPath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,29 +28,163 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <expand />
+    <expand>
+      <path>
+        <item name="" type="eadb38e5:DatabaseStructure$Root" />
+        <item name="default/Hibernate" type="e3449647:DbNodeDescriptor" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Competition.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java">
+      <file leaf-file-name="UserDaoTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="178">
+              <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompetitionDaoImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/CompetitionDaoImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="20" column="47" lean-forward="true" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1509118889093" expanded="true" signature="595:602" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserDaoTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java">
+      <file leaf-file-name="SportDaoImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportDaoImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-107">
-              <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+            <state relative-caret-position="68">
+              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="e#312#313#0" expanded="true" />
+                <element signature="e#368#369#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportsMenDaoImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportsMenDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportsMenDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding>
+                <element signature="e#503#504#0" expanded="true" />
+                <element signature="e#548#549#0" expanded="true" />
+                <marker date="1509130411176" expanded="false" signature="597:608" ph=" { " />
+                <marker date="1509130411176" expanded="false" signature="637:643" ph=" }" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportEventDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="50" lean-forward="false" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportEventDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="10" column="87" lean-forward="false" selection-start-line="10" selection-start-column="87" selection-end-line="10" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Role.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Role.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainJavaSe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/MainJavaSe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,8 +193,8 @@
       <file leaf-file-name="BaseDaoImplTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="37" column="14" lean-forward="true" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+            <state relative-caret-position="255">
+              <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,61 +202,89 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logback-test.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/test/resources/logback-test.xml">
+      <file leaf-file-name="CompetitionDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/CompetitionDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersistenceSampleApplicationContext.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/PersistenceSampleApplicationContext.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="22" column="6" lean-forward="false" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="2329">
+              <caret line="177" column="34" lean-forward="true" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="34" />
+              <folding>
+                <element signature="e#1712#1713#0" expanded="true" />
+                <element signature="e#1737#1738#0" expanded="true" />
+                <marker date="1509129536054" expanded="false" signature="1770:1781" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="1794:1800" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="1837:1848" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="1868:1874" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2008:2019" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2032:2038" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2078:2089" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2108:2114" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2148:2159" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2176:2182" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2230:2241" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2268:2274" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2307:2318" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2334:2340" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2386:2397" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2422:2428" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2458:2469" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2482:2488" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2528:2539" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2558:2564" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2596:2607" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2622:2628" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2672:2683" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2706:2712" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2739:2750" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2762:2768" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2804:2815" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2832:2838" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2869:2880" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2894:2900" ph=" }" />
+                <marker date="1509129536054" expanded="false" signature="2942:2953" ph=" { " />
+                <marker date="1509129536054" expanded="false" signature="2974:2980" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sport.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sport.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Sport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state relative-caret-position="102">
+              <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+              <folding>
+                <element signature="e#673#674#0" expanded="true" />
+                <element signature="e#705#706#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportEvent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Team.java">
+      <file leaf-file-name="BaseEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/BaseEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="85">
+              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -136,12 +303,18 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>FK6CB60CBLFIX56NFHM622H9AHB</find>
+      <find>ma</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="SportsMan" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -153,10 +326,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/persistance/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Role.java" />
-        <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/UserRole.java" />
-        <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/Identifiable.java" />
         <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportsMen.java" />
         <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportsMenImpl.java" />
         <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Gender.java" />
@@ -182,19 +351,32 @@
         <option value="$PROJECT_DIR$/persistance/src/main/resources/META-INF/persistance.xml" />
         <option value="$PROJECT_DIR$/persistance/test/cz/muni/fi/pa165/BaseDaoImplTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/MainJavaSe.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java" />
-        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java" />
-        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java" />
-        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportDaoImplTest.java" />
-        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/CompetitionDaoImpl.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/PersistenceSampleApplicationContext.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Team.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Identifiable.java" />
         <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/CompetitionDaoImplTest.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/BaseEntity.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDao.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Gendre.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Role.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/MainJavaSe.java" />
+        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Sport.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDaoImpl.java" />
+        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportDaoImplTest.java" />
+        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java" />
+        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java" />
       </list>
     </option>
   </component>
@@ -246,10 +428,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -317,6 +495,16 @@
               <item name="SportEventManager" type="462c0819:PsiDirectoryNode" />
               <item name="persistence" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pa165" type="462c0819:PsiDirectoryNode" />
+              <item name="enums" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SportEventManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SportEventManager" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -336,10 +524,22 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SportEventManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SportEventManager" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -360,18 +560,18 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="cz.fi.muni.pa165.dao" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/persistance/src/main" />
-      <recent name="$PROJECT_DIR$/persistance/src" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cz.muni.fi.pa165.dao" />
+      <recent name="cz.muni.fi.pa165.services" />
+      <recent name="cz.muni.fi.pa165.enums" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="cz.fi.muni.pa165.dao.BaseDaoImplTest" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="cz.muni.fi.pa165.dao" />
-      <recent name="cz.muni.fi.pa165.services" />
-      <recent name="cz.muni.fi.pa165.enums" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/persistance/src/main" />
+      <recent name="$PROJECT_DIR$/persistance/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -386,39 +586,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.CompetitionDaoImplTest.testCreate">
-    <configuration name="BaseDaoImplTest (2)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="persistence" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.BaseDaoImplTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
+  <component name="RunManager" selected="TestNG.SportsMenDaoImplTest.testCreate">
     <configuration name="BaseDaoImplTest.createTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -451,7 +619,7 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="CompetitionDaoImplTest.testCreate" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CompetitionDaoImplTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
@@ -464,6 +632,70 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
       <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.CompetitionDaoImplTest" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="SportDaoImplTest.test" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="persistence" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportDaoImplTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="SportDaoImplTest.testCreate" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="persistence" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportDaoImplTest" />
       <option name="METHOD_NAME" value="testCreate" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
@@ -483,7 +715,7 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="CompetitionDaoImplTest.testDelete" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SportsMenDaoImplTest.testCreate" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
@@ -495,8 +727,8 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.CompetitionDaoImplTest" />
-      <option name="METHOD_NAME" value="testDelete" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportsMenDaoImplTest" />
+      <option name="METHOD_NAME" value="testCreate" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -539,38 +771,6 @@
         </option>
       </MavenSettings>
     </configuration>
-    <configuration name="UserDaoTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="persistence" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.UserDaoTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -610,18 +810,6 @@
       </option>
       <envs />
       <patterns />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="parent" />
-      <envs />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
@@ -663,21 +851,33 @@
       <properties />
       <listeners />
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="parent" />
+      <envs />
+    </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Maven.Unnamed" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest (2)" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest.createTest" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.UserDaoTest" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.CompetitionDaoImplTest.testDelete" />
-      <item index="5" class="java.lang.String" itemvalue="TestNG.CompetitionDaoImplTest.testCreate" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest.createTest" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.CompetitionDaoImplTest" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.SportDaoImplTest.test" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testCreate" />
+      <item index="5" class="java.lang.String" itemvalue="TestNG.SportDaoImplTest.testCreate" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.CompetitionDaoImplTest.testCreate" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.CompetitionDaoImplTest.testDelete" />
+        <item index="0" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testCreate" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.SportDaoImplTest.testCreate" />
         <item index="2" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest.createTest" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.UserDaoTest" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest (2)" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.SportDaoImplTest.test" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.CompetitionDaoImplTest" />
       </list>
     </recent_temporary>
   </component>
@@ -754,46 +954,53 @@
       <option name="project" value="LOCAL" />
       <updated>1509035614263</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="merge + entity update">
+      <created>1509129634934</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1509129634934</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.26 at 19h 16m 02s.xml">
+    <history-entry file="BaseDaoImplTest_createTest - 2017.10.27 at 21h 04m 32s.xml">
       <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.26 at 19h 16m 26s.xml">
+    <history-entry file="BaseDaoImplTest_createTest - 2017.10.27 at 21h 06m 22s.xml">
       <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.26 at 19h 17m 38s.xml">
-      <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
+    <history-entry file="CompetitionDaoImplTest - 2017.10.27 at 21h 00m 20s.xml">
+      <configuration name="CompetitionDaoImplTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.26 at 19h 18m 40s.xml">
-      <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
+    <history-entry file="SportDaoImplTest_test - 2017.10.27 at 21h 01m 57s.xml">
+      <configuration name="SportDaoImplTest.test" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.26 at 19h 19m 25s.xml">
-      <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
+    <history-entry file="SportDaoImplTest_testCreate - 2017.10.27 at 21h 10m 54s.xml">
+      <configuration name="SportDaoImplTest.testCreate" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.27 at 16h 13m 54s.xml">
-      <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
+    <history-entry file="SportDaoImplTest_testCreate - 2017.10.27 at 21h 13m 56s.xml">
+      <configuration name="SportDaoImplTest.testCreate" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseDaoImplTest_createTest - 2017.10.27 at 16h 15m 58s.xml">
-      <configuration name="BaseDaoImplTest.createTest" configurationId="TestNG" />
+    <history-entry file="SportsMenDaoImplTest_testCreate - 2017.10.27 at 21h 09m 35s.xml">
+      <configuration name="SportsMenDaoImplTest.testCreate" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="CompetitionDaoImplTest_testCreate - 2017.10.27 at 17h 29m 06s.xml">
-      <configuration name="CompetitionDaoImplTest.testCreate" configurationId="TestNG" />
+    <history-entry file="SportsMenDaoImplTest_testCreate - 2017.10.27 at 21h 15m 21s.xml">
+      <configuration name="SportsMenDaoImplTest.testCreate" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="CompetitionDaoImplTest_testDelete - 2017.10.27 at 17h 06m 07s.xml">
-      <configuration name="CompetitionDaoImplTest.testDelete" configurationId="TestNG" />
+    <history-entry file="SportsMenDaoImplTest_testCreate - 2017.10.27 at 21h 15m 59s.xml">
+      <configuration name="SportsMenDaoImplTest.testCreate" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="UserDaoTest - 2017.10.26 at 19h 19m 58s.xml">
+    <history-entry file="UserDaoTest - 2017.10.27 at 20h 59m 54s.xml">
       <configuration name="UserDaoTest" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21933000" />
+    <option name="totallyTimeSpent" value="27240000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -802,23 +1009,24 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28213507" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44208288" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22654584" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31435078" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37619555" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12752391" sideWeight="0.49583334" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22395274" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22083333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17293233" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1734375" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.49791667" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995749" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -835,9 +1043,10 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24654622" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
@@ -866,18 +1075,16 @@
     <MESSAGE value="update sportsmen" />
     <MESSAGE value="generalization" />
     <MESSAGE value="project setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="project setting" />
+    <MESSAGE value="merge + entity update" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge + entity update" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="5" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/persistance/src/main/resources/log4j,xml" />
-    <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/Sport.java" />
-    <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/User.java" />
-    <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Role.java" />
-    <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/services/CompetitionService.java" />
     <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Gendre.java" />
     <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/Competition.java" />
     <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/services/CompetitionServiceImpl.java" />
@@ -912,40 +1119,11 @@
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/71d04639-6a67-4d99-b7da-58d36e39f460/console.sql" />
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Role.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/persistence/ContainerManagedEntityManagerTest.java" />
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/MainJavaSe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/InMemoryDatabaseSpring.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -973,139 +1151,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Gendre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="44" lean-forward="false" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/CompetitionDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportDaoImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="53" lean-forward="false" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="29" lean-forward="true" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1509118889093" expanded="true" signature="595:602" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="22" column="6" lean-forward="false" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-107">
-          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="37" column="14" lean-forward="true" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/PersistenceSampleApplicationContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/CompetitionDaoImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-356">
-          <caret line="34" column="45" lean-forward="true" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/test/resources/logback-test.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1114,35 +1159,301 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java">
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/PersistenceSampleApplicationContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final-sources.jar!/javax/persistence/OneToMany.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="119" column="11" lean-forward="false" selection-start-line="119" selection-start-column="11" selection-end-line="119" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state relative-caret-position="85">
+          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java">
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Identifiable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/CompetitionDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#543#544#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#776#777#0" expanded="true" />
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#846#847#0" expanded="true" />
+            <element signature="e#874#875#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#949#950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding>
+            <marker date="1509129607083" expanded="true" signature="671:732" ph="/**...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Gendre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/enums/Role.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/MainJavaSe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/CompetitionDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/CompetitionDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="20" column="47" lean-forward="true" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/UserDaoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="50" lean-forward="false" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="87" lean-forward="false" selection-start-line="10" selection-start-column="87" selection-end-line="10" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#368#369#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="e#503#504#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+            <marker date="1509130411176" expanded="false" signature="597:608" ph=" { " />
+            <marker date="1509130411176" expanded="false" signature="637:643" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/BaseDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Sport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="102">
+          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding>
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2329">
+          <caret line="177" column="34" lean-forward="true" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="34" />
+          <folding>
+            <element signature="e#1712#1713#0" expanded="true" />
+            <element signature="e#1737#1738#0" expanded="true" />
+            <marker date="1509129536054" expanded="false" signature="1770:1781" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="1794:1800" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="1837:1848" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="1868:1874" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2008:2019" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2032:2038" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2078:2089" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2108:2114" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2148:2159" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2176:2182" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2230:2241" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2268:2274" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2307:2318" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2334:2340" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2386:2397" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2422:2428" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2458:2469" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2482:2488" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2528:2539" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2558:2564" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2596:2607" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2622:2628" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2672:2683" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2706:2712" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2739:2750" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2762:2768" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2804:2815" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2832:2838" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2869:2880" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2894:2900" ph=" }" />
+            <marker date="1509129536054" expanded="false" signature="2942:2953" ph=" { " />
+            <marker date="1509129536054" expanded="false" signature="2974:2980" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>

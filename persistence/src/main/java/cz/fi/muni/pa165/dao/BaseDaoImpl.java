@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.BaseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -12,7 +13,7 @@ import javax.persistence.PersistenceContext;
 public abstract class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
 
     @PersistenceContext
-    protected EntityManager entityManager;
+    EntityManager entityManager;
 
     @Override
     public void create(T entity) {

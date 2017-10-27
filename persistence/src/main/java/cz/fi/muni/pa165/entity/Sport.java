@@ -13,7 +13,6 @@ public class Sport extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sport_id")
     private Long id;
 
     @NotNull
