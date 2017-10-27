@@ -6,6 +6,9 @@ import cz.fi.muni.pa165.enums.Role;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+/**
+ * @author jiritobias
+ */
 @Repository
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 

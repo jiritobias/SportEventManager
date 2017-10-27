@@ -7,19 +7,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Competition {
+@Table(name = "COMPETITION_TABLE")
+public class Competition extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(nullable = false)
+    @OneToOne
+    @JoinTable(name="SPORT_TABLE")
     private Sport sport;
 
     @ManyToMany
     private Set<User> sportsMen = new HashSet<>();
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -61,4 +63,5 @@ public class Competition {
         result = 31 * result + getSportsMen().hashCode();
         return result;
     }
+
 }

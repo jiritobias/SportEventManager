@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 import java.util.List;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * @author jiritobias
+ */
 public class UserDaoTest extends BaseDaoImplTest {
 
     @Qualifier("userDaoImpl")
