@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author jiritobias
+ */
 @Entity
 @Table(name = "Users")
 public class User extends BaseEntity {
