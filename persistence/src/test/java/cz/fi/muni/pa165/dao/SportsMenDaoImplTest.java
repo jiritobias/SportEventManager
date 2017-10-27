@@ -21,14 +21,12 @@ import static org.testng.Assert.assertNotNull;
  * @author Martin Šmíd
  */
 public class SportsMenDaoImplTest extends BaseDaoImplTest {
+    @Autowired
+    private SportsMenDao sportsMenDao;
 
-
-
-        @Autowired
-        SportsMenDao sportsMenDao;
     @Autowired
     private CompetitionDao competitionDao;
-    
+
     private User sportsmen;
 
     @BeforeMethod

@@ -53,7 +53,7 @@ public class User extends BaseEntity {
     private Gendre gendre;
 
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "sportsMen")
     private Set<Competition> competitions = new HashSet<>();
 
     @Override
@@ -139,7 +139,14 @@ public class User extends BaseEntity {
 
     public void removeFromCompetition(Competition competition) {
         this.competitions.remove(competition);
+        competition.removeSportman(this);
     }
+
+    public void addToCompetition(Competition competition) {
+        this.competitions.add(competition);
+        competition.addSportman(this);
+    }
+
 
     @Override
     public boolean equals(Object o) {
