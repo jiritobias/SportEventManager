@@ -88,7 +88,7 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         
         Set<User> sportsmenInComp = found.getSportsMen();
 
-        assertTrue(sportsmen.getCompetitions().contains(competition));
+        assertTrue(sportsmen.getCompetitions().contains(competition1));
         assertEquals(sportsmenInComp.size(), 1);
         assertTrue(sportsmenInComp.contains(sportsmen));
     }
