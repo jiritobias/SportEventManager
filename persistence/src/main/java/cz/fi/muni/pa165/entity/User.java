@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User extends BaseEntity {
 
     private static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
@@ -59,6 +59,7 @@ public class User {
     @ManyToMany
     private Set<Competition> competitions = new HashSet<>();
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -141,5 +142,41 @@ public class User {
 
     public void removeFromCompetition(Competition competition) {
         this.competitions.remove(competition);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (!id.equals(user.id)) {
+            return false;
+        }
+        if (!passwordHash.equals(user.passwordHash)) {
+            return false;
+        }
+        if (!email.equals(user.email)) {
+            return false;
+        }
+        if (!firstname.equals(user.firstname)) {
+            return false;
+        }
+        return lastname.equals(user.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + passwordHash.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + firstname.hashCode();
+        result = 31 * result + lastname.hashCode();
+        return result;
     }
 }

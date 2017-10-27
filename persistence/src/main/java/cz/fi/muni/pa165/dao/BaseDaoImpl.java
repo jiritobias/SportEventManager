@@ -1,11 +1,12 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.BaseEntity;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public abstract class BaseDaoImpl<T> implements BaseDao<T> {
+public abstract class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
 
     @PersistenceContext
     protected EntityManager entityManager;
