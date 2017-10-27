@@ -83,11 +83,9 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         sportsMenDao.addToCompetition(competition1, sportsmen);
         sportsMenDao.removeFromCompetition(competition, sportsmen);
 
-        Competition found = competitionDao.findById(competition.getId());
-        
         assertEquals(sportsmen.getCompetitions().size(), 1);
-        found = competitionDao.findById(competition1.getId());
-        assertNotNull(found);
+        Competition found = competitionDao.findById(competition1.getId());
+        
         Set<User> sportsmenInComp = found.getSportsMen();
 
         assertTrue(sportsmen.getCompetitions().contains(competition));
