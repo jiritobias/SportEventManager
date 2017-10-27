@@ -24,8 +24,8 @@ public class Sport extends BaseEntity {
     public Sport() {
     }
 
+    @Override
     public Long getId() {
-
         return id;
     }
 

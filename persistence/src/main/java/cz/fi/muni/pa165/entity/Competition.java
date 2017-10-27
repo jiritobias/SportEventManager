@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Competition {
+public class Competition extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +14,7 @@ public class Competition {
     @ManyToMany
     private Set<User> sportsMen = new HashSet<>();
 
+    @Override
     public Long getId() {
         return id;
     }
