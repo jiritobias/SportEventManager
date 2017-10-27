@@ -80,7 +80,9 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         competitionDao.create(competition2);
 
         List<Competition> competitions = competitionDao.findAll();
-
+        assertEquals(2, competitions.size());
+        assertEquals("Tennis", competitions.get(0).getSport().getName());
+        assertEquals("Swimming", competitions.get(1).getSport().getName());
     }
 
     /**
