@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -21,9 +22,10 @@ import static org.testng.Assert.assertNotNull;
  */
 public class SportsMenDaoImplTest extends BaseDaoImplTest {
 
-    @Autowired
-    private SportsMenDao sportsMenDao;
 
+
+        @Autowired
+        SportsMenDao sportsMenDao;
     @Autowired
     private CompetitionDao competitionDao;
     
@@ -49,6 +51,7 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
 
         User found = sportsMenDao.findById(sportsmen.getId());
         assertNotNull(found);
+        assertEquals(sportsMenDao.findAll().size(), 1);
         assertEquals(found, sportsmen);
     }
 
@@ -94,16 +97,6 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         Assert.assertTrue(sportsmen.getCompetitions().contains(competition));
         Assert.assertEquals(sportsmenInComp.size(), 1);
         Assert.assertTrue(sportsmenInComp.contains(sportsmen));
-    }
-
-    @Test
-    public void testAddToTeam() {
-
-    }
-
-    @Test
-    public void testRemoveFromTeam() {
-
     }
 
     @Test
