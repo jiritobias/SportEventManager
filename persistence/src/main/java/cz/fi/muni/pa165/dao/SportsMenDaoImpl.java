@@ -25,7 +25,7 @@ public class SportsMenDaoImpl extends UserDaoImpl implements SportsMenDao {
         assert competition != null;
         assert sportsMan != null;
 
-        sportsMan.getCompetitions().add(competition);
+        sportsMan.addToCompetition(competition);
         entityManager.merge(sportsMan);
     }
 
