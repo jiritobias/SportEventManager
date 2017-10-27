@@ -31,30 +31,24 @@ public class User extends BaseEntity {
     private String email;
 
     @NotNull
-    @Column
     private String firstname;
 
     @NotNull
-    @Column
     private String lastname;
 
     @Column
     private Date birthdate;
 
     @Pattern(regexp = "\\+?\\d+")
-    @Column
     private String phone;
 
     @NotNull
-    @Column
     private String address;
 
     @NotNull
     @Enumerated
-    @Column
     private Role role;
 
-    @Column
     @Enumerated
     private Gendre gendre;
 

@@ -6,13 +6,10 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
-
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -22,14 +19,19 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
 
     @Autowired
     private CompetitionDao competitionDao;
+    @Autowired
+    private SportsMenDao sportsMenDao;
+    @Autowired
+    private SportDao sportDao;
 
     private Competition competition;
+    private Sport sport;
 
     @BeforeMethod
     public void setUp() {
         competition = new Competition();
-        Sport sport = new Sport();
-        sport.setName("Tennis");
+        sport = createSport("Tennis");
+
         competition.setSport(sport);
 
         User sportman = new User();
@@ -39,6 +41,7 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         sportman.setAddress("address");
         sportman.setGendre(Gendre.MEN);
         sportman.setRole(Role.SPORTSMEN);
+        sportman.setPasswordHash("hash");
 
         User sportwoman = new User();
         sportwoman.setFirstname("Pavla");
@@ -47,6 +50,10 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         sportwoman.setAddress("place");
         sportwoman.setGendre(Gendre.WOMAN);
         sportwoman.setRole(Role.SPORTSMEN);
+        sportwoman.setPasswordHash("password");
+
+        sportsMenDao.create(sportman);
+        sportsMenDao.create(sportwoman);
 
         competition.addSportman(sportman);
         competition.addSportman(sportwoman);
@@ -71,9 +78,8 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
     @Test
     public void testFindAll() {
         Competition competition2 = new Competition();
-        Sport sport = new Sport();
-        sport.setName("Swimming");
-        competition2.setSport(sport);
+        Sport swimming = createSport("Swimming");
+        competition2.setSport(swimming);
 
         competitionDao.create(competition);
         competitionDao.create(competition2);
@@ -93,8 +99,7 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         assertEquals(1, competitionDao.findAll().size());
 
         Competition competition2 = new Competition();
-        Sport sport = new Sport();
-        sport.setName("Swimming");
+        Sport sport = createSport("Swimming");
         competition2.setSport(sport);
         competitionDao.create(competition2);
         assertEquals(2, competitionDao.findAll().size());
@@ -110,5 +115,14 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
 
         competitionDao.delete(competition);
         Assert.assertNull(competitionDao.findById(competition.getId()));
+    }
+
+    private Sport createSport(String name) {
+        Sport sport = new Sport();
+        sport.setName(name);
+
+        sportDao.create(sport);
+
+        return sport;
     }
 }

@@ -8,12 +8,10 @@ import javax.validation.constraints.NotNull;
  * @author Martin Šmíd
  */
 @Entity
-@Table(name="SPORT_TABLE")
 public class Sport extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sport_id")
     private Long id;
 
     @NotNull

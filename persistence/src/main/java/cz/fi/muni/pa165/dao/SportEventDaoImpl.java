@@ -8,7 +8,7 @@ import java.util.List;
  * Created by lenoch on 26.10.17.
  */
 @Repository
-public class SportEventDaoImpl extends BaseDaoImpl<SportEvent> {
+public class SportEventDaoImpl extends BaseDaoImpl<SportEvent> implements SportEventDao {
     @Override
     public SportEvent findById(Long id) {
         return findByIdAndClass(SportEvent.class, id);
