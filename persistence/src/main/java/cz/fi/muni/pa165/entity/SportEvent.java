@@ -12,7 +12,8 @@ import java.util.Set;
  */
 
 @Entity
-public class SportEvent {
+@Table(name = "SPORT_EVENT_TABLE")
+public class SportEvent extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,9 +30,10 @@ public class SportEvent {
     @Column(nullable = false)
     private Date date;
 
-    @OneToMany(mappedBy="User")
+    @OneToMany(mappedBy="sportsMen")
     private Set<Competition> competitions = new HashSet<>();
 
+    @Override
     public Long getId() {
         return id;
     }

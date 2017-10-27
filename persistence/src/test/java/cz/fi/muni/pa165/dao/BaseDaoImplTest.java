@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * @author jiritobias
+ */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional

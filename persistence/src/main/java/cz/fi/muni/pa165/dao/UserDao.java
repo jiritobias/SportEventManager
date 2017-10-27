@@ -4,6 +4,9 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import java.util.List;
 
+/**
+ * @author jiritobias
+ */
 public interface UserDao extends BaseDao<User> {
 
     /**

@@ -7,14 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "COMPETITION_TABLE")
 public class Competition extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(nullable = false)
+    @OneToOne
+    @JoinTable(name="SPORT_TABLE")
     private Sport sport;
 
     @ManyToMany
@@ -63,27 +64,4 @@ public class Competition extends BaseEntity {
         return result;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Competition that = (Competition) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) {
-            return false;
-        }
-        return sportsMen != null ? sportsMen.equals(that.sportsMen) : that.sportsMen == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (sportsMen != null ? sportsMen.hashCode() : 0);
-        return result;
-    }
 }
