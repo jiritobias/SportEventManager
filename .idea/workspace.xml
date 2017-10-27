@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b0dd0be-083d-4a37-a2a3-18cfd7e7ab2c" name="Default" comment="base test update">
+    <list default="true" id="0b0dd0be-083d-4a37-a2a3-18cfd7e7ab2c" name="Default" comment="uprava uzivatele">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportEventDaoImplTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -97,16 +96,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="36" column="12" lean-forward="false" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SportsMenDaoImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -130,10 +119,11 @@
       <file leaf-file-name="BaseDaoImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+            <state relative-caret-position="316">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#548#549#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,8 +162,8 @@
       <file leaf-file-name="SportEvent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="435">
+              <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -213,11 +203,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SportsMenDaoImplTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SportsMenDaoImplTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+            <state relative-caret-position="571">
+              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportEventDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportEventDaoImplTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportEventDaoImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SportEventDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -261,7 +283,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="sportsmen-manyToMany-update" />
       </map>
     </option>
   </component>
@@ -273,7 +295,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportsMen.java" />
         <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportsMenImpl.java" />
         <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Gender.java" />
         <option value="$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/enums/Gendre.java" />
@@ -303,7 +324,6 @@
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/PersistenceSampleApplicationContext.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Team.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Identifiable.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/BaseEntity.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportsMenDao.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/UserDao.java" />
@@ -324,6 +344,8 @@
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/Competition.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/User.java" />
         <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java" />
+        <option value="$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java" />
+        <option value="$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportEventDaoImplTest.java" />
       </list>
     </option>
   </component>
@@ -510,18 +532,18 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="cz.fi.muni.pa165.dao" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/persistance/src/main" />
-      <recent name="$PROJECT_DIR$/persistance/src" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cz.muni.fi.pa165.dao" />
+      <recent name="cz.muni.fi.pa165.services" />
+      <recent name="cz.muni.fi.pa165.enums" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="cz.fi.muni.pa165.dao.BaseDaoImplTest" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="cz.muni.fi.pa165.dao" />
-      <recent name="cz.muni.fi.pa165.services" />
-      <recent name="cz.muni.fi.pa165.enums" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/persistance/src/main" />
+      <recent name="$PROJECT_DIR$/persistance/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -536,8 +558,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.SportsMenDaoImplTest.testRemoveFromCompetition">
-    <configuration name="BaseDaoImplTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.SportEventDaoImplTest.fail">
+    <configuration name="SportEventDaoImplTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
@@ -549,7 +571,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.BaseDaoImplTest" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportEventDaoImplTest" />
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
@@ -569,7 +591,7 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="SportsMenDaoImplTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SportEventDaoImplTest.delete" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
@@ -581,40 +603,8 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportsMenDaoImplTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration name="SportsMenDaoImplTest.testAddToCompetition" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="persistence" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportsMenDaoImplTest" />
-      <option name="METHOD_NAME" value="testAddToCompetition" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportEventDaoImplTest" />
+      <option name="METHOD_NAME" value="delete" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -633,7 +623,71 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="SportsMenDaoImplTest.testRemoveFromCompetition" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SportEventDaoImplTest.fail" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="persistence" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportEventDaoImplTest" />
+      <option name="METHOD_NAME" value="fail" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="SportEventDaoImplTest.findAll" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="persistence" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
+      <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportEventDaoImplTest" />
+      <option name="METHOD_NAME" value="findAll" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="SportsMenDaoImplTest.testFindAll" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
@@ -646,7 +700,7 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
       <option name="MAIN_CLASS_NAME" value="cz.fi.muni.pa165.dao.SportsMenDaoImplTest" />
-      <option name="METHOD_NAME" value="testRemoveFromCompetition" />
+      <option name="METHOD_NAME" value="testFindAll" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -781,53 +835,21 @@
       <module name="parent" />
       <envs />
     </configuration>
-    <configuration name="cz.fi.muni.pa165.dao" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="cz.fi.muni.pa165.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="persistence" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="cz.fi.muni.pa165.dao" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Maven.Unnamed" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.cz.fi.muni.pa165.dao" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testAddToCompetition" />
-      <item index="5" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testRemoveFromCompetition" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testFindAll" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest.findAll" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest.delete" />
+      <item index="5" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest.fail" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testRemoveFromCompetition" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testAddToCompetition" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.cz.fi.muni.pa165.dao" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.BaseDaoImplTest" />
+        <item index="0" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest.fail" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest.delete" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest.findAll" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.SportEventDaoImplTest" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.SportsMenDaoImplTest.testFindAll" />
       </list>
     </recent_temporary>
   </component>
@@ -855,7 +877,7 @@
       <workItem from="1509025984823" duration="2746000" />
       <workItem from="1509030615001" duration="4222000" />
       <workItem from="1509134599875" duration="1119000" />
-      <workItem from="1509136160454" duration="1352000" />
+      <workItem from="1509136160454" duration="2971000" />
     </task>
     <task id="LOCAL-00001" summary="project creation">
       <created>1507991497543</created>
@@ -920,43 +942,50 @@
       <option name="project" value="LOCAL" />
       <updated>1509134993620</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="uprava uzivatele">
+      <created>1509137535367</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1509137535367</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SportsMenDaoImplTest - 2017.10.27 at 22h 32m 58s.xml">
-      <configuration name="SportsMenDaoImplTest" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest - 2017.10.27 at 23h 03m 18s.xml">
+      <configuration name="SportEventDaoImplTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest - 2017.10.27 at 22h 33m 31s.xml">
-      <configuration name="SportsMenDaoImplTest" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest - 2017.10.27 at 23h 03m 44s.xml">
+      <configuration name="SportEventDaoImplTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest - 2017.10.27 at 22h 33m 55s.xml">
-      <configuration name="SportsMenDaoImplTest" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest_delete - 2017.10.27 at 23h 07m 53s.xml">
+      <configuration name="SportEventDaoImplTest.delete" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest - 2017.10.27 at 22h 34m 35s.xml">
-      <configuration name="SportsMenDaoImplTest" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest_fail - 2017.10.27 at 23h 11m 18s.xml">
+      <configuration name="SportEventDaoImplTest.fail" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest_testAddToCompetition - 2017.10.27 at 22h 38m 11s.xml">
-      <configuration name="SportsMenDaoImplTest.testAddToCompetition" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest_fail - 2017.10.27 at 23h 11m 49s.xml">
+      <configuration name="SportEventDaoImplTest.fail" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest_testAddToCompetition - 2017.10.27 at 22h 38m 18s.xml">
-      <configuration name="SportsMenDaoImplTest.testAddToCompetition" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest_fail - 2017.10.27 at 23h 18m 48s.xml">
+      <configuration name="SportEventDaoImplTest.fail" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest_testRemoveFromCompetition - 2017.10.27 at 22h 40m 02s.xml">
-      <configuration name="SportsMenDaoImplTest.testRemoveFromCompetition" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest_findAll - 2017.10.27 at 23h 05m 01s.xml">
+      <configuration name="SportEventDaoImplTest.findAll" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest_testRemoveFromCompetition - 2017.10.27 at 22h 45m 03s.xml">
-      <configuration name="SportsMenDaoImplTest.testRemoveFromCompetition" configurationId="TestNG" />
+    <history-entry file="SportEventDaoImplTest_findAll - 2017.10.27 at 23h 05m 46s.xml">
+      <configuration name="SportEventDaoImplTest.findAll" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="SportsMenDaoImplTest_testRemoveFromCompetition - 2017.10.27 at 22h 48m 52s.xml">
-      <configuration name="SportsMenDaoImplTest.testRemoveFromCompetition" configurationId="TestNG" />
+    <history-entry file="SportsMenDaoImplTest_testFindAll - 2017.10.27 at 22h 55m 32s.xml">
+      <configuration name="SportsMenDaoImplTest.testFindAll" configurationId="TestNG" />
     </history-entry>
     <history-entry file="SportsMenDaoImplTest_testRemoveFromCompetition - 2017.10.27 at 22h 49m 48s.xml">
       <configuration name="SportsMenDaoImplTest.testRemoveFromCompetition" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29812000" />
+    <option name="totallyTimeSpent" value="31431000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -1012,7 +1041,8 @@
     <MESSAGE value="project setting" />
     <MESSAGE value="merge + entity update" />
     <MESSAGE value="base test update" />
-    <option name="LAST_COMMIT_MESSAGE" value="base test update" />
+    <MESSAGE value="uprava uzivatele" />
+    <option name="LAST_COMMIT_MESSAGE" value="uprava uzivatele" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1024,12 +1054,11 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="13" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/entity/Competition.java" />
     <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/services/CompetitionServiceImpl.java" />
     <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/UserDao.java" />
     <entry file="file://$PROJECT_DIR$/persistance/src/main/java/cz/muni/fi/pa165/dao/SportDao.java" />
@@ -1197,20 +1226,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="50" lean-forward="false" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="87" lean-forward="false" selection-start-line="10" selection-start-column="87" selection-end-line="10" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1242,16 +1257,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1287,14 +1292,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1341,9 +1338,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportsMenDaoImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        <state relative-caret-position="571">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/SportEventDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/entity/SportEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/cz/fi/muni/pa165/dao/BaseDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/test/java/cz/fi/muni/pa165/dao/SportEventDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

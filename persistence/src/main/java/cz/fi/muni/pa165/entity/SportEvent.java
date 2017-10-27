@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SPORT_EVENT_TABLE")
-public class SportEvent extends BaseEntity{
+public class SportEvent extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +30,7 @@ public class SportEvent extends BaseEntity{
     @Column(nullable = false)
     private Date date;
 
-    @OneToMany(mappedBy="sportsMen")
+    @OneToMany(mappedBy = "sportsMen")
     private Set<Competition> competitions = new HashSet<>();
 
     @Override
@@ -76,14 +76,24 @@ public class SportEvent extends BaseEntity{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Competition)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof Competition)) {
+            return false;
+        }
 
         SportEvent that = (SportEvent) o;
 
-        if (!getName().equals(that.getName())) return false;
-        if (!getPlace().equals(that.getPlace())) return false;
-        if (!getDate().equals(that.getDate())) return false;
+        if (!getName().equals(that.getName())) {
+            return false;
+        }
+        if (!getPlace().equals(that.getPlace())) {
+            return false;
+        }
+        if (!getDate().equals(that.getDate())) {
+            return false;
+        }
         return getCompetitions().equals(that.getCompetitions());
     }
 
