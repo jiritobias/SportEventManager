@@ -152,59 +152,31 @@ public class User extends BaseEntity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
 
         User user = (User) o;
 
-        if (id != null ? !id.equals(user.id) : user.id != null) {
+        if (!id.equals(user.id)) {
             return false;
         }
-        if (passwordHash != null ? !passwordHash.equals(user.passwordHash) : user.passwordHash != null) {
+        if (!passwordHash.equals(user.passwordHash)) {
             return false;
         }
-        if (email != null ? !email.equals(user.email) : user.email != null) {
+        if (!email.equals(user.email)) {
             return false;
         }
-        if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) {
+        if (!firstname.equals(user.firstname)) {
             return false;
         }
-        if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) {
-            return false;
-        }
-        if (birthdate != null ? !birthdate.equals(user.birthdate) : user.birthdate != null) {
-            return false;
-        }
-        if (phone != null ? !phone.equals(user.phone) : user.phone != null) {
-            return false;
-        }
-        if (address != null ? !address.equals(user.address) : user.address != null) {
-            return false;
-        }
-        if (role != user.role) {
-            return false;
-        }
-        if (gendre != user.gendre) {
-            return false;
-        }
-        return competitions != null ? competitions.equals(user.competitions) : user.competitions == null;
+        return lastname.equals(user.lastname);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
-        result = 31 * result + (competitions != null ? competitions.hashCode() : 0);
+        int result = id.hashCode();
+        result = 31 * result + passwordHash.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + firstname.hashCode();
+        result = 31 * result + lastname.hashCode();
         return result;
     }
 }
