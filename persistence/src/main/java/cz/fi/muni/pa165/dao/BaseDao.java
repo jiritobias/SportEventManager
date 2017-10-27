@@ -1,8 +1,9 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.BaseEntity;
 import java.util.List;
 
-public interface BaseDao<T> {
+public interface BaseDao<T extends BaseEntity> {
     /**
      * Creates a record of Enitity object in DB
      * @param entity object to be created
