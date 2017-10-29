@@ -72,7 +72,10 @@ public class SportEvent extends BaseEntity{
     }
 
     public void addCompetition(Competition competition) {
-        competitions.add(competition);
+        this.competitions.add(competition);
+    }
+    public void removeCompetition(Competition competition){
+        this.competitions.remove(competition);
     }
 
     @Override

@@ -28,6 +28,11 @@ public interface BaseDao<T extends BaseEntity> {
      * @return Entity object with the input ID
      */
     T findById(Long id);
+    /**
+     *
+     * Updates entity.
+     */
+    void update(T entity);
 
     /**
      * Finds all entity objects in DB

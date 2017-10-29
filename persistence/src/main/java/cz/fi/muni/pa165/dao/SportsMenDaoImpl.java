@@ -21,24 +21,6 @@ public class SportsMenDaoImpl extends UserDaoImpl implements SportsMenDao {
     }
 
     @Override
-    public void addToCompetition(Competition competition, User sportsMan) {
-        assert competition != null;
-        assert sportsMan != null;
-
-        sportsMan.addToCompetition(competition);
-        entityManager.merge(sportsMan);
-    }
-
-    @Override
-    public void removeFromCompetition(Competition competition, User sportsMan) {
-        assert competition != null;
-        assert sportsMan != null;
-
-        sportsMan.removeFromCompetition(competition);
-        entityManager.merge(sportsMan);
-    }
-
-    @Override
     public List<User> findAll() {
         return entityManager.createQuery("SELECT s FROM User s where s.role = :role", User.class)
                 .setParameter("role", Role.SPORTSMEN)
