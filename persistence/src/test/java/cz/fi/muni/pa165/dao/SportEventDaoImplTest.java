@@ -108,6 +108,12 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
                         .size())
                 .isOne();
 
+        assertThat(
+                found
+                        .getCompetitions()
+                        .contains(competition))
+                .isTrue();
+
         sportEvent.removeCompetition(competition);
         sportEventDao.update(sportEvent);
 
@@ -117,6 +123,7 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
                         .getCompetitions()
                         .size())
                 .isZero();
+
     }
 
 }

@@ -9,7 +9,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="Entities" />
+          <factory-entry name="Entities" value="83319981-93e9-4bdf-b543-c578fa274cc5" />
         </datasource-mapping>
       </configuration>
     </facet>
