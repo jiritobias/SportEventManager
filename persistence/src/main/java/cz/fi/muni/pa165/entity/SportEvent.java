@@ -13,7 +13,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SPORT_EVENT_TABLE")
-public class SportEvent extends BaseEntity {
+public class SportEvent extends BaseEntity{
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

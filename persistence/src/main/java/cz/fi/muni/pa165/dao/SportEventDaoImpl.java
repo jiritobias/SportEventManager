@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by lenoch on 26.10.17.
+ * @author Petra Halová on 26.10.17.
  */
 @Repository
 public class SportEventDaoImpl extends BaseDaoImpl<SportEvent> implements SportEventDao {
