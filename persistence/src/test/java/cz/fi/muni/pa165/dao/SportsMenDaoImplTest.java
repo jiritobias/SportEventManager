@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.testng.Assert.*;
@@ -56,15 +57,20 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         Competition competition = new Competition();
         competitionDao.create(competition);
 
+        sportsmen.addToCompetition(competition);
         sportsMenDao.create(sportsmen);
-        sportsMenDao.addToCompetition(competition, sportsmen);
 
         Competition foundCompetition = competitionDao.findById(competition.getId());
         Set<User> sportsmenInComp = foundCompetition.getSportsMen();
 
         assertTrue(sportsmen.getCompetitions().contains(competition));
         assertEquals(sportsmenInComp.size(), 1);
-        assertTrue(sportsmenInComp.contains(sportsmen));
+
+        Optional<User> first = sportsmenInComp
+                .stream()
+                .findFirst();
+        assertTrue(first.isPresent());
+        assertTrue(first.get().equals(sportsmen));
     }
 
     @Test
@@ -76,16 +82,15 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
 
         sportsMenDao.create(sportsmen);
 
-        sportsMenDao.removeFromCompetition(competition, sportsmen);
         assertEquals(sportsMenDao.findById(sportsmen.getId()).getCompetitions().size(), 0);
 
-        sportsMenDao.addToCompetition(competition, sportsmen);
-        sportsMenDao.addToCompetition(competition1, sportsmen);
-        sportsMenDao.removeFromCompetition(competition, sportsmen);
+        sportsmen.addToCompetition(competition);
+        sportsmen.addToCompetition(competition1);
+        sportsmen.removeFromCompetition(competition);
 
         assertEquals(sportsmen.getCompetitions().size(), 1);
         Competition found = competitionDao.findById(competition1.getId());
-        
+
         Set<User> sportsmenInComp = found.getSportsMen();
 
         assertTrue(sportsmen.getCompetitions().contains(competition1));

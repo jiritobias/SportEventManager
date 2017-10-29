@@ -16,12 +16,12 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
 
     @Autowired
     SportEventDao sportEventDao;
-
     @Autowired
     SportDao sportDao;
-
     @Autowired
     SportsMenDao sportsMenDao;
+    @Autowired
+    CompetitionDao competitionDao;
 
     private SportEvent sportEvent1;
     private SportEvent sportEvent2;
@@ -51,6 +51,8 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
         competition = new Competition();
         competition.setSport(sport);
         competition.addSportman(pepik);
+
+        competitionDao.create(competition);
 
     }
 
@@ -86,13 +88,32 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     }
 
     @Test
-    public void addCompetitonTest() {
+    public void addAndRemoveCompetitonTest() {
         SportEvent sportEvent = new SportEvent();
         sportEvent.setName("ME");
         sportEvent.setPlace("Prague");
         sportEvent.setDate(new Date());
 
+        sportEvent.addCompetition(competition);
         sportEventDao.create(sportEvent);
+
+        SportEvent found = sportEventDao.findById(sportEvent.getId());
+
+        assertThat(
+                found
+                        .getCompetitions()
+                        .size())
+                .isOne();
+
+        sportEvent.removeCompetition(competition);
+        sportEventDao.update(sportEvent);
+
+        SportEvent foundById = sportEventDao.findById(sportEvent.getId());
+        assertThat(
+                foundById
+                        .getCompetitions()
+                        .size())
+                .isZero();
     }
 
 }
