@@ -1,22 +1,34 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.Competition;
+import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.SportEvent;
+import cz.fi.muni.pa165.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Date;
 import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+/**
+ * @author jiritobias
+ */
 public class SportEventDaoImplTest extends BaseDaoImplTest {
 
     @Autowired
     SportEventDao sportEventDao;
+    @Autowired
+    SportDao sportDao;
+    @Autowired
+    SportsMenDao sportsMenDao;
+    @Autowired
+    CompetitionDao competitionDao;
 
     private SportEvent sportEvent1;
     private SportEvent sportEvent2;
+    private Competition competition;
 
     @BeforeMethod
     public void createEvents() {
@@ -32,6 +44,18 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
 
         sportEventDao.create(sportEvent1);
         sportEventDao.create(sportEvent2);
+
+        Sport sport = new Sport();
+        sport.setName("Ice hockey");
+        sportDao.create(sport);
+
+        User pepik = createSportsMen("Pepik");
+
+        competition = new Competition();
+        competition.setSport(sport);
+        competition.addSportman(pepik);
+
+        competitionDao.create(competition);
 
     }
 
@@ -59,11 +83,47 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     }
 
     @Test
-    public void fail(){
+    public void fail() {
         SportEvent sportEvent = new SportEvent();
         // hashcode returns NullPointerException
         assertThatThrownBy(() -> sportEventDao.create(sportEvent))
                 .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    public void addAndRemoveCompetitonTest() {
+        SportEvent sportEvent = new SportEvent();
+        sportEvent.setName("ME");
+        sportEvent.setPlace("Prague");
+        sportEvent.setDate(new Date());
+
+        sportEvent.addCompetition(competition);
+        sportEventDao.create(sportEvent);
+
+        SportEvent found = sportEventDao.findById(sportEvent.getId());
+
+        assertThat(
+                found
+                        .getCompetitions()
+                        .size())
+                .isOne();
+
+        assertThat(
+                found
+                        .getCompetitions()
+                        .contains(competition))
+                .isTrue();
+
+        sportEvent.removeCompetition(competition);
+        sportEventDao.update(sportEvent);
+
+        SportEvent foundById = sportEventDao.findById(sportEvent.getId());
+        assertThat(
+                foundById
+                        .getCompetitions()
+                        .size())
+                .isZero();
+
     }
 
 }

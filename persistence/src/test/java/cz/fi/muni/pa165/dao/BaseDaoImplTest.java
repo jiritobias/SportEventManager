@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Sport;
+import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.enums.Gendre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,8 +13,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 import java.util.List;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -27,6 +27,14 @@ public class BaseDaoImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     BaseDao<Sport> baseDao;
 
+    @Qualifier("userDaoImpl")
+    @Autowired
+    BaseDao<User> userDao;
+
+    @Qualifier("sportsMenDaoImpl")
+    @Autowired
+    BaseDao<User> sportsMenDao;
+
     @Test
     @Transactional
     public void createTest() {
@@ -37,5 +45,37 @@ public class BaseDaoImplTest extends AbstractTestNGSpringContextTests {
 
         List<Sport> all = baseDao.findAll();
         assertTrue(all.contains(sport));
+    }
+
+    protected User createUser(String firstname) {
+        assert firstname != null;
+
+        User user = buildUser(firstname);
+        userDao.create(user);
+
+        return user;
+    }
+
+    protected User buildUser(String firstname) {
+        assert firstname != null;
+
+        User user = new User();
+        user.setPasswordHash("psswd");
+        user.setFirstname(firstname);
+        user.setLastname("Horolezec");
+        user.setEmail("fake@gmail.com");
+        user.setGendre(Gendre.MAN);
+        user.setAddress("Pricna ulice");
+
+        return user;
+    }
+
+    protected User createSportsMen(String firstname) {
+        assert firstname != null;
+
+        User sportsMen = buildUser("SportsMen");
+        sportsMenDao.create(sportsMen);
+
+        return sportsMen;
     }
 }

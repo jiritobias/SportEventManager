@@ -59,17 +59,19 @@ public class Competition extends BaseEntity {
 
         Competition that = (Competition) o;
 
-        if (!getSport().equals(that.getSport())) {
+        if (!id.equals(that.id)) {
             return false;
         }
-        return getSportsMen().equals(that.getSportsMen());
+        if (sport != null ? !sport.equals(that.sport) : that.sport != null) {
+            return false;
+        }
+        return sportsMen != null ? sportsMen.equals(that.sportsMen) : that.sportsMen == null;
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + (sport != null ? sport.hashCode() : 0);
-        result = 31 * result + sportsMen.hashCode();
         return result;
     }
 }
