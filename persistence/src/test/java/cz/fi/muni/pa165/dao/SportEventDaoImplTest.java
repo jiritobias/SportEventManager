@@ -12,6 +12,9 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+/**
+ * @author jiritobias
+ */
 public class SportEventDaoImplTest extends BaseDaoImplTest {
 
     @Autowired
