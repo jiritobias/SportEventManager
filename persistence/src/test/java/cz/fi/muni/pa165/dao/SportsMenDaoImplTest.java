@@ -33,7 +33,7 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         sportsmen.setRole(Role.SPORTSMEN);
         sportsmen.setFirstname("Martin");
         sportsmen.setLastname("Novy");
-        sportsmen.setGendre(Gendre.MEN);
+        sportsmen.setGendre(Gendre.MAN);
         sportsmen.setAddress("address");
         sportsmen.setEmail("abc@test.com");
         sportsmen.setPasswordHash("password");

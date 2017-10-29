@@ -8,12 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by lenoch on 26.10.17.
+ * @author Petra Halová on 26.10.17.
  */
 
 @Entity
 @Table(name = "SPORT_EVENT_TABLE")
 public class SportEvent extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

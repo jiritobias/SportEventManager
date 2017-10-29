@@ -1,13 +1,15 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.Competition;
+import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.SportEvent;
+import cz.fi.muni.pa165.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Date;
 import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class SportEventDaoImplTest extends BaseDaoImplTest {
@@ -15,8 +17,15 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     @Autowired
     SportEventDao sportEventDao;
 
+    @Autowired
+    SportDao sportDao;
+
+    @Autowired
+    SportsMenDao sportsMenDao;
+
     private SportEvent sportEvent1;
     private SportEvent sportEvent2;
+    private Competition competition;
 
     @BeforeMethod
     public void createEvents() {
@@ -32,6 +41,16 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
 
         sportEventDao.create(sportEvent1);
         sportEventDao.create(sportEvent2);
+
+        Sport sport = new Sport();
+        sport.setName("Ice hockey");
+        sportDao.create(sport);
+
+        User pepik = createSportsMen("Pepik");
+
+        competition = new Competition();
+        competition.setSport(sport);
+        competition.addSportman(pepik);
 
     }
 
@@ -59,11 +78,21 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     }
 
     @Test
-    public void fail(){
+    public void fail() {
         SportEvent sportEvent = new SportEvent();
         // hashcode returns NullPointerException
         assertThatThrownBy(() -> sportEventDao.create(sportEvent))
                 .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    public void addCompetitonTest() {
+        SportEvent sportEvent = new SportEvent();
+        sportEvent.setName("ME");
+        sportEvent.setPlace("Prague");
+        sportEvent.setDate(new Date());
+
+        sportEventDao.create(sportEvent);
     }
 
 }

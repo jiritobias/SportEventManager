@@ -176,11 +176,14 @@ public class User extends BaseEntity {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + passwordHash.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + firstname.hashCode();
         result = 31 * result + lastname.hashCode();
+        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 }

@@ -39,7 +39,7 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         sportman.setLastname("Novy");
         sportman.setEmail("test@test.com");
         sportman.setAddress("address");
-        sportman.setGendre(Gendre.MEN);
+        sportman.setGendre(Gendre.MAN);
         sportman.setRole(Role.SPORTSMEN);
         sportman.setPasswordHash("hash");
 
