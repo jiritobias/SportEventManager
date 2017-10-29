@@ -7,6 +7,5 @@ Create an information system allowing sportsmen to sign up for a sporting event.
 Team No. 4
 
 - Petra Halová
-- Martin Ondo-Eštok
 - Martin Šmíd
 - Jiří Tobiáš (team leader)
