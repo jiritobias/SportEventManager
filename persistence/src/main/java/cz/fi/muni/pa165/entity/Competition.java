@@ -1,11 +1,15 @@
 package cz.fi.muni.pa165.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "COMPETITION_TABLE")
 public class Competition extends BaseEntity {
 
@@ -19,15 +23,6 @@ public class Competition extends BaseEntity {
     @ManyToMany
     private Set<User> sportsMen = new HashSet<>();
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Set<User> getSportsMen() {
         return Collections.unmodifiableSet(sportsMen);
     }
@@ -38,14 +33,6 @@ public class Competition extends BaseEntity {
 
     public void removeSportman(User sportman) {
         sportsMen.remove(sportman);
-    }
-
-    public Sport getSport() {
-        return sport;
-    }
-
-    public void setSport(Sport sport) {
-        this.sport = sport;
     }
 
     @Override

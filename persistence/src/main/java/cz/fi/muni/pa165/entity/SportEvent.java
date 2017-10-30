@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
@@ -12,6 +14,8 @@ import java.util.Set;
  */
 
 @Entity
+@Getter
+@Setter
 @Table(name = "SPORT_EVENT_TABLE")
 public class SportEvent extends BaseEntity{
 
@@ -33,39 +37,6 @@ public class SportEvent extends BaseEntity{
 
     @OneToMany(mappedBy="sportsMen")
     private Set<Competition> competitions = new HashSet<>();
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public Set<Competition> getCompetitions() {
         return Collections.unmodifiableSet(competitions);

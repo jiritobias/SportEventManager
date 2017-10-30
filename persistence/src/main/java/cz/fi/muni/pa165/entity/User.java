@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.entity;
 
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -14,6 +16,8 @@ import java.util.Set;
  * @author jiritobias
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "Users")
 public class User extends BaseEntity {
 
@@ -23,6 +27,7 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String passwordHash;
 
     @Column(nullable = false, unique = true)
@@ -52,89 +57,11 @@ public class User extends BaseEntity {
     @Enumerated
     private Gendre gendre;
 
-
     @ManyToMany(mappedBy = "sportsMen")
     private Set<Competition> competitions = new HashSet<>();
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Gendre getGendre() {
-        return gendre;
-    }
-
-    public void setGendre(Gendre gendre) {
-        this.gendre = gendre;
-    }
-
     public Set<Competition> getCompetitions() {
         return Collections.unmodifiableSet(competitions);
-    }
-
-    public void setCompetitions(Set<Competition> competitions) {
-        this.competitions = competitions;
     }
 
     public void removeFromCompetition(Competition competition) {
@@ -146,7 +73,6 @@ public class User extends BaseEntity {
         this.competitions.add(competition);
         competition.addSportman(this);
     }
-
 
     @Override
     public boolean equals(Object o) {
