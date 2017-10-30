@@ -23,6 +23,7 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String passwordHash;
 
     @Column(nullable = false, unique = true)

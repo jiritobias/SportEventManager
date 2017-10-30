@@ -33,7 +33,6 @@ public class SportDaoImplTest extends BaseDaoImplTest {
 
         sportDao.create(sport1);
         sportDao.create(sport2);
-
     }
 
     /*
