@@ -63,7 +63,7 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     public void findAll() {
         List<SportEvent> all = sportEventDao.findAll();
 
-        assertThat(all.size() == 2);
+        assertThat(all.size()).isEqualTo(2);
         assertThat(all.get(0).getName()).isEqualTo("OH");
         assertThat(all.get(1).getName()).isEqualTo("MS");
 
@@ -74,12 +74,12 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
         sportEventDao.delete(sportEvent2);
 
         List<SportEvent> all = sportEventDao.findAll();
-        assertThat(all.size() == 1);
+        assertThat(all.size()).isOne();
         assertThat(all.get(0).getName()).isEqualTo("OH");
 
         sportEventDao.delete(sportEvent1);
         all = sportEventDao.findAll();
-        assertThat(all.size() == 0);
+        assertThat(all.size()).isZero();
     }
 
     @Test
@@ -123,7 +123,6 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
                         .getCompetitions()
                         .size())
                 .isZero();
-
     }
 
 }
