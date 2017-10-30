@@ -6,23 +6,19 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 /**
  * @author jiritobias, Petra Halová
  */
-public class UserDaoTest extends BaseDaoImplTest {
+public class UserDaoImplTest extends BaseDaoImplTest {
 
     @Qualifier("userDaoImpl")
     @Autowired
@@ -31,15 +27,11 @@ public class UserDaoTest extends BaseDaoImplTest {
     @Autowired
     private CompetitionDao competitionDao;
 
-    @Qualifier("sportDaoImpl")
     @Autowired
     private SportDao sportDao;
 
     private User user1;
     private User user2;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeMethod
     public void createUsers() {
@@ -78,24 +70,17 @@ public class UserDaoTest extends BaseDaoImplTest {
         Assertions.assertThat(userDao.findAll())
                 .usingFieldByFieldElementComparator()
                 .containsOnly(user1,user2);
-
-/*
-        List<User> allSportsMen = userDao.findAll();
-
-        assertEquals(allSportsMen.size(), 1);
-        assertEquals(allSportsMen.get(0).getRole(), Role.USER);
-*/
     }
 
     @Test
     public void findByGendre() {
-        List<User> womem = userDao.findByGendre(Gendre.WOMAN);
-        List<User> men = userDao.findByGendre(Gendre.MAN);
+        Assertions.assertThat(userDao.findByGendre(Gendre.MAN))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(user1);
 
-        assertThat(womem.size() == 0);
-        assertThat(men.size() == 1);
-        assertThat(men.get(0).getFirstname())
-                .isEqualTo("Honza");
+        Assertions.assertThat(userDao.findByGendre(Gendre.WOMAN))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(user2);
     }
 
     @Test
@@ -115,19 +100,6 @@ public class UserDaoTest extends BaseDaoImplTest {
         userDao.delete(user1);
         Assertions.assertThat(userDao.findById(user2.getId())).isNotNull();
         Assertions.assertThat(userDao.findById(user1.getId())).isNull();
-    }
-
-    @Test
-    public void testDeleteWithNonExistingId(){
-        user1.setId(11L);
-        expectedException.expect(IllegalArgumentException.class);
-        userDao.delete(user1);
-    }
-
-    @Test
-    public void testFindByNonExistingId(){
-        expectedException.expect(IllegalArgumentException.class);
-        userDao.findById(11L);
     }
 
     @Test

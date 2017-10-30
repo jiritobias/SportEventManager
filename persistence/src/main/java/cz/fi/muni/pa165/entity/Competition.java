@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Petra Halová
+ */
 @Entity
 @Table(name = "COMPETITION_TABLE")
 public class Competition extends BaseEntity {
