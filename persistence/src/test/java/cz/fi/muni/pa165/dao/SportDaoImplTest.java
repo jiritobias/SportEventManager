@@ -58,4 +58,10 @@ public class SportDaoImplTest extends BaseDaoImplTest {
         assertThat(sportDao.findById(id))
                 .isEqualToComparingFieldByField(sport1);
     }
+
+    @Test
+    public void testFindByName() {
+        String name = sport1.getName();
+        assertThat(sportDao.findByName(name)).isEqualToComparingFieldByField(sport1);
+    }
 }
