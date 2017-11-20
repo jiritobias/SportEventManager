@@ -20,4 +20,12 @@ public class SportDaoImpl extends BaseDaoImpl<Sport> implements SportDao {
     public List<Sport> findAll() {
         return entityManager.createQuery("SELECT s FROM Sport s", Sport.class).getResultList();
     }
+
+    @Override
+    public Sport findByName(String name) {
+        return entityManager
+                .createQuery("SELECT s FROM Sport s WHERE name = :name", Sport.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
 }
