@@ -57,8 +57,8 @@ public class Competition extends BaseEntity {
 
     @Override
     public int hashCode() {
-        int result = sport != null ? sport.hashCode() : 0;
-        result = 31 * result + (sportsMen != null ? sportsMen.hashCode() : 0);
+        int result = id.hashCode();
+        result = 31 * result + (sport != null ? sport.hashCode() : 0);
         return result;
     }
 }
