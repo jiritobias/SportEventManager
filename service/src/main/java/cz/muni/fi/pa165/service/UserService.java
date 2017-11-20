@@ -6,16 +6,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Martin Smid
+ */
 @Service
 public interface UserService extends BaseService<User> {
 
     /**
-     * Finds users with the given email.
+     * Finds user with the given email.
      *
      * @param email email to find
-     * @return collection of found users with the email
+     * @return found user with the email
      */
-    List<User> findByEmail(String email);
+    User findByEmail(String email);
 
     /**
      * Finds users with the given gender.
