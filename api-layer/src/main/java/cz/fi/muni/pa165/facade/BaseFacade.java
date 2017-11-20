@@ -5,29 +5,20 @@ import java.util.List;
 /**
  * @author jiritobias
  */
-public interface CrudFacade<T> {
-    /**
-     *
-     */
-    Long create(T dto);
+public interface BaseFacade<T> {
 
     /**
-     *
-     */
-    void update(T dto);
-
-    /**
-     *
+     * Delete object by DTO param.
      */
     void delete(T dto);
 
     /**
-     *
+     * Load object by DTO param;
      */
     T load(Long id);
 
     /**
-     *
+     * Get all objects.
      */
     List<T> getAll();
 }

@@ -32,7 +32,7 @@ public class CreateSportsMenDTO {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CreateSportsMenDTO)) {
             return false;
         }
 
@@ -68,7 +68,7 @@ public class CreateSportsMenDTO {
         result = 31 * result + email.hashCode();
         result = 31 * result + firstname.hashCode();
         result = 31 * result + lastname.hashCode();
-        result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
+        result = 31 * result + gendre.hashCode();
         result = 31 * result + birthdate.hashCode();
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
