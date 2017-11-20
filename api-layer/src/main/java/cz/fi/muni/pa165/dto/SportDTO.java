@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 /**
- * @author jiritobias
+ * @author jiritobias, Martin Smid
  */
 @Getter
 @AllArgsConstructor
