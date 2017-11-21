@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,8 +12,12 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.List;
+import java.util.UUID;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -47,6 +52,19 @@ public class BaseDaoImplTest extends AbstractTestNGSpringContextTests {
         assertTrue(all.contains(sport));
     }
 
+    @Test
+    @Transactional
+    public void updateTest(){
+        User user = createUser("Karel");
+
+        user.setLastname("Podivny");
+        userDao.update(user);
+
+        assertThat(user.getLastname())
+                .isEqualTo("Podivny");
+
+    }
+
     protected User createUser(String firstname) {
         assert firstname != null;
 
@@ -63,7 +81,7 @@ public class BaseDaoImplTest extends AbstractTestNGSpringContextTests {
         user.setPasswordHash("psswd");
         user.setFirstname(firstname);
         user.setLastname("Horolezec");
-        user.setEmail("fake@gmail.com");
+        user.setEmail(UUID.randomUUID().toString() + "@gmail.com");
         user.setGendre(Gendre.MAN);
         user.setAddress("Pricna ulice");
 

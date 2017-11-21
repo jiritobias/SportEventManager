@@ -30,16 +30,20 @@ public class Sport extends BaseEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Sport)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null ||  !(o instanceof Sport)) {
+            return false;
+        }
 
         Sport sport = (Sport) o;
 
-        return getName() != null ? getName().equals(sport.getName()) : sport.getName() == null;
+        return name.equals(sport.name);
     }
 
     @Override
     public int hashCode() {
-        return getName() != null ? getName().hashCode() : 0;
+        return name.hashCode();
     }
 }
