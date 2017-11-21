@@ -56,9 +56,9 @@ public interface UserService extends BaseService<User> {
     /**
      * Authenticates the user. It checks that the password hash in the records.
      *
-     * @param user         user to authenticate
-     * @param passwordHash password hash
+     * @param user     user to authenticate
+     * @param password password
      * @return true iff the password hash is in the records
      */
-    boolean authenticate(User user, String passwordHash);
+    boolean authenticate(User user, String password);
 }
