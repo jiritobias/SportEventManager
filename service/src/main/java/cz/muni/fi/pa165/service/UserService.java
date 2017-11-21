@@ -31,9 +31,10 @@ public interface UserService extends BaseService<User> {
     /**
      * Checks if the user is administrator.
      *
+     * @param user user to check for administrator role
      * @return true iff user is administrator
      */
-    boolean isAdmin();
+    boolean isAdmin(User user);
 
     /**
      * Registers a new user with the given unencrypted password.
