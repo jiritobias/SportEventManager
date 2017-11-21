@@ -15,6 +15,9 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
+/**
+ * @author Martin Smid
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
-        return null;
+        return userDao.findByEmail(email);
     }
 
     @Override
