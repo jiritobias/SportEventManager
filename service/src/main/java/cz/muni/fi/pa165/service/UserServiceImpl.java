@@ -42,21 +42,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user, String rawPassword) {
-        try {
-            user.setPasswordHash(generateStrongPasswordHash(rawPassword));
-            userDao.create(user);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
+        registerUserWithRole(user, rawPassword, null, userDao);
     }
 
     @Override
     public void registerUser(User user, String rawPassword, String email) {
+        registerUserWithRole(user, rawPassword, email, userDao);
+    }
+
+    protected static void registerUserWithRole(User user, String rawPassword, String email, UserDao userDao) {
         try {
             user.setPasswordHash(generateStrongPasswordHash(rawPassword));
-            user.setEmail(email);
+            if (email != null && !email.isEmpty()) {
+                user.setEmail(email);
+            }
             userDao.create(user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
