@@ -33,17 +33,17 @@ public class Sport extends BaseEntity {
         if (this == o) {
             return true;
         }
-        if (o == null ||  !(o instanceof Sport)) {
+        if (!(o instanceof Sport)) {
             return false;
         }
 
         Sport sport = (Sport) o;
 
-        return name.equals(sport.name);
+        return name != null ? name.equals(sport.name) : sport.name == null;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return name != null ? name.hashCode() : 0;
     }
 }

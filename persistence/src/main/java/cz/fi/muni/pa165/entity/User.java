@@ -83,17 +83,50 @@ public class User extends BaseEntity {
         if (this == o) {
             return true;
         }
-        if (o == null || !(o instanceof User)) {
+        if (!(o instanceof User)) {
             return false;
         }
 
         User user = (User) o;
 
-        return email.equals(user.email);
+        if (passwordHash != null ? !passwordHash.equals(user.passwordHash) : user.passwordHash != null) {
+            return false;
+        }
+        if (email != null ? !email.equals(user.email) : user.email != null) {
+            return false;
+        }
+        if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) {
+            return false;
+        }
+        if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) {
+            return false;
+        }
+        if (birthdate != null ? !birthdate.equals(user.birthdate) : user.birthdate != null) {
+            return false;
+        }
+        if (phone != null ? !phone.equals(user.phone) : user.phone != null) {
+            return false;
+        }
+        if (address != null ? !address.equals(user.address) : user.address != null) {
+            return false;
+        }
+        if (role != user.role) {
+            return false;
+        }
+        return gendre == user.gendre;
     }
 
     @Override
     public int hashCode() {
-        return email.hashCode();
+        int result = passwordHash != null ? passwordHash.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
+        return result;
     }
 }
