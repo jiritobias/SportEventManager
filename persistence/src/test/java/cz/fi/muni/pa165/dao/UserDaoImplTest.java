@@ -84,6 +84,12 @@ public class UserDaoImplTest extends BaseDaoImplTest {
     }
 
     @Test
+    public void findByEmail_existingEmail_shouldPass() {
+        Assertions.assertThat(userDao.findByEmail("fake@gmail.com"))
+                .isEqualToComparingFieldByField(user1);
+    }
+
+    @Test
     public void testCreateUser(){
         Long userId = user1.getId();
         Assert.assertNotNull(userId);

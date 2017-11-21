@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -32,6 +33,13 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
                 .createQuery("SELECT s FROM User s where s.gendre = :gend", User.class)
                 .setParameter("gend", gendre)
                 .getResultList();
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return entityManager.createQuery("SELECT s FROM User s where s.email = :email", User.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 
     @Override

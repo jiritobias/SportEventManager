@@ -14,4 +14,11 @@ public interface UserDao extends BaseDao<User> {
      */
     List<User> findByGendre(Gendre gendre);
 
+    /**
+     * Find user with the given email.
+     *
+     * @param email email
+     * @return found user with the email
+     */
+    User findByEmail(String email);
 }
