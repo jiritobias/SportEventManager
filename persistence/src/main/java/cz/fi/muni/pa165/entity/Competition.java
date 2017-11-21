@@ -49,9 +49,6 @@ public class Competition extends BaseEntity {
 
         Competition that = (Competition) o;
 
-        if (!id.equals(that.id)) {
-            return false;
-        }
         if (sport != null ? !sport.equals(that.sport) : that.sport != null) {
             return false;
         }

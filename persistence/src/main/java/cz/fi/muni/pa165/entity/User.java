@@ -35,9 +35,11 @@ public class User extends BaseEntity {
     @NotNull
     private String email;
 
+    @Column(nullable = false)
     @NotNull
     private String firstname;
 
+    @Column(nullable = false)
     @NotNull
     private String lastname;
 
@@ -47,6 +49,7 @@ public class User extends BaseEntity {
     @Pattern(regexp = "\\+?\\d+")
     private String phone;
 
+    @Column(nullable = false)
     @NotNull
     private String address;
 
@@ -85,31 +88,11 @@ public class User extends BaseEntity {
 
         User user = (User) o;
 
-        if (!id.equals(user.id)) {
-            return false;
-        }
-        if (!passwordHash.equals(user.passwordHash)) {
-            return false;
-        }
-        if (!email.equals(user.email)) {
-            return false;
-        }
-        if (!firstname.equals(user.firstname)) {
-            return false;
-        }
-        return lastname.equals(user.lastname);
+        return email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + passwordHash.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + firstname.hashCode();
-        result = 31 * result + lastname.hashCode();
-        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        return result;
+        return email.hashCode();
     }
 }
