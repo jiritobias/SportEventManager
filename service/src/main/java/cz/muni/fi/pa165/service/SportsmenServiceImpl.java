@@ -23,6 +23,7 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
         User foundUser = sportsMenDao.findById(user.getId());
         if (foundUser != null) {
             user.addToCompetition(competition);
+            sportsMenDao.update(user);
         } else {
             throw new IllegalArgumentException("Only registered user can be added to the competition.");
         }
@@ -33,6 +34,7 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
         User foundUser = sportsMenDao.findById(user.getId());
         if (foundUser != null) {
             user.removeFromCompetition(competition);
+            sportsMenDao.update(user);
         } else {
             throw new IllegalArgumentException("User is not registered.");
         }
