@@ -19,30 +19,30 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     private SportsMenDao sportsMenDao;
 
     @Override
-    public void registerToCompetition(User user, Competition competition) {
-        User foundUser = sportsMenDao.findById(user.getId());
+    public void registerToCompetition(User sportsman, Competition competition) {
+        User foundUser = sportsMenDao.findById(sportsman.getId());
         if (foundUser != null) {
-            user.addToCompetition(competition);
-            sportsMenDao.update(user);
+            sportsman.addToCompetition(competition);
+            sportsMenDao.update(sportsman);
         } else {
-            throw new IllegalArgumentException("Only registered user can be added to the competition.");
+            throw new IllegalArgumentException("Only registered sportsman can be added to the competition.");
         }
     }
 
     @Override
-    public void unregisterFromCompetition(User user, Competition competition) {
-        User foundUser = sportsMenDao.findById(user.getId());
+    public void unregisterFromCompetition(User sportsman, Competition competition) {
+        User foundUser = sportsMenDao.findById(sportsman.getId());
         if (foundUser != null) {
-            user.removeFromCompetition(competition);
-            sportsMenDao.update(user);
+            sportsman.removeFromCompetition(competition);
+            sportsMenDao.update(sportsman);
         } else {
             throw new IllegalArgumentException("User is not registered.");
         }
     }
 
     @Override
-    public List<Competition> findAllRegisteredCompetitions(User user) {
-        User foundUser = sportsMenDao.findById(user.getId());
+    public List<Competition> findAllRegisteredCompetitions(User sportsman) {
+        User foundUser = sportsMenDao.findById(sportsman.getId());
         return foundUser == null ? null : new ArrayList<>(foundUser.getCompetitions());
     }
 

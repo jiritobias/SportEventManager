@@ -13,26 +13,26 @@ import java.util.List;
 public interface SportsmenService extends UserService {
 
     /**
-     * Registers the user in the competition.
+     * Registers the sportsman in the competition.
      *
-     * @param user        user to register to the competition
+     * @param sportsman   sportsman to register to the competition
      * @param competition competition
      */
-    void registerToCompetition(User user, Competition competition);
+    void registerToCompetition(User sportsman, Competition competition);
 
     /**
-     * Unregister the user from the competition.
+     * Unregister the sportsman from the competition.
      *
-     * @param user        user to unregister
+     * @param sportsman   sportsman to unregister
      * @param competition competition
      */
-    void unregisterFromCompetition(User user, Competition competition);
+    void unregisterFromCompetition(User sportsman, Competition competition);
 
     /**
-     * Finds all competitions where the user is registered.
+     * Finds all competitions where the sportsman is registered.
      *
-     * @param user user
-     * @return collection of competitions with the user
+     * @param sportsman sportsman
+     * @return collection of competitions with the sportsman
      */
-    List<Competition> findAllRegisteredCompetitions(User user);
+    List<Competition> findAllRegisteredCompetitions(User sportsman);
 }
