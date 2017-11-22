@@ -41,11 +41,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(User user, String rawPassword) {
-        registerUserWithRole(user, rawPassword, null, userDao);
-    }
-
-    @Override
     public void registerUser(User user, String rawPassword, String email) {
         registerUserWithRole(user, rawPassword, email, userDao);
     }
@@ -53,9 +48,7 @@ public class UserServiceImpl implements UserService {
     protected static void registerUserWithRole(User user, String rawPassword, String email, UserDao userDao) {
         try {
             user.setPasswordHash(generateStrongPasswordHash(rawPassword));
-            if (email != null && !email.isEmpty()) {
-                user.setEmail(email);
-            }
+            user.setEmail(email);
             userDao.create(user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

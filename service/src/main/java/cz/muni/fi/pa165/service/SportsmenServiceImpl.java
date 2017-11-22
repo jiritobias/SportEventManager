@@ -47,11 +47,6 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     }
 
     @Override
-    public void registerUser(User user, String rawPassword) {
-        registerUserWithRole(user, rawPassword, null, sportsMenDao);
-    }
-
-    @Override
     public void registerUser(User user, String rawPassword, String email) {
         registerUserWithRole(user, rawPassword, email, sportsMenDao);
     }

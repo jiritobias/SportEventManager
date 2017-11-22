@@ -37,14 +37,6 @@ public interface UserService extends BaseService<User> {
     boolean isAdmin(User user);
 
     /**
-     * Registers a new user with the given unencrypted password.
-     *
-     * @param user        user to register
-     * @param rawPassword unencrypted password
-     */
-    void registerUser(User user, String rawPassword);
-
-    /**
      * Registers a new user with the given unencrypted password and email address.
      *
      * @param user        user to register
