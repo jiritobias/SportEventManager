@@ -41,19 +41,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(User user, String rawPassword) {
-        try {
-            user.setPasswordHash(generateStrongPasswordHash(rawPassword));
-            userDao.create(user);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
+    public void registerUser(User user, String password, String email) {
+        registerUserWithRole(user, password, email, userDao);
     }
 
-    @Override
-    public void registerUser(User user, String rawPassword, String email) {
+    protected static void registerUserWithRole(User user, String rawPassword, String email, UserDao userDao) {
         try {
             user.setPasswordHash(generateStrongPasswordHash(rawPassword));
             user.setEmail(email);

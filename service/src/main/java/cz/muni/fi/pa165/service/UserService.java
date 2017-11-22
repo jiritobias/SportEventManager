@@ -37,21 +37,13 @@ public interface UserService extends BaseService<User> {
     boolean isAdmin(User user);
 
     /**
-     * Registers a new user with the given unencrypted password.
-     *
-     * @param user        user to register
-     * @param rawPassword unencrypted password
-     */
-    void registerUser(User user, String rawPassword);
-
-    /**
      * Registers a new user with the given unencrypted password and email address.
      *
-     * @param user        user to register
-     * @param rawPassword unencrypted password
-     * @param email       email address
+     * @param user     user to register
+     * @param password unencrypted password
+     * @param email    email address
      */
-    void registerUser(User user, String rawPassword, String email);
+    void registerUser(User user, String password, String email);
 
     /**
      * Authenticates the user. It checks that the password hash in the records.
