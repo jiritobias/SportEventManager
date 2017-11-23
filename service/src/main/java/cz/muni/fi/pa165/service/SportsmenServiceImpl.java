@@ -3,6 +3,8 @@ package cz.muni.fi.pa165.service;
 import cz.fi.muni.pa165.dao.SportsMenDao;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
