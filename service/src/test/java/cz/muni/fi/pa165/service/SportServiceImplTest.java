@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
@@ -27,6 +28,8 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
         Assertions
                 .assertThat(sport)
                 .isEqualTo(load);
+
+        sportService.delete(sport); // restore the state
     }
 
     @Test
@@ -42,6 +45,7 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
                 .assertThat(all)
                 .contains(sport);
 
+        sportService.delete(sport); // restore the state
     }
 
     @Test
@@ -57,13 +61,15 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
                 .assertThat(all)
                 .contains(sport);
 
-//        sportService.delete(sport); // TODO deatached exception
-//
-//        all = sportService.findAll();
-//
-//        Assertions
-//                .assertThat(all)
-//                .isEmpty();
+        sportService.delete(sport); // TODO deatached exception
+
+        all = sportService.findAll();
+
+        Assertions
+                .assertThat(all)
+                .isEmpty();
+
+        sportService.delete(sport); // restore the state
     }
 
     @Test
@@ -78,6 +84,7 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
         Assertions.assertThat(basketball)
                 .isNotNull()
                 .isEqualTo(sport);
-    }
 
+        sportService.delete(sport); // restore the state
+    }
 }
