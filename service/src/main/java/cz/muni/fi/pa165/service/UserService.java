@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.service;
 
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +18,18 @@ public interface UserService extends BaseService<User> {
      *
      * @param email email to find
      * @return found user with the email
+     * @throws DataAccessException in a case of failure on DAO layer
      */
-    User findByEmail(String email);
+    User findByEmail(String email) throws DataAccessException;
 
     /**
      * Finds users with the given gender.
      *
      * @param gender gender to find
      * @return collection of found users with the gender
+     * @throws DataAccessException in a case of failure on DAO layer
      */
-    List<User> findByGender(Gendre gender);
+    List<User> findByGender(Gendre gender) throws DataAccessException;
 
     /**
      * Checks if the user is administrator.
@@ -42,8 +45,9 @@ public interface UserService extends BaseService<User> {
      * @param user     user to register
      * @param password unencrypted password
      * @param email    email address
+     * @throws DataAccessException in a case of failure on DAO layer
      */
-    void registerUser(User user, String password, String email);
+    void registerUser(User user, String password, String email) throws DataAccessException;
 
     /**
      * Authenticates the user. It checks that the password hash in the records.
