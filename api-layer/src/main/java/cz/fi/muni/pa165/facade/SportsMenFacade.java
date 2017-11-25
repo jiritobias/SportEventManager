@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
 import cz.fi.muni.pa165.dto.RegistToCompetitionDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author jiritobias
@@ -19,7 +20,7 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
     /**
      * Findes sportsMen by birth day.
      */
-    SportsMenDTO findByBirthDay(Date birthDay);
+    List<SportsMenDTO> findByBirthDay(Date birthDay);
 
     /**
      * Register sportsMen to competition.
