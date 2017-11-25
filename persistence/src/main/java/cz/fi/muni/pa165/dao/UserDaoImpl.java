@@ -5,6 +5,8 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.stereotype.Repository;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +42,23 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return entityManager.createQuery("SELECT s FROM User s where s.email = :email", User.class)
                 .setParameter("email", email)
                 .getSingleResult();
+    }
+
+    @Override
+    public List<User> findByBirthdayWithinRange(Date start, Date end) {
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(start);
+        startCal.set(Calendar.MILLISECOND, 0);
+        Date startDate = startCal.getTime();
+        Calendar endCal = Calendar.getInstance();
+        endCal.setTime(end);
+        endCal.set(Calendar.MILLISECOND, 0);
+        Date endDate = endCal.getTime();
+
+        return entityManager.createQuery("SELECT s FROM User s WHERE s.birthdate BETWEEN :startdate AND :enddate", User.class)
+                .setParameter("startdate", startDate)
+                .setParameter("enddate", endDate)
+                .getResultList();
     }
 
     @Override
