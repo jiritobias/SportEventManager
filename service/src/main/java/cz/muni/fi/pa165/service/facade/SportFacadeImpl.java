@@ -6,9 +6,16 @@ import cz.fi.muni.pa165.facade.SportFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * @author Martin Smid
+ */
+@Service
+@Transactional
 public class SportFacadeImpl implements SportFacade {
 
     @Autowired

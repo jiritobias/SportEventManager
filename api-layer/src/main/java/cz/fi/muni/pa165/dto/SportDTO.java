@@ -16,7 +16,7 @@ public class SportDTO {
     @NonNull
     private Long id;
 
-    @NotNull
+    @NonNull
     @Size(max = 40)
     private String name;
 
