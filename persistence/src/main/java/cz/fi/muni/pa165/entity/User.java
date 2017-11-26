@@ -4,9 +4,18 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -83,17 +92,57 @@ public class User extends BaseEntity {
         if (this == o) {
             return true;
         }
-        if (o == null || !(o instanceof User)) {
+        if (!(o instanceof User)) {
             return false;
         }
 
         User user = (User) o;
 
-        return email.equals(user.email);
+        if (passwordHash != null ? !passwordHash.equals(user.passwordHash) : user.passwordHash != null) {
+            return false;
+        }
+        if (email != null ? !email.equals(user.email) : user.email != null) {
+            return false;
+        }
+        if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) {
+            return false;
+        }
+        if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) {
+            return false;
+        }
+        if (birthdate != null ? !birthdate.equals(user.birthdate) : user.birthdate != null) {
+            return false;
+        }
+        if (phone != null ? !phone.equals(user.phone) : user.phone != null) {
+            return false;
+        }
+        if (address != null ? !address.equals(user.address) : user.address != null) {
+            return false;
+        }
+        if (role != user.role) {
+            return false;
+        }
+        return gendre == user.gendre;
     }
 
     @Override
     public int hashCode() {
-        return email.hashCode();
+        int result = passwordHash != null ? passwordHash.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
+        return result;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(birthdate);
+        startCal.set(Calendar.MILLISECOND, 0);
+        this.birthdate = startCal.getTime();
     }
 }

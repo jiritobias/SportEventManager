@@ -7,10 +7,11 @@ import cz.fi.muni.pa165.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 /**
  * @author jiritobias
@@ -85,9 +86,11 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     @Test
     public void fail() {
         SportEvent sportEvent = new SportEvent();
-        // hashcode returns NullPointerException
+        sportEvent.setName("OH");
+        sportEvent.setPlace("Prague");
+        // null parameters
         assertThatThrownBy(() -> sportEventDao.create(sportEvent))
-                .isInstanceOf(NullPointerException.class);
+                .isInstanceOf(ConstraintViolationException.class);
     }
 
     @Test

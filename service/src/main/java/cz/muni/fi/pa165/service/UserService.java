@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,23 @@ public interface UserService extends BaseService<User> {
     List<User> findByGender(Gendre gender);
 
     /**
+     * Find users with the given birth date.
+     *
+     * @param date birth date
+     * @return collection of users with the birth date
+     */
+    List<User> findByBirthdate(Date date);
+
+    /**
+     * Find users with birthdate within the range.
+     *
+     * @param start start of the range
+     * @param end   end of the range
+     * @return collection of found users
+     */
+    List<User> findByBirthdateWithinRange(Date start, Date end);
+
+    /**
      * Checks if the user is administrator.
      *
      * @param user user to check for administrator role
@@ -37,21 +55,13 @@ public interface UserService extends BaseService<User> {
     boolean isAdmin(User user);
 
     /**
-     * Registers a new user with the given unencrypted password.
-     *
-     * @param user        user to register
-     * @param rawPassword unencrypted password
-     */
-    void registerUser(User user, String rawPassword);
-
-    /**
      * Registers a new user with the given unencrypted password and email address.
      *
-     * @param user        user to register
-     * @param rawPassword unencrypted password
-     * @param email       email address
+     * @param user     user to register
+     * @param password unencrypted password
+     * @param email    email address
      */
-    void registerUser(User user, String rawPassword, String email);
+    void registerUser(User user, String password, String email);
 
     /**
      * Authenticates the user. It checks that the password hash in the records.

@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +23,13 @@ public interface UserDao extends BaseDao<User> {
      * @return found user with the email
      */
     User findByEmail(String email);
+
+    /**
+     * Find users with birthday in given range.
+     *
+     * @param start start date of the range
+     * @param end   end date of the range
+     * @return collection of users with birthday within the range
+     */
+    List<User> findByBirthdayWithinRange(Date start, Date end);
 }

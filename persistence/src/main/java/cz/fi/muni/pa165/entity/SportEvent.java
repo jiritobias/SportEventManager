@@ -51,23 +51,29 @@ public class SportEvent extends BaseEntity{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Competition)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SportEvent)) {
+            return false;
+        }
 
         SportEvent that = (SportEvent) o;
 
-        if (!getName().equals(that.getName())) return false;
-        if (!getPlace().equals(that.getPlace())) return false;
-        if (!getDate().equals(that.getDate())) return false;
-        return getCompetitions().equals(that.getCompetitions());
+        if (name != null ? !name.equals(that.name) : that.name != null) {
+            return false;
+        }
+        if (place != null ? !place.equals(that.place) : that.place != null) {
+            return false;
+        }
+        return date != null ? date.equals(that.date) : that.date == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getPlace().hashCode();
-        result = 31 * result + getDate().hashCode();
-        result = 31 * result + getCompetitions().hashCode();
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (place != null ? place.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
 }
