@@ -7,7 +7,7 @@ import cz.fi.muni.pa165.entity.User;
 import java.util.List;
 
 /**
- * Created by lenoch on 22.11.17.
+ * @author Petra Halová on 22.11.17.
  */
 public interface CompetitionService extends BaseService<Competition> {
 
@@ -16,6 +16,6 @@ public interface CompetitionService extends BaseService<Competition> {
      * @param competition represents Competition
      * @param sportsMan represents User, which is sportsman
      */
-    public void addSportMen(Competition competition, User sportsMan);
+    void addSportMen(Competition competition, User sportsMan);
 
 }

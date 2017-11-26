@@ -2,16 +2,14 @@ package cz.muni.fi.pa165.service;
 
 import cz.fi.muni.pa165.dao.CompetitionDao;
 import cz.fi.muni.pa165.dao.SportDao;
-import cz.fi.muni.pa165.entity.BaseEntity;
 import cz.fi.muni.pa165.entity.Competition;
-import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 
 import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by lenoch on 22.11.17.
+ * @author Petra Halová on 22.11.17.
  */
 public class CompetitionServiceImpl implements CompetitionService {
 

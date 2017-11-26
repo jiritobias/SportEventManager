@@ -3,7 +3,6 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.SportDTO;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
-import cz.fi.muni.pa165.entity.User;
 import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.dto.AddSportsMenDTO;
@@ -19,7 +18,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by lenoch on 22.11.17.
+ * @author Petra Halová on 22.11.17.
  */
 @Service
 @Transactional
@@ -45,8 +44,7 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
     @Override
     public CompetitionDTO load(Long id) {
         Competition competition = competitionService.findById(id);
-        Sport sport = competition.getSport();
-        return new CompetitionDTO(id, new SportDTO(sport.getId(), sport.getName()));
+        return beanMappingService.mapTo(competition, CompetitionDTO.class);
     }
 
     @Override
