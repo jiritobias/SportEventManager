@@ -4,9 +4,18 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -128,5 +137,12 @@ public class User extends BaseEntity {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
         return result;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(birthdate);
+        startCal.set(Calendar.MILLISECOND, 0);
+        this.birthdate = startCal.getTime();
     }
 }

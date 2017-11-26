@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
+import javax.validation.constraints.Size;
+
 /**
  * @author jiritobias
  */
@@ -12,6 +14,8 @@ import lombok.NonNull;
 public class SportsMenDTO {
     @NonNull
     private Long id;
+    @NonNull
+    @Size(max = 50)
     private String name;
 
     @Override
