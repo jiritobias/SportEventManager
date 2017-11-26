@@ -1,13 +1,11 @@
-package cz.fi.muni.pa165.facade;
+package cz.muni.fi.pa165.service.facade;
 
-import cz.fi.muni.pa165.dto.SportDTO;
+import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
+import cz.fi.muni.pa165.facade.CompetitionFacade;
 import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.BeanMappingService;
-import cz.fi.muni.pa165.dto.AddSportsMenDTO;
-import cz.fi.muni.pa165.dto.CompetitionDTO;
-import cz.fi.muni.pa165.dto.CreateCompetitionDTO;
 import cz.muni.fi.pa165.service.SportService;
 import cz.muni.fi.pa165.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Petra Halová on 22.11.17.
@@ -69,5 +68,11 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
     @Override
     public void addSportsMen(AddSportsMenDTO addSportsManDTO){
        competitionService.addSportMen(competitionService.findById(addSportsManDTO.getCompetition()), sportsManService.findById(addSportsManDTO.getSportsMan()));
+    }
+
+    @Override
+    public List<SportsMenDTO> listAllRegisteredSportsMen(CompetitionDTO competitionDTO) {
+        return beanMappingService.mapTo(competitionService.
+                listAllRegisteredSportsMen(competitionService.findById(competitionDTO.getId())), SportsMenDTO.class);
     }
 }
