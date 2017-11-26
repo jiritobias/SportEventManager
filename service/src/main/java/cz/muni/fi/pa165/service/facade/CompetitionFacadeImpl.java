@@ -1,9 +1,10 @@
-package cz.fi.muni.pa165.facade;
+package cz.muni.fi.pa165.service.facade;
 
 import cz.fi.muni.pa165.dto.SportDTO;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.facade.CompetitionFacade;
 import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.dto.AddSportsMenDTO;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -34,6 +36,7 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
     @Inject
     private SportService sportService;
 
+    @Named("sportsmenServiceImpl")
     @Inject
     private UserService sportsManService;
 

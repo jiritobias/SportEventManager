@@ -63,9 +63,7 @@ public class UserServiceImpl implements UserService {
             user.setPasswordHash(generateStrongPasswordHash(rawPassword));
             user.setEmail(email);
             userDao.create(user);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
     }
@@ -74,9 +72,7 @@ public class UserServiceImpl implements UserService {
     public boolean authenticate(User user, String password) {
         try {
             return validatePassword(password, user.getPasswordHash());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return false;

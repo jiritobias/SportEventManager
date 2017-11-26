@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.entity.BaseEntity;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by lenoch on 22.11.17.
  */
+@Service
 public class CompetitionServiceImpl implements CompetitionService {
 
     @Inject
