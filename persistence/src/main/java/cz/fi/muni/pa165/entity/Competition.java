@@ -23,7 +23,7 @@ public class Competition extends BaseEntity {
     @OneToOne
     private Sport sport;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> sportsMen = new HashSet<>();
 
     public Set<User> getSportsMen() {

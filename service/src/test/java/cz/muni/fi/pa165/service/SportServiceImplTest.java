@@ -10,8 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@ContextConfiguration(classes = ServiceConfiguration.class)
-public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
+public class SportServiceImplTest extends BaseServiceTest {
 
     @Autowired
     private SportService sportService;

@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ import java.util.List;
  * @author Martin Smid
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Inject

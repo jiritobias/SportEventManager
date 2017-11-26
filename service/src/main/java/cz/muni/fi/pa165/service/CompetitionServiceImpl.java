@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * Created by lenoch on 22.11.17.
  */
 @Service
+@Transactional
 public class CompetitionServiceImpl implements CompetitionService {
 
     @Inject
@@ -26,7 +28,6 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public void create(Competition entity) {
-        sportDao.create(entity.getSport());
         competitionDao.create(entity);
     }
 
@@ -49,6 +50,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     public void addSportMen(Competition competition, User sportsMan) {
         if(!competition.getSportsMen().contains(sportsMan)){
             competition.addSportman(sportsMan);
+            competitionDao.update(competition);
         }
     }
 }

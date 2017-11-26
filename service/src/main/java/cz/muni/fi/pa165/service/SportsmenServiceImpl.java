@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author Martin Smid
  */
 @Service
+@Transactional
 public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenService {
 
     @Inject
