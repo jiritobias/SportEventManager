@@ -1,9 +1,12 @@
 package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.enums.Gendre;
+import cz.fi.muni.pa165.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -12,6 +15,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 public class CreateSportsMenDTO {
+
     @NonNull
     private String password;
     @NonNull
@@ -26,6 +30,10 @@ public class CreateSportsMenDTO {
     private Date birthdate;
     private String phone;
     private String address;
+    @NonNull
+    private Role role;
+    @NonNull
+    private Long sportsmanId;
 
     @Override
     public boolean equals(Object o) {

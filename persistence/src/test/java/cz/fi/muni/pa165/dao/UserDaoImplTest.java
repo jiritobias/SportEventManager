@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
@@ -42,6 +45,10 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         user1.setLastname("Novotny");
         user1.setGendre(Gendre.MAN);
         user1.setPasswordHash("1");
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(2000, Calendar.MARCH, 1, 1, 1, 1);
+        Date date1 = cal1.getTime();
+        user1.setBirthdate(date1);
         userDao.create(user1);
 
         user2 = new User();
@@ -51,6 +58,10 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         user2.setLastname("Targaryen");
         user2.setGendre(Gendre.WOMAN);
         user2.setPasswordHash("2");
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(2000, Calendar.FEBRUARY, 1, 1, 1, 1);
+        Date date2 = cal2.getTime();
+        user2.setBirthdate(date2);
         userDao.create(user2);
     }
 
@@ -130,5 +141,21 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         Set<Competition> competitions = user2.getCompetitions();
         assertEquals(competitions.size(),1);
         assertTrue(competitions.contains(competition2));
+    }
+
+    @Test
+    public void testFindByBirthdayWithinRange() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2000, Calendar.JANUARY, 1, 1, 1, 1);
+        Date date = cal.getTime();
+
+        Assertions.assertThat(userDao.findByBirthdayWithinRange(date, date)).isEmpty();
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(2000, Calendar.MARCH, 1, 1, 1, 1);
+        Date date2 = cal2.getTime();
+
+        Assertions.assertThat(userDao.findByBirthdayWithinRange(date2, date2)).contains(user1).hasSize(1);
+        Assertions.assertThat(userDao.findByBirthdayWithinRange(date, date2)).contains(user2).hasSize(2);
     }
 }

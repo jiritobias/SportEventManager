@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.enums.Gendre;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,23 @@ public interface UserService extends BaseService<User> {
      * @throws DataAccessException in a case of failure on DAO layer
      */
     List<User> findByGender(Gendre gender) throws DataAccessException;
+
+    /**
+     * Find users with the given birth date.
+     *
+     * @param date birth date
+     * @return collection of users with the birth date
+     */
+    List<User> findByBirthdate(Date date);
+
+    /**
+     * Find users with birthdate within the range.
+     *
+     * @param start start of the range
+     * @param end   end of the range
+     * @return collection of found users
+     */
+    List<User> findByBirthdateWithinRange(Date start, Date end);
 
     /**
      * Checks if the user is administrator.

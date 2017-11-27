@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByGender(Gendre gender) throws DataAccessException {
         return userDao.findByGendre(gender);
+    }
+
+    @Override
+    public List<User> findByBirthdate(Date date) {
+        return userDao.findByBirthdayWithinRange(date, date);
+    }
+
+    @Override
+    public List<User> findByBirthdateWithinRange(Date start, Date end) {
+        return userDao.findByBirthdayWithinRange(start, end);
     }
 
     @Override
