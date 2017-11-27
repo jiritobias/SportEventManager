@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
@@ -26,12 +27,12 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User findByEmail(String email) {
+    public User findByEmail(String email) throws DataAccessException {
         return userDao.findByEmail(email);
     }
 
     @Override
-    public List<User> findByGender(Gendre gender) {
+    public List<User> findByGender(Gendre gender) throws DataAccessException {
         return userDao.findByGendre(gender);
     }
 
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(User user, String password, String email) {
+    public void registerUser(User user, String password, String email) throws DataAccessException {
         registerUserWithRole(user, password, email, userDao);
     }
 
@@ -135,22 +136,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void create(User entity) {
+    public void create(User entity) throws DataAccessException {
         throw new UnsupportedOperationException("User can't be created without their password.");
     }
 
     @Override
-    public User findById(Long id) {
+    public User findById(Long id) throws DataAccessException {
         return userDao.findById(id);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAll() throws DataAccessException {
         return userDao.findAll();
     }
 
     @Override
-    public void delete(User entity) {
+    public void delete(User entity) throws DataAccessException {
         userDao.delete(entity);
     }
 }

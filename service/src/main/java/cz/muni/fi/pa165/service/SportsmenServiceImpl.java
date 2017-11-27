@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.service;
 import cz.fi.muni.pa165.dao.SportsMenDao;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     private SportsMenDao sportsMenDao;
 
     @Override
-    public void registerToCompetition(User sportsman, Competition competition) {
+    public void registerToCompetition(User sportsman, Competition competition) throws DataAccessException {
         User foundUser = sportsMenDao.findById(sportsman.getId());
         if (foundUser != null) {
             sportsman.addToCompetition(competition);
@@ -30,7 +31,7 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     }
 
     @Override
-    public void unregisterFromCompetition(User sportsman, Competition competition) {
+    public void unregisterFromCompetition(User sportsman, Competition competition) throws DataAccessException {
         User foundUser = sportsMenDao.findById(sportsman.getId());
         if (foundUser != null) {
             sportsman.removeFromCompetition(competition);
@@ -41,13 +42,13 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     }
 
     @Override
-    public List<Competition> findAllRegisteredCompetitions(User sportsman) {
+    public List<Competition> findAllRegisteredCompetitions(User sportsman) throws DataAccessException {
         User foundUser = sportsMenDao.findById(sportsman.getId());
         return foundUser == null ? null : new ArrayList<>(foundUser.getCompetitions());
     }
 
     @Override
-    public void registerUser(User user, String password, String email) {
+    public void registerUser(User user, String password, String email) throws DataAccessException {
         registerUserWithRole(user, password, email, sportsMenDao);
     }
 }
