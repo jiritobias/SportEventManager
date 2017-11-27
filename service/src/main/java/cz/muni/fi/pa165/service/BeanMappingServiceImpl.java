@@ -13,7 +13,6 @@ import java.util.List;
  * @author Martin Smid
  */
 @Service
-@Transactional
 public class BeanMappingServiceImpl implements BeanMappingService {
 
     @Autowired

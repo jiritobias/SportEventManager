@@ -61,13 +61,13 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
                 .assertThat(all)
                 .contains(sport);
 
-        sportService.delete(sport); // TODO deatached exception
+        sportService.delete(sport);
 
         all = sportService.findAll();
 
         Assertions
                 .assertThat(all)
-                .isEmpty();
+                .doesNotContain(sport);
 
         sportService.delete(sport); // restore the state
     }
@@ -75,11 +75,11 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindByName() {
         Sport sport = new Sport();
-        sport.setName("Basketball");
+        sport.setName("Volleyball");
 
         sportService.create(sport);
 
-        Sport basketball = sportService.findByName("Basketball");
+        Sport basketball = sportService.findByName("Volleyball");
 
         Assertions.assertThat(basketball)
                 .isNotNull()
