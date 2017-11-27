@@ -62,7 +62,7 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
     @BeforeMethod
     public void setUpData() {
         sportDTO = new SportDTO(1L, "Tennis");
-        competitionDTO = new CompetitionDTO(1L, sportDTO);
+        competitionDTO = new CompetitionDTO(1L, sportDTO, null);
         sport = new Sport();
         sport.setId(1L);
         sport.setName("Tennis");

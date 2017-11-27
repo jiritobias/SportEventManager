@@ -1,9 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
+import java.util.List;
 
 /**
  * @author jiritobias
@@ -11,11 +9,13 @@ import lombok.NonNull;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class CompetitionDTO {
 
     @NonNull
     private Long id;
     private SportDTO sport;
+    private List<SportsMenDTO> sportsMen;
 
     @Override
     public boolean equals(Object o) {

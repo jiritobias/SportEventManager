@@ -29,7 +29,7 @@ public class BeanMappingServiceImplTest extends AbstractTestNGSpringContextTests
         competition.setSport(sport);
 
         CompetitionDTO competitionDTO = beanMappingService.mapTo(competition, CompetitionDTO.class);
-        assertThat(competitionDTO)
+        assertThat(competitionDTO.getSport())
                 .isNotNull();
     }
 
