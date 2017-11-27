@@ -61,10 +61,11 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
         if (sport == null) {
             sport = new Sport();
             sport.setName(createCompetitionDTO.getSport().getName());
+            sportService.create(sport);
         }
         mappedCompetition.setSport(sport);
 
-        competitionService.create(mappedCompetition);
+        competitionService.create(mappedCompetition); // TODO Detached exception
         return mappedCompetition.getId();
     }
 

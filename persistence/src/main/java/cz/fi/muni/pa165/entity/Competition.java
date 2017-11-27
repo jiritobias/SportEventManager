@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.HashSet;
