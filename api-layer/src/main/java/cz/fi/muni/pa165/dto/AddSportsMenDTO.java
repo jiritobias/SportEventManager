@@ -8,7 +8,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class AddSportsMenDTO {
     @NonNull
-    private Long sportsMen;
+    private Long sportsMan;
     @NonNull
     private Long competition;
 }

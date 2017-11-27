@@ -21,7 +21,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
 
     @Override
     public void delete(T entity) {
-        entityManager.remove(entity);
+        entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
     }
 
     @Override

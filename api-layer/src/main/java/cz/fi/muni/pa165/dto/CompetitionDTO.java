@@ -10,6 +10,7 @@ import lombok.NonNull;
 @Getter
 @AllArgsConstructor
 public class CompetitionDTO {
+
     @NonNull
     private Long id;
     private SportDTO sport;

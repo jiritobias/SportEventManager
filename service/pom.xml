@@ -54,9 +54,19 @@
             <scope>test</scope><!-- logging implementation should not be part of a library, but is needed for tests -->
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>api-layer</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
