@@ -10,6 +10,7 @@ import org.assertj.core.api.Assertions;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
@@ -26,12 +27,14 @@ import static org.mockito.Mockito.when;
  * @author Martin Smid
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class SportFacadeImplTest extends AbstractTestNGSpringContextTests{
+public class SportFacadeImplTest extends AbstractTestNGSpringContextTests {
+
     @Mock
     private BeanMappingService beanMappingService;
     @Mock
     private SportService sportService;
 
+    @Autowired
     @InjectMocks
     private SportFacade sportFacade;
 
@@ -57,8 +60,6 @@ public class SportFacadeImplTest extends AbstractTestNGSpringContextTests{
 
     @BeforeClass
     public void init() {
-        sportFacade = new SportFacadeImpl();
-
         MockitoAnnotations.initMocks(this);
     }
 
