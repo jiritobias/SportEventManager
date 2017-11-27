@@ -63,9 +63,9 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
     }
 
     @Override
-    public void resetPassword(ResetPasswordDTO resetPasswordDTO) {
+    public String resetPassword(ResetPasswordDTO resetPasswordDTO) {
         User user = sportsmenService.findById(resetPasswordDTO.getId());
-        sportsmenService.resetPassword(user, resetPasswordDTO.getEmail());
+        return sportsmenService.resetPassword(user, resetPasswordDTO.getEmail());
     }
 
     @Override

@@ -37,8 +37,9 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
 
     /**
      * Reset user password.
+     * @return new password
      */
-    void resetPassword(ResetPasswordDTO resetPasswordDTO);
+    String resetPassword(ResetPasswordDTO resetPasswordDTO);
 
     /**
      * Change user password.

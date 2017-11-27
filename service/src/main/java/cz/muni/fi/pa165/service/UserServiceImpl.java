@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.inject.Inject;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -99,18 +98,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void resetPassword(User user, String email) {
+    public String resetPassword(User user, String email) {
         User foundUser = userDao.findByEmail(email);
         if (foundUser.equals(user)) {
             try {
-                user.setPasswordHash(generateStrongPasswordHash(stringService.getRandomString(16)));
+                String newPassword = stringService.getRandomString(16);
+                user.setPasswordHash(generateStrongPasswordHash(newPassword));
                 userDao.update(user);
+                return newPassword;
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 e.printStackTrace();
             }
         } else {
             throw new IllegalArgumentException("User and email does not match");
         }
+        return null;
     }
 
     private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {

@@ -84,8 +84,9 @@ public interface UserService extends BaseService<User> {
     /**
      * Reset user password
      *
-     * @param user user
+     * @param user  user
      * @param email email
+     * @return new password
      */
-    void resetPassword(User user, String email);
+    String resetPassword(User user, String email);
 }
