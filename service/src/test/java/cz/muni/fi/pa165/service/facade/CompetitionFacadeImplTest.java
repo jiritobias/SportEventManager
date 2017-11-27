@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.service.facade;
 
-import cz.fi.muni.pa165.dto.*;
+import cz.fi.muni.pa165.dto.CompetitionDTO;
+import cz.fi.muni.pa165.dto.CreateCompetitionDTO;
+import cz.fi.muni.pa165.dto.SportDTO;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.facade.CompetitionFacade;
@@ -52,11 +54,6 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
 
     @Test
     public void testGetAll() {
-        List<CompetitionDTO> all = competitionFacade.getAll();
-
-        Assertions.assertThat(all)
-                .isEmpty();
-
         Sport sport = new Sport();
         sport.setName("AAA");
 
@@ -68,7 +65,7 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
 
         CompetitionDTO competitionDTO = new CompetitionDTO(competition.getId(), new SportDTO(sport.getId(), sport.getName()), null);
 
-        all = competitionFacade.getAll();
+        List<CompetitionDTO> all = competitionFacade.getAll();
 
         Assertions.assertThat(all)
                 .isNotEmpty()
@@ -90,7 +87,9 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
 
     @Test
     public void testCreateCompetition() {
-        CreateCompetitionDTO createCompetitionDTO = new CreateCompetitionDTO(666L, new SportDTO(sport.getId(), sport.getName()));
-//        Long competition = competitionFacade.createCompetition(createCompetitionDTO); // TODO
+        CreateCompetitionDTO createCompetitionDTO = new CreateCompetitionDTO(null, new SportDTO(sport.getId(), sport.getName()));
+        Long competition = competitionFacade.createCompetition(createCompetitionDTO);
+        Assertions.assertThat(competition)
+                .isNotNull();
     }
 }

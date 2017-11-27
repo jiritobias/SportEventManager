@@ -65,7 +65,7 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
         }
         mappedCompetition.setSport(sport);
 
-        competitionService.create(mappedCompetition); // TODO Detached exception
+        competitionService.create(mappedCompetition);
         return mappedCompetition.getId();
     }
 
