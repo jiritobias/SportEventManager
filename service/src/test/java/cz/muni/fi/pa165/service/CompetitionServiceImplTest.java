@@ -5,6 +5,8 @@ import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.List;
@@ -41,8 +43,6 @@ public class CompetitionServiceImplTest extends BaseServiceTest {
 
         sportsmenService.registerUser(sportsMen, "password", "abc@test.com");
         sportService.create(sport);
-
-
     }
 
     @Test
@@ -60,9 +60,6 @@ public class CompetitionServiceImplTest extends BaseServiceTest {
     @Test
     public void testFindAll() {
         List<Competition> list = competitionService.findAll();
-        // precondition, empty db
-        assertThat(list)
-                .isEmpty();
 
         Competition competition = new Competition();
         competition.setSport(sport);
@@ -72,33 +69,41 @@ public class CompetitionServiceImplTest extends BaseServiceTest {
         list = competitionService.findAll();
         assertThat(list)
                 .isNotEmpty()
-                .containsOnly(competition);
+                .contains(competition);
 
     }
 
     @Test
     public void testDelete() {
+        Sport sport = new Sport();
+        sport.setName("Beer pong");
         Competition competition = new Competition();
         competition.setSport(sport);
 
+        sportService.create(sport);
         competitionService.create(competition);
+
         List<Competition> list = competitionService.findAll();
         assertThat(list)
-                .isNotEmpty()
-                .containsOnly(competition);
+                .contains(competition);
 
         competitionService.delete(competition);
 
         list = competitionService.findAll();
         assertThat(list)
-                .isEmpty();
+                .doesNotContain(competition);
+
     }
 
     @Test
     public void testAddSportMen() {
+        Sport sport = new Sport();
+        sport.setName("Sport1");
+
         Competition competition = new Competition();
         competition.setSport(sport);
 
+        sportService.create(sport);
         competitionService.create(competition);
 
         competitionService.addSportMen(competition, sportsMen);
