@@ -71,4 +71,21 @@ public interface UserService extends BaseService<User> {
      * @return true iff the password hash is in the records
      */
     boolean authenticate(User user, String password);
+
+    /**
+     * Change user password
+     *
+     * @param user        user
+     * @param oldPassword old password
+     * @param newPassword new password
+     */
+    void changePassword(User user, String oldPassword, String newPassword);
+
+    /**
+     * Reset user password
+     *
+     * @param user user
+     * @param email email
+     */
+    void resetPassword(User user, String email);
 }
