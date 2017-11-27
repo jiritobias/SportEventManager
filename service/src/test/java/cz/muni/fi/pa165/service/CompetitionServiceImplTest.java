@@ -4,9 +4,10 @@ import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.List;
@@ -15,7 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author jiritobias
  */
-public class CompetitionServiceImplTest extends BaseServiceTest {
+@ContextConfiguration(classes = ServiceConfiguration.class)
+public class CompetitionServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     CompetitionService competitionService;
