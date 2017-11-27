@@ -18,7 +18,7 @@
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>persistence</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>
