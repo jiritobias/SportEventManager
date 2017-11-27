@@ -4,11 +4,13 @@ import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -20,9 +22,11 @@ import java.util.List;
  * @author Martin Smid
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Inject
+    @Qualifier("userDaoImpl")
     private UserDao userDao;
 
     @Override
@@ -61,9 +65,7 @@ public class UserServiceImpl implements UserService {
             user.setPasswordHash(generateStrongPasswordHash(rawPassword));
             user.setEmail(email);
             userDao.create(user);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
     }
@@ -72,9 +74,7 @@ public class UserServiceImpl implements UserService {
     public boolean authenticate(User user, String password) {
         try {
             return validatePassword(password, user.getPasswordHash());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return false;

@@ -14,7 +14,7 @@ public interface CompetitionFacade extends BaseFacade<CompetitionDTO> {
     Long createCompetition(CreateCompetitionDTO createCompetitionDTO);
 
     /**
-     * Add sportsMen to competition.
+     * Add sportsMan to competition.
      */
-    Long addSportsMen(AddSportsMenDTO addSportsMenDTO);
+    void addSportsMen(AddSportsMenDTO addSportsManDTO);
 }

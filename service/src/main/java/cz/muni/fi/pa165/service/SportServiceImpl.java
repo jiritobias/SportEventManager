@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.service;
 import cz.fi.muni.pa165.dao.SportDao;
 import cz.fi.muni.pa165.entity.Sport;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author Martin Smid
  */
 @Service
+@Transactional
 public class SportServiceImpl implements SportService {
 
     @Inject
