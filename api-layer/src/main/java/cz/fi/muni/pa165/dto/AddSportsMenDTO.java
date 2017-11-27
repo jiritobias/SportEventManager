@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
+/**
+ * @author Petra Halová
+ */
 @Getter
 @AllArgsConstructor
 public class AddSportsMenDTO {

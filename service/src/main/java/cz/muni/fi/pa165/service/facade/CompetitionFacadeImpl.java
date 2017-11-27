@@ -1,27 +1,25 @@
 package cz.muni.fi.pa165.service.facade;
 
-import cz.fi.muni.pa165.dto.SportDTO;
-import cz.fi.muni.pa165.entity.Competition;
-import cz.fi.muni.pa165.entity.Sport;
-import cz.fi.muni.pa165.entity.User;
-import cz.fi.muni.pa165.facade.CompetitionFacade;
-import cz.muni.fi.pa165.service.CompetitionService;
-import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.dto.AddSportsMenDTO;
 import cz.fi.muni.pa165.dto.CompetitionDTO;
 import cz.fi.muni.pa165.dto.CreateCompetitionDTO;
+import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.entity.Competition;
+import cz.fi.muni.pa165.entity.Sport;
+import cz.fi.muni.pa165.facade.CompetitionFacade;
+import cz.muni.fi.pa165.service.BeanMappingService;
+import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.SportService;
 import cz.muni.fi.pa165.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 /**
- * Created by lenoch on 22.11.17.
+ * @author Petra Halová on 22.11.17.
  */
 @Service
 @Transactional
@@ -48,8 +46,7 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
     @Override
     public CompetitionDTO load(Long id) {
         Competition competition = competitionService.findById(id);
-        Sport sport = competition.getSport();
-        return new CompetitionDTO(id, new SportDTO(sport.getId(), sport.getName()));
+        return beanMappingService.mapTo(competition, CompetitionDTO.class);
     }
 
     @Override
@@ -61,7 +58,7 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
     public Long createCompetition(CreateCompetitionDTO createCompetitionDTO) {
         Competition mappedCompetition = beanMappingService.mapTo(createCompetitionDTO, Competition.class);
         Sport sport = sportService.findById(createCompetitionDTO.getSport().getId());
-        if(sport == null){
+        if (sport == null) {
             sport = new Sport();
             sport.setName(createCompetitionDTO.getSport().getName());
         }
@@ -72,7 +69,13 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
     }
 
     @Override
-    public void addSportsMen(AddSportsMenDTO addSportsManDTO){
-       competitionService.addSportMen(competitionService.findById(addSportsManDTO.getCompetition()), sportsManService.findById(addSportsManDTO.getSportsMan()));
+    public void addSportsMen(AddSportsMenDTO addSportsManDTO) {
+        competitionService.addSportMen(competitionService.findById(addSportsManDTO.getCompetition()), sportsManService.findById(addSportsManDTO.getSportsMan()));
+    }
+
+    @Override
+    public List<SportsMenDTO> listAllRegisteredSportsMen(CompetitionDTO competitionDTO) {
+        return beanMappingService.mapTo(competitionService.
+                listAllRegisteredSportsMen(competitionService.findById(competitionDTO.getId())), SportsMenDTO.class);
     }
 }
