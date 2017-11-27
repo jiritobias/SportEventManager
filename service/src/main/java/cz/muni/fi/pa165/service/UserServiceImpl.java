@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +26,13 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+
     @Inject
     @Qualifier("userDaoImpl")
     private UserDao userDao;
+
+    @Autowired
+    private StringService stringService;
 
     @Override
     public User findByEmail(String email) {
@@ -78,6 +83,38 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void changePassword(User user, String oldPassword, String newPassword) {
+        if (authenticate(user, oldPassword)) {
+            try {
+                user.setPasswordHash(generateStrongPasswordHash(newPassword));
+                userDao.update(user);
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new IllegalArgumentException("User and password do not match");
+        }
+    }
+
+    @Override
+    public String resetPassword(User user, String email) {
+        User foundUser = userDao.findByEmail(email);
+        if (foundUser.equals(user)) {
+            try {
+                String newPassword = stringService.getRandomString(16);
+                user.setPasswordHash(generateStrongPasswordHash(newPassword));
+                userDao.update(user);
+                return newPassword;
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new IllegalArgumentException("User and email does not match");
+        }
+        return null;
     }
 
     private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
