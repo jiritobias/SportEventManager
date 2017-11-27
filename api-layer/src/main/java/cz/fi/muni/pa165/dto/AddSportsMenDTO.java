@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
@@ -9,6 +10,7 @@ import lombok.NonNull;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class AddSportsMenDTO {
     @NonNull
     private Long sportsMan;

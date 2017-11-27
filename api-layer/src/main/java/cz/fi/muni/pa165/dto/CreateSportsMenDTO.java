@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import java.util.Date;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateSportsMenDTO {
 
     @NonNull

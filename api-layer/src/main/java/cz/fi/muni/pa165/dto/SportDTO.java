@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SportDTO {
     @NonNull
     private Long id;

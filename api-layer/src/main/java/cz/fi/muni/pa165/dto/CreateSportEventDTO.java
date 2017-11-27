@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateSportEventDTO {
     @NonNull
     private String name;
