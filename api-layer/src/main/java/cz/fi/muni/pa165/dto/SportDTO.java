@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Data
 public class SportDTO {
-    @NonNull
+
     private Long id;
 
     @NonNull
