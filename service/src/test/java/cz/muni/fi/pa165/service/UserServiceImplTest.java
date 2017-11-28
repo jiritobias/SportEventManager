@@ -6,22 +6,20 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.assertj.core.api.Assertions;
 import org.hibernate.service.spi.ServiceException;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Petra Halová on 26.11.17.
@@ -30,15 +28,21 @@ import java.util.Date;
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
 
-    @Autowired
-    private UserService userService;
+    @Mock
+    private UserDao userDao;
+
+    @InjectMocks
+    @Qualifier("userServiceImpl")
+    private UserService userService = new UserServiceImpl();
 
     private User testUser;
 
     private User anotherTestUser;
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @BeforeClass
+    public void setup() throws ServiceException {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @BeforeMethod
     public void setUpData(){
@@ -68,27 +72,15 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
    }
 
     @Test
-    public void testCreate(){
-        Assertions.assertThat(userService.findAll()).isEmpty();
-        userService.create(testUser);
-
-        Assertions.assertThat(userService.findById(testUser.getId()))
-                .isEqualToComparingFieldByField(testUser);
-    }
-
-    @Test
     public void testFindById(){
-    userService.create(testUser);
-
+    when(userDao.findById(testUser.getId())).thenReturn(testUser);
     Assertions.assertThat(userService.findById(testUser.getId()))
                 .isEqualToComparingFieldByField(testUser);
     }
 
     @Test
     public void testFindAll(){
-        userService.create(testUser);
-        userService.create(anotherTestUser);
-
+        when(userDao.findAll()).thenReturn(Arrays.asList(testUser, anotherTestUser));
         Assertions.assertThat(userService.findAll())
                 .usingFieldByFieldElementComparator()
                 .containsOnly(testUser, anotherTestUser);
@@ -96,32 +88,28 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testDelete(){
-        userService.create(testUser);
-        userService.create(anotherTestUser);
-        Assertions.assertThat(userService.findAll())
-                .usingFieldByFieldElementComparator()
-                .containsOnly(testUser,anotherTestUser);
-
-        userService.delete(anotherTestUser);
-        Assertions.assertThat(userService.findAll())
-                .usingFieldByFieldElementComparator()
-                .containsOnly(testUser);
+        userService.delete(testUser);
+        verify(userDao).delete(testUser);
     }
 
     @Test
     public void testFindByEmail() {
-        userService.create(testUser);
-        userService.create(anotherTestUser);
+        when(userDao.findByEmail(testUser.getEmail())).thenReturn(testUser);
         Assertions.assertThat(userService.findByEmail(testUser.getEmail()))
                 .isEqualToComparingFieldByField(testUser);
     }
 
     @Test
+    public void testFindByNonExistingEmail() {
+        when(userDao.findByEmail(testUser.getEmail())).thenReturn(null);
+        Assertions.assertThat(userService.findByEmail(testUser.getEmail()))
+            .isNull();
+    }
+
+    @Test
     public void testFindByGender(){
         anotherTestUser.setGendre(Gendre.WOMAN);
-        userService.create(testUser);
-        userService.create(anotherTestUser);
-
+        when(userDao.findByGendre(Gendre.MAN)).thenReturn(Collections.singletonList(testUser));
         Assertions.assertThat(userService.findByGender(Gendre.MAN))
                 .usingFieldByFieldElementComparator().
                 containsOnly(testUser);
@@ -129,12 +117,21 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindByBirthDate(){
-        Assertions.assertThat(userService.findByBirthdate(testUser.getBirthdate())).isEmpty();
-        userService.create(testUser);
-        userService.create(anotherTestUser);
+        when(userDao.findByBirthdayWithinRange(testUser.getBirthdate(), testUser.getBirthdate()))
+                .thenReturn(Collections.singletonList(testUser));
         Assertions.assertThat(userService.findByBirthdate(testUser.getBirthdate()))
                 .usingFieldByFieldElementComparator()
                 .containsOnly(testUser);
+    }
+
+    @Test
+    public void testFindBirthDateWithNoResult(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(2005, Calendar.JANUARY, 1, 1, 1, 1);
+        Date date = cal.getTime();
+        when(userDao.findByBirthdayWithinRange(testUser.getBirthdate(), date))
+                .thenReturn(Collections.emptyList());
+        Assertions.assertThat(userService.findByBirthdate(testUser.getBirthdate())).isEmpty();
     }
 
     @Test
@@ -142,10 +139,9 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         Calendar cal = Calendar.getInstance();
         cal.set(2005, Calendar.JANUARY, 1, 1, 1, 1);
         Date date = cal.getTime();
-        Assertions.assertThat(userService.findByBirthdateWithinRange(testUser.getBirthdate(), date)).isEmpty();
 
-        userService.create(testUser);
-        userService.create(anotherTestUser);
+        when(userDao.findByBirthdayWithinRange(testUser.getBirthdate(), date))
+                .thenReturn(Collections.singletonList(testUser));
         Assertions.assertThat(userService.findByBirthdateWithinRange(testUser.getBirthdate(), date))
                 .usingFieldByFieldElementComparator()
                 .containsOnly(testUser);
@@ -153,39 +149,36 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testRegisterUser(){
-        Assertions.assertThat(userService.findAll()).isEmpty();
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        Assertions.assertThat(userService.findAll())
-                .usingFieldByFieldElementComparator()
-                .containsOnly(testUser);
+        verify(userDao).create(testUser);
     }
 
-    @Test
+    //Nevim, jak se ma ta metoda chovat
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAlreadyRegisteredUser(){
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        //expectedException.expect(IllegalArgumentException.class);
+        verify(userDao).create(testUser);
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
     }
 
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testRegisterUserWithSameEmail(){
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
+        verify(userDao).create(testUser);
         anotherTestUser.setEmail(testUser.getEmail());
-
-        expectedException.expect(IllegalArgumentException.class);
         userService.registerUser(anotherTestUser, anotherTestUser.getEmail(), anotherTestUser.getPasswordHash());
     }
 
     @Test
     public void testAuthenticate(){
-
+        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
+        Assertions.assertThat(userService.authenticate(testUser, testUser.getPasswordHash())).isTrue();
     }
 
     @Test
     public void testWrongPassword(){
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        expectedException.expect(IllegalArgumentException.class);
-        userService.authenticate(testUser, "111");
+        Assertions.assertThat(userService.authenticate(testUser, "111")).isFalse();
     }
 }
 

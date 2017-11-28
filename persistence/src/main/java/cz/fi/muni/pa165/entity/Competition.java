@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -41,19 +40,13 @@ public class Competition extends BaseEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || !(o instanceof Competition)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Competition that = (Competition) o;
 
-        if (sport != null ? !sport.equals(that.sport) : that.sport != null) {
-            return false;
-        }
-        return sportsMen != null ? sportsMen.equals(that.sportsMen) : that.sportsMen == null;
+        if (!getSport().equals(that.getSport())) return false;
+        return getSportsMen() != null ? getSportsMen().equals(that.getSportsMen()) : that.getSportsMen() == null;
     }
 
     @Override
