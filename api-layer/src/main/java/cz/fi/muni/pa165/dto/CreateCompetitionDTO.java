@@ -10,9 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class CreateCompetitionDTO {
-    @NonNull
-    private Long id;
 
+    private Long id;
     @NonNull
     private SportDTO sport;
 
