@@ -31,21 +31,14 @@ import java.util.Date;
 public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    @InjectMocks
     private UserService userService;
 
     private User testUser;
 
     private User anotherTestUser;
 
-
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
-
-    @BeforeClass
-    public void setup() throws ServiceException{
-        MockitoAnnotations.initMocks(this);
-    }
 
     @BeforeMethod
     public void setUpData(){
