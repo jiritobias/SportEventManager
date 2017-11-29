@@ -32,9 +32,6 @@ public class CreateSportsMenDTO {
     private String address;
     @NonNull
     private Role role;
-    @NonNull
-    private Long sportsmanId;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

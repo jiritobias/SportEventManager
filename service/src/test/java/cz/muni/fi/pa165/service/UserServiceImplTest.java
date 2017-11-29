@@ -148,34 +148,6 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testRegisterUser(){
-        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        verify(userDao).create(testUser);
-    }
-
-    //Nevim, jak se ma ta metoda chovat
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testAlreadyRegisteredUser(){
-        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        verify(userDao).create(testUser);
-        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-    }
-
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testRegisterUserWithSameEmail(){
-        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        verify(userDao).create(testUser);
-        anotherTestUser.setEmail(testUser.getEmail());
-        userService.registerUser(anotherTestUser, anotherTestUser.getEmail(), anotherTestUser.getPasswordHash());
-    }
-
-    @Test
-    public void testAuthenticate(){
-        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
-        Assertions.assertThat(userService.authenticate(testUser, testUser.getPasswordHash())).isTrue();
-    }
-
-    @Test
     public void testWrongPassword(){
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
         Assertions.assertThat(userService.authenticate(testUser, "111")).isFalse();

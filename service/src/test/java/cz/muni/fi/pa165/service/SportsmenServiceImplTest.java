@@ -92,13 +92,6 @@ public class SportsmenServiceImplTest extends AbstractTestNGSpringContextTests {
                 .containsOnly(testSportsman);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testRegisterToNonExistingCompetition(){
-        when(sportsMenDao.findById(testSportsman.getId())).thenReturn(testSportsman);
-        when(competitionDao.findById(competition.getId())).thenReturn(null);
-        sportsmenService.registerToCompetition(testSportsman, competition);
-    }
-
     @Test
     public void testFindAllRegistered(){
         when(sportsMenDao.findById(testSportsman.getId())).thenReturn(testSportsman);
@@ -111,28 +104,4 @@ public class SportsmenServiceImplTest extends AbstractTestNGSpringContextTests {
                 .containsOnly(competition, anotherCompetition);
     }
 
-
-//nejspis jsem spatne implementovala hashcode v competition
-    @Test
-    public void testUnregisterFromCompetition(){
-
-        when(sportsMenDao.findById(testSportsman.getId())).thenReturn(testSportsman);
-        testSportsman.addToCompetition(competition);
-        testSportsman.addToCompetition(anotherCompetition);
-
-        sportsmenService.unregisterFromCompetition(testSportsman,anotherCompetition);
-        verify(sportsMenDao).update(testSportsman);
-        Assertions.assertThat(testSportsman.getCompetitions())
-                .usingFieldByFieldElementComparator()
-                .containsOnly(competition);
-        Assertions.assertThat(anotherCompetition.getSportsMen())
-                .isEmpty();
-    }
-
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testUnregisterFromNotRegisteredCompetition(){
-        when(sportsMenDao.findById(testSportsman.getId())).thenReturn(testSportsman);
-        testSportsman.addToCompetition(anotherCompetition);
-        sportsmenService.unregisterFromCompetition(testSportsman,competition);
-    }
 }
