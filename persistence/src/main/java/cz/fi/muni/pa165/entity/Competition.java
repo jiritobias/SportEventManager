@@ -40,19 +40,23 @@ public class Competition extends BaseEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof Competition)) {
+            return false;
+        }
 
         Competition that = (Competition) o;
 
-        if (!getSport().equals(that.getSport())) return false;
-        return getSportsMen() != null ? getSportsMen().equals(that.getSportsMen()) : that.getSportsMen() == null;
+        if (sport != null ? !sport.equals(that.sport) : that.sport != null) {
+            return false;
+        }
+        return sportsMen != null ? sportsMen.equals(that.sportsMen) : that.sportsMen == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getSport().hashCode();
-        result = 31 * result + (getSportsMen() != null ? getSportsMen().hashCode() : 0);
-        return result;
+        return 31 *  (sport != null ? sport.hashCode() : 0);
     }
 }
