@@ -14,6 +14,7 @@ import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.List;
@@ -50,6 +51,15 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
 
         sportDTO = new SportDTO(sport.getId(), "Tennis");
         competitionDTO = new CompetitionDTO(competition.getId(), sportDTO, null);
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        try {
+            sportService.delete(sport);
+            competitionService.delete(competition);
+        } catch (Exception ignore) { // ingore, delete tests
+        }
     }
 
     @Test

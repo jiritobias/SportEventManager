@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -28,6 +29,15 @@ public class SportDaoImplTest extends BaseDaoImplTest {
 
         sportDao.create(sport1);
         sportDao.create(sport2);
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        try {
+            sportDao.delete(sport1);
+            sportDao.delete(sport2);
+        } catch (Exception ignore) {
+        }
     }
 
     @Test

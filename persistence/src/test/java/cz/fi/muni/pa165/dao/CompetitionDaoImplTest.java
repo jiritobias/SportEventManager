@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.List;
@@ -26,6 +27,8 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
 
     private Competition competition;
     private Sport sport;
+    private User sportman;
+    private User sportwoman;
 
     @BeforeMethod
     public void setUp() {
@@ -34,7 +37,7 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
 
         competition.setSport(sport);
 
-        User sportman = new User();
+        sportman = new User();
         sportman.setFirstname("Martin");
         sportman.setLastname("Novy");
         sportman.setEmail("test@test.com");
@@ -43,7 +46,7 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         sportman.setRole(Role.SPORTSMEN);
         sportman.setPasswordHash("hash");
 
-        User sportwoman = new User();
+        sportwoman = new User();
         sportwoman.setFirstname("Pavla");
         sportwoman.setLastname("Stara");
         sportwoman.setEmail("abc@test.com");
@@ -59,6 +62,12 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         competition.addSportman(sportwoman);
     }
 
+    @AfterMethod
+    public void tearDown() {
+        sportsMenDao.delete(sportman);
+        sportsMenDao.delete(sportwoman);
+    }
+
     /**
      * Checks that will return competition with the ID
      */
@@ -70,6 +79,8 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         assertEquals(competition.getId(), comp.getId());
         assertEquals("Tennis", comp.getSport().getName());
         assertEquals(2, comp.getSportsMen().size());
+
+        competitionDao.delete(competition);
     }
 
     /**
@@ -88,6 +99,9 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         assertEquals(2, competitions.size());
         assertEquals("Tennis", competitions.get(0).getSport().getName());
         assertEquals("Swimming", competitions.get(1).getSport().getName());
+
+        competitionDao.delete(competition);
+        competitionDao.delete(competition2);
     }
 
     /**
@@ -103,6 +117,9 @@ public class CompetitionDaoImplTest extends BaseDaoImplTest {
         competition2.setSport(sport);
         competitionDao.create(competition2);
         assertEquals(2, competitionDao.findAll().size());
+
+        competitionDao.delete(competition);
+        competitionDao.delete(competition2);
     }
 
     /**
