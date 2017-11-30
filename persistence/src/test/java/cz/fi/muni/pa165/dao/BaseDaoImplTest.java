@@ -63,6 +63,7 @@ public class BaseDaoImplTest extends AbstractTestNGSpringContextTests {
         assertThat(user.getLastname())
                 .isEqualTo("Podivny");
 
+        userDao.delete(user);
     }
 
     protected User createUser(String firstname) {

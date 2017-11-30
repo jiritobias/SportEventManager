@@ -61,5 +61,7 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         Long sportsMan = sportsMenFacade.createSportsMen(createdSportsMan);
         Assertions.assertThat(sportsMan)
                 .isNotNull();
+
+        sportsMenFacade.delete(new SportsMenDTO(sportsMan, ""));
     }
 }
