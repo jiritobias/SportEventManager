@@ -33,10 +33,11 @@ public class SportFacadeImplTest extends AbstractTestNGSpringContextTests {
     public void setUpData() {
 
         sport = new Sport();
-        sport.setName("Tennis");
+        String sportName = "Lazy-Tennis";
+        sport.setName(sportName);
         sportService.create(sport);
 
-        sportDTO = new SportDTO(sport.getId(), "Tennis");
+        sportDTO = new SportDTO(sport.getId(), sportName);
     }
 
     @AfterMethod
@@ -56,7 +57,7 @@ public class SportFacadeImplTest extends AbstractTestNGSpringContextTests {
         all = sportFacade.getAll();
 
         Assertions.assertThat(all)
-                .isEmpty();
+                .doesNotContain(sportDTO);
     }
 
     @Test
