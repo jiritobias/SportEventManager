@@ -118,8 +118,8 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testLoad() {
         SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
-        Assertions.assertThat(sportsMenDTO.getFirstName()).isEqualTo(createSportsMenDTO.getFirstname());
-        Assertions.assertThat(sportsMenDTO.getLastName()).isEqualTo(createSportsMenDTO.getLastname());
+        Assertions.assertThat(sportsMenDTO.getFirstname()).isEqualTo(createSportsMenDTO.getFirstname());
+        Assertions.assertThat(sportsMenDTO.getLastname()).isEqualTo(createSportsMenDTO.getLastname());
     }
 
     @Test

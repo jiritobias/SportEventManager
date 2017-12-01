@@ -21,16 +21,18 @@ public class SportsMenDTO {
     private Long id;
     @NonNull
     @Size(max = 50)
-    private String firstName;
+    private String firstname;
     @NonNull
-    private String lastName;
+    private String lastname;
     @NonNull
     private String passwordHash;
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
         return result;
     }
@@ -49,7 +51,13 @@ public class SportsMenDTO {
 
         SportsMenDTO that = (SportsMenDTO) o;
 
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) {
+        if (id != null ? !id.equals(that.id) : that.id != null) {
+            return false;
+        }
+        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) {
+            return false;
+        }
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) {
             return false;
         }
         return passwordHash != null ? passwordHash.equals(that.passwordHash) : that.passwordHash == null;

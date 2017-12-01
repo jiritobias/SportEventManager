@@ -6,7 +6,7 @@
             <!--  log message format    http://logback.qos.ch/manual/layouts.html#conversionWord
              %date ... date and time of event
              %-5level ... level (debug/info/warn), left justified, minimum 5 characters
-             %logger{36} ... logger firstName, shortened to at most 36 characters
+             %logger{36} ... logger firstname, shortened to at most 36 characters
              - ... literal dash
              %message ... the logged text
              %n - OS-dependent end of line, \n on Unix, \r\n on Windows
