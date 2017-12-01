@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.assertj.core.api.Assertions;
+import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -107,12 +108,11 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testDelete() {
-        List<SportsMenDTO> all = sportsMenFacade.getAll();
-        Assertions.assertThat(all).isNotEmpty();
-        sportsMenFacade.delete(sportsMenFacade.load(sportsManId));
+        SportsMenDTO dto = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(dto.getId()).isNotNull();
 
-        all = sportsMenFacade.getAll();
-        Assertions.assertThat(all).isEmpty();
+        sportsMenFacade.delete(dto);
+        Assertions.assertThatThrownBy(() -> sportsMenFacade.load(sportsManId)).isInstanceOf(MappingException.class);
     }
 
     @Test
