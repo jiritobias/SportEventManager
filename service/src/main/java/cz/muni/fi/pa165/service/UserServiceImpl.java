@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
         byte[] salt = fromHex(parts[1]);
         byte[] hash = fromHex(parts[2]);
 
-        PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, hash.length);
+        PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, hash.length * 8);
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] testHash = secretKeyFactory.generateSecret(keySpec).getEncoded();
 
