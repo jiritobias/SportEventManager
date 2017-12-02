@@ -150,7 +150,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testWrongPassword(){
-        userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
+        userService.registerUser(testUser, password, testUser.getEmail());
         Assertions.assertThat(userService.authenticate(testUser, "111")).isFalse();
     }
 
