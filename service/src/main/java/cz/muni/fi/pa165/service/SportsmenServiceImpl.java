@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dao.CompetitionDao;
 import cz.fi.muni.pa165.dao.SportsMenDao;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,7 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
 
     @Override
     public void registerUser(User user, String password, String email) {
-        registerUserWithRole(user, password, email, sportsMenDao);
+        registerUserWithRole(user, password, email, Role.SPORTSMEN);
     }
 
     @Override

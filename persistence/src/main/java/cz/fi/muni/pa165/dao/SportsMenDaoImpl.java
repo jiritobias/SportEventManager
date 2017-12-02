@@ -12,15 +12,6 @@ import java.util.List;
 @Repository
 public class SportsMenDaoImpl extends UserDaoImpl implements SportsMenDao {
     @Override
-    public void create(User sportsMan) {
-        // create
-        super.create(sportsMan);
-        // set role
-        sportsMan.setRole(Role.SPORTSMEN);
-        entityManager.merge(sportsMan);
-    }
-
-    @Override
     public List<User> findAll() {
         return entityManager.createQuery("SELECT s FROM User s where s.role = :role", User.class)
                 .setParameter("role", Role.SPORTSMEN)
