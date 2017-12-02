@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
+import cz.muni.fi.pa165.service.SportsmenService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.assertj.core.api.Assertions;
 import org.dozer.MappingException;
@@ -27,6 +28,9 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private SportsMenFacade sportsMenFacade;
+
+    @Autowired
+    private SportsmenService sportsmenService;
 
     private User sportman;
     private CreateSportsMenDTO createSportsMenDTO;
@@ -105,6 +109,9 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
 
         String newPasswordHash = sportsMenFacade.load(sportsManId).getPasswordHash();
         Assertions.assertThat(newPasswordHash).isNotEqualTo(oldPasswordHash);
+
+        sportman.setPasswordHash(newPasswordHash);
+        Assertions.assertThat(sportsmenService.authenticate(sportman, "newPassword")).isTrue();
     }
 
     @Test
