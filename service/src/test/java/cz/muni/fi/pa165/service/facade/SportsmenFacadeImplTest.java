@@ -88,8 +88,7 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
 
         found = sportsMenFacade.findByBirthDay(date);
         SportsMenDTO load = sportsMenFacade.load(sportsManId);
-        Assertions.assertThat(found).hasSize(1);
-        Assertions.assertThat(found.get(0)).isEqualToComparingFieldByField(load);
+        Assertions.assertThat(found).contains(load).hasSize(1);
     }
 
     @Test
