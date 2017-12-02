@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.SportEvent;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import javax.validation.ConstraintViolationException;
@@ -30,6 +31,7 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
     private SportEvent sportEvent1;
     private SportEvent sportEvent2;
     private Competition competition;
+    private Sport sport;
 
     @BeforeMethod
     public void createEvents() {
@@ -46,7 +48,7 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
         sportEventDao.create(sportEvent1);
         sportEventDao.create(sportEvent2);
 
-        Sport sport = new Sport();
+        sport = new Sport();
         sport.setName("Ice hockey");
         sportDao.create(sport);
 
@@ -58,6 +60,13 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
 
         competitionDao.create(competition);
 
+    }
+
+    @AfterMethod
+    public void tearDown() throws Exception {
+        sportEventDao.delete(sportEvent1);
+        sportEventDao.delete(sportEvent2);
+        sportDao.delete(sport);
     }
 
     @Test
@@ -126,6 +135,8 @@ public class SportEventDaoImplTest extends BaseDaoImplTest {
                         .getCompetitions()
                         .size())
                 .isZero();
+
+        sportEventDao.delete(sportEvent);
     }
 
 }

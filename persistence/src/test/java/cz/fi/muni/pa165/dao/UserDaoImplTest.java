@@ -8,6 +8,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -63,6 +64,15 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         Date date2 = cal2.getTime();
         user2.setBirthdate(date2);
         userDao.create(user2);
+    }
+
+    @AfterMethod
+    public void tearDown()  {
+        try {
+            userDao.delete(user1);
+            userDao.delete(user2);
+        } catch (Exception ignore) {
+        }
     }
 
     private Competition createCompetition(String nameOfSport){
@@ -127,6 +137,9 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         Set<Competition> competitions = user2.getCompetitions();
         assertEquals(competitions.size(),1);
         assertTrue(competitions.contains(competition));
+
+        sportDao.delete(competition.getSport());
+        competitionDao.delete(competition);
     }
 
     @Test
@@ -141,6 +154,9 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         Set<Competition> competitions = user2.getCompetitions();
         assertEquals(competitions.size(),1);
         assertTrue(competitions.contains(competition2));
+
+        competitionDao.delete(competition1);
+        competitionDao.delete(competition2);
     }
 
     @Test

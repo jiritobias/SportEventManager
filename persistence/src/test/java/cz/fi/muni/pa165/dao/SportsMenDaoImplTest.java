@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -42,6 +43,11 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         sportsmen.setCompetitions(new HashSet<>());
     }
 
+    @AfterMethod
+    public void tearDown() {
+        sportsMenDao.delete(sportsmen);
+    }
+
     @Test
     public void testCreate() {
         sportsMenDao.create(sportsmen);
@@ -71,6 +77,8 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
                 .findFirst();
         assertTrue(first.isPresent());
         assertTrue(first.get().equals(sportsmen));
+
+        competitionDao.delete(competition);
     }
 
     @Test
@@ -96,6 +104,9 @@ public class SportsMenDaoImplTest extends BaseDaoImplTest {
         assertTrue(sportsmen.getCompetitions().contains(competition1));
         assertEquals(sportsmenInComp.size(), 1);
         assertTrue(sportsmenInComp.contains(sportsmen));
+
+        competitionDao.delete(competition);
+        competitionDao.delete(competition1);
     }
 
     @Test
