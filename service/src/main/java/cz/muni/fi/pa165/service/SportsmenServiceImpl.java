@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.service;
 
+import cz.fi.muni.pa165.dao.CompetitionDao;
 import cz.fi.muni.pa165.dao.SportsMenDao;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
@@ -21,6 +22,8 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
 
     @Inject
     private SportsMenDao sportsMenDao;
+    @Inject
+    private CompetitionDao competitionDao;
 
     @Override
     public void registerToCompetition(User sportsman, Competition competition) {
@@ -39,6 +42,7 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
         if (foundUser != null) {
             sportsman.removeFromCompetition(competition);
             sportsMenDao.update(sportsman);
+            competitionDao.update(competition);
         } else {
             throw new IllegalArgumentException("User is not registered.");
         }
@@ -53,5 +57,10 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     @Override
     public void registerUser(User user, String password, String email) {
         registerUserWithRole(user, password, email, sportsMenDao);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return sportsMenDao.findAll();
     }
 }
