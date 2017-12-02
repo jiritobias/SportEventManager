@@ -54,4 +54,9 @@ public class SportsmenServiceImpl extends UserServiceImpl implements SportsmenSe
     public void registerUser(User user, String password, String email) {
         registerUserWithRole(user, password, email, sportsMenDao);
     }
+
+    @Override
+    public List<User> findAll() {
+        return sportsMenDao.findAll();
+    }
 }
