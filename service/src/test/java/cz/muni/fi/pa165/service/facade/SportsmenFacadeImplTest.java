@@ -31,6 +31,7 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     private User sportman;
     private CreateSportsMenDTO createSportsMenDTO;
     private Long sportsManId;
+    private String password;
 
     @BeforeMethod
     public void setUp() {
@@ -41,7 +42,8 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         sportman.setLastname("Vader");
         sportman.setGendre(Gendre.MAN);
         sportman.setRole(Role.SPORTSMEN);
-        sportman.setPasswordHash("666");
+        password = "666";
+        sportman.setPasswordHash(password);
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date = cal.getTime();
@@ -78,32 +80,28 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         List<SportsMenDTO> found = sportsMenFacade.findByBirthDay(date);
         Assertions.assertThat(found).isEmpty();
 
-        cal = Calendar.getInstance();
-        cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
-        date = cal.getTime();
-
-        found = sportsMenFacade.findByBirthDay(date);
+        found = sportsMenFacade.findByBirthDay(sportman.getBirthdate());
         Assertions.assertThat(found.size()).isEqualTo(1);
+        Assertions.assertThat(found.get(0).getId()).isEqualTo(sportsManId);
     }
 
     @Test
     public void testResetPassword() {
         SportsMenDTO dto = sportsMenFacade.load(sportsManId);
-        sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
+        String resetPass = sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
         SportsMenDTO load = sportsMenFacade.load(sportsManId);
-
         Assertions.assertThat(dto.getPasswordHash()).isNotEqualTo(load.getPasswordHash());
+//      Assertions.assertThat(load.getPasswordHash()).isEqualTo(resetPass);
     }
 
     @Test
     public void testChangePassword() {
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
-        String oldPasswordHash = sportsMenDTO.getPasswordHash();
-        ChangePasswordDTO passwordDTO = new ChangePasswordDTO(sportsManId, createSportsMenDTO.getPassword(), "newPassword");
+        String newPassword = "newPassword";
+        ChangePasswordDTO passwordDTO = new ChangePasswordDTO(sportsManId, password, newPassword);
         sportsMenFacade.changePassword(passwordDTO);
-        String newPasswordHash = sportsMenDTO.getPasswordHash();
+        String changedPassword = sportsMenFacade.load(sportsManId).getPasswordHash();
 
-        Assertions.assertThat(newPasswordHash).isNotEqualTo(oldPasswordHash);
+        Assertions.assertThat(changedPassword).isEqualTo(newPassword);
     }
 
     @Test
@@ -126,6 +124,6 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     public void testGetAll() {
         List<SportsMenDTO> all = sportsMenFacade.getAll();
         SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
-        Assertions.assertThat(all).hasSize(1).contains(sportsMenDTO);
+        Assertions.assertThat(all).containsOnly(sportsMenDTO);
     }
 }

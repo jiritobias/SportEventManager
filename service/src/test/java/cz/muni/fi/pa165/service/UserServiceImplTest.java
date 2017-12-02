@@ -36,7 +36,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
     private UserService userService = new UserServiceImpl();
 
     private User testUser;
-
+    private String password;
     private User anotherTestUser;
 
     @BeforeClass
@@ -52,7 +52,8 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         testUser.setFirstname("Darth");
         testUser.setLastname("Vader");
         testUser.setGendre(Gendre.MAN);
-        testUser.setPasswordHash("666");
+        password = "666";
+        testUser.setPasswordHash(password);
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date = cal.getTime();
@@ -151,6 +152,12 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
     public void testWrongPassword(){
         userService.registerUser(testUser, testUser.getPasswordHash(), testUser.getEmail());
         Assertions.assertThat(userService.authenticate(testUser, "111")).isFalse();
+    }
+
+    @Test
+    public void testAuthenticate(){
+        userService.registerUser(testUser, password, testUser.getEmail());
+        Assertions.assertThat(userService.authenticate(testUser, password)).isTrue();
     }
 }
 
