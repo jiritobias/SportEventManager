@@ -93,10 +93,12 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testResetPassword() {
         SportsMenDTO dto = sportsMenFacade.load(sportsManId);
-        sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
+        String newPassword = sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
         SportsMenDTO load = sportsMenFacade.load(sportsManId);
 
         Assertions.assertThat(dto.getPasswordHash()).isNotEqualTo(load.getPasswordHash());
+        sportman.setPasswordHash(load.getPasswordHash());
+        Assertions.assertThat(sportsmenService.authenticate(sportman, newPassword)).isTrue();
     }
 
     @Test
