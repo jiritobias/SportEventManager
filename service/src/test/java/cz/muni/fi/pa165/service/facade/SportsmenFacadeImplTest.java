@@ -100,9 +100,10 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
         String oldPasswordHash = sportsMenDTO.getPasswordHash();
         ChangePasswordDTO passwordDTO = new ChangePasswordDTO(sportsManId, createSportsMenDTO.getPassword(), "newPassword");
-        sportsMenFacade.changePassword(passwordDTO);
-        String newPasswordHash = sportsMenDTO.getPasswordHash();
 
+        sportsMenFacade.changePassword(passwordDTO);
+
+        String newPasswordHash = sportsMenFacade.load(sportsManId).getPasswordHash();
         Assertions.assertThat(newPasswordHash).isNotEqualTo(oldPasswordHash);
     }
 
