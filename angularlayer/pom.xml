@@ -11,5 +11,44 @@
 
     <artifactId>angular-layer</artifactId>
 
-
+    <build>
+        <!-- what to do when only "mvn" is run -->
+        <defaultGoal>tomcat7:run</defaultGoal>
+        <plugins>
+            <!-- Servlet 3.0 allows no web.xml deployment descriptor -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <!--  embedded tomcat -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/sem</path> <!--sem = Sport Event Manager-->
+                </configuration>
+            </plugin>
+            <!-- try "mavn javadoc:javadoc" and see target/site/apidocs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <detectLinks>false</detectLinks>
+                    <links>
+                        <link>http://docs.oracle.com/javaee/6/api/</link>
+                        <link>http://docs.spring.io/spring/docs/current/javadoc-api/</link>
+                        <link>http://docs.spring.io/spring-hateoas/docs/current/api/</link>
+                        <link>http://fasterxml.github.io/jackson-annotations/javadoc/2.5/</link>
+                        <!--<link>http://docs.oracle.com/javase/8/docs/api/</link>-->
+                    </links>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
