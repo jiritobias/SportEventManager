@@ -13,3 +13,15 @@ pa165semApp.config(['$routeProvider',
         when('/sport', {templateUrl: 'partials/sport.html', controller: 'SportCtrl'}).
         otherwise({redirectTo: '/error'});
     }]);
+
+pa165semApp.run(function ($rootScope) {
+    $rootScope.hideSuccessAlert = function () {
+        $rootScope.successAlert = undefined;
+    };
+    $rootScope.hideWarningAlert = function () {
+        $rootScope.warningAlert = undefined;
+    };
+    $rootScope.hideErrorAlert = function () {
+        $rootScope.errorAlert = undefined;
+    };
+});
