@@ -30,7 +30,6 @@
     <logger name="org.springframework" level="error"/>
     <logger name="org.springframework.web" level="warn"/>
     <logger name="cz.muni.fi.pa165" level="warn"/>
-    <logger name="cz.muni.fi.pa165.sampledata" level="info"/>
     <logger name="cz.muni.fi.pa165.restapi" level="debug"/>
 
 </configuration>

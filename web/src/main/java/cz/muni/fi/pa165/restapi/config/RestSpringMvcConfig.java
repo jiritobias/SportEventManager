@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.restapi.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import cz.fi.muni.pa165.defaltdata.SemWithDefaultDataConfiguration;
+import cz.fi.muni.pa165.defaultdata.SemWithDefaultDataConfiguration;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

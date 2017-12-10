@@ -2,20 +2,26 @@ package cz.muni.fi.pa165.restapi.controllers;
 
 import cz.fi.muni.pa165.dto.SportDTO;
 import cz.fi.muni.pa165.facade.SportFacade;
+import cz.muni.fi.pa165.restapi.exceptions.InvalidRequestException;
+import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.restapi.hateoas.SportResource;
 import cz.muni.fi.pa165.restapi.hateoas.SportResourceAssembler;
-import org.dozer.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -32,7 +38,7 @@ public class SportRestController {
     @Autowired
     private SportResourceAssembler sportResourceAssembler;
 
-    @Inject
+    @Autowired
     private SportFacade sportFacade;
 
 
@@ -41,7 +47,6 @@ public class SportRestController {
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<SportResource>> getSports() {
         log.debug("resController getSports()");
-        // TODO
 
         List<SportResource> sportResources = sportResourceAssembler.toResources(sportFacade.getAll());
 
@@ -50,5 +55,22 @@ public class SportRestController {
                 linkTo(SportRestController.class).slash("/create").withRel("create"));
 
         return new ResponseEntity<>(resources, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<SportResource> createProduct(@RequestBody @Valid SportDTO sportDTO, BindingResult bindingResult) throws Exception {
+        log.debug("rest createSport()");
+        if (bindingResult.hasErrors()) {
+            log.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+        Long id;
+        try {
+            id = sportFacade.create(sportDTO);
+        } catch (DataAccessException e) {
+            throw new ResourceAlreadyExistingException("Sport already exists");
+        }
+        SportResource resource = sportResourceAssembler.toResource(sportFacade.load(id));
+        return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 }

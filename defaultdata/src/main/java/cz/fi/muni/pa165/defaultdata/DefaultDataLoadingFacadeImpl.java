@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.defaltdata;
+package cz.fi.muni.pa165.defaultdata;
 
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  *

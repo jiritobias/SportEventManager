@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import cz.fi.muni.pa165.defaltdata.SemWithDefaultDataConfiguration;
+import cz.fi.muni.pa165.defaultdata.SemWithDefaultDataConfiguration;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.http.converter.HttpMessageConverter;
