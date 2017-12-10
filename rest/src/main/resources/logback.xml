@@ -1,5 +1,5 @@
 <!-- configuration for logback http://logback.qos.ch/ -->
-<configuration>
+<configuration debug="false">
     <!-- logs to console -->
     <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -16,21 +16,10 @@
     </appender>
 
     <!-- default logging level -->
-    <root level="info">
+    <root level="warn">
         <!-- reference to the used appender -->
         <appender-ref ref="APP"/>
     </root>
 
-    <!-- list of logger prefixes with non-default logging levels -->
     <logger name="org" level="info"/>
-    <logger name="org.hibernate.tool.hbm2ddl.SchemaExport" level="off"/>
-    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="off" />
-    <logger name="org.hibernate" level="error"/>
-    <logger name="org.dozer" level="error"/>
-    <logger name="org.springframework" level="error"/>
-    <logger name="org.springframework.web" level="warn"/>
-    <logger name="cz.muni.fi.pa165" level="warn"/>
-    <logger name="cz.muni.fi.pa165.sampledata" level="info"/>
-    <logger name="cz.muni.fi.pa165.restapi" level="debug"/>
-
 </configuration>
