@@ -58,18 +58,18 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
             var createdSport = response.data;
             //display confirmation alert
             $rootScope.successAlert = 'A new sport "' + createdSport.name + '" was created';
-            //change view to list of products
+            //change view to list of sports
             $location.path("/admin/sports");
         }, function error(response) {
             //display error
-            console.log("error when creating product");
+            console.log("error when creating sport");
             console.log(response);
             switch (response.data.code) {
                 case 'InvalidRequestException':
                     $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
                     break;
                 default:
-                    $rootScope.errorAlert = 'Cannot create product ! Reason given by the server: ' + response.data.message;
+                    $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
                     break;
             }
         });
@@ -91,18 +91,18 @@ semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams
             var createdSport = response.data;
             //display confirmation alert
             $rootScope.successAlert = 'Sport "' + createdSport.name + '" was updated';
-            //change view to list of products
+            //change view to list of sports
             $location.path("/admin/sports");
         }, function error(response) {
             //display error
-            console.log("error when updating product");
+            console.log("error when updating sport");
             console.log(response);
             switch (response.data.code) {
                 case 'InvalidRequestException':
                     $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
                     break;
                 default:
-                    $rootScope.errorAlert = 'Cannot create product ! Reason given by the server: ' + response.data.message;
+                    $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
                     break;
             }
         });
