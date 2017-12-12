@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dto.SportDTO;
 import cz.fi.muni.pa165.facade.SportFacade;
 import cz.muni.fi.pa165.restapi.exceptions.InvalidRequestException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
+import cz.muni.fi.pa165.restapi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.restapi.hateoas.SportResource;
 import cz.muni.fi.pa165.restapi.hateoas.SportResourceAssembler;
 import org.slf4j.Logger;
@@ -17,10 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -72,5 +71,18 @@ public class SportRestController {
         }
         SportResource resource = sportResourceAssembler.toResource(sportFacade.load(id));
         return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<SportResource> getSport(@PathVariable("id") long id) throws Exception {
+        logger.debug("restController getSport({})", id);
+
+        SportDTO sportDTO = sportFacade.load(id);
+        if (sportDTO == null) {
+            throw new ResourceNotFoundException("sportsman " + id + " not found");
+        }
+
+        SportResource sportResource = sportResourceAssembler.toResource(sportDTO);
+        return new ResponseEntity<>(sportResource, HttpStatus.OK);
     }
 }
