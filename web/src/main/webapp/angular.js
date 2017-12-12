@@ -48,11 +48,15 @@ semControllers.controller('SportCtrl', function ($scope, $http) {
 semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     console.log('creating new sport');
 
-    $scope.create = function (sport) {
+    $scope.newsport={
+        'name':''
+    };
+
+    $scope.create = function (newsport) {
         $http({
             method: 'POST',
             url: apiV1('sports/create'),
-            data: sport
+            data: newsport
         }).then(function success(response) {
             console.log('created sport');
             var createdSport = response.data;
