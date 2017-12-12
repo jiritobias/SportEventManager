@@ -61,7 +61,6 @@
         <module>persistence</module>
         <module>service</module>
         <module>defaultdata</module>
-        <module>rest</module>
         <module>web</module>
     </modules>
 </project>

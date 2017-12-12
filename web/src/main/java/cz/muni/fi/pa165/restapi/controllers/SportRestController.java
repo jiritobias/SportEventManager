@@ -2,6 +2,8 @@ package cz.muni.fi.pa165.restapi.controllers;
 
 import cz.fi.muni.pa165.dto.SportDTO;
 import cz.fi.muni.pa165.facade.SportFacade;
+import cz.muni.fi.pa165.restapi.ApiUris;
+import cz.muni.fi.pa165.restapi.exceptions.CannotDeleteResourceException;
 import cz.muni.fi.pa165.restapi.exceptions.InvalidRequestException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceNotFoundException;
@@ -29,7 +31,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  */
 @RestController
 @ExposesResourceFor(SportDTO.class)
-@RequestMapping("/sports")
+@RequestMapping(ApiUris.ROOT_URI_SPORTS)
 public class SportRestController {
 
     final static Logger logger = LoggerFactory.getLogger(SportRestController.class);
@@ -57,7 +59,7 @@ public class SportRestController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<SportResource> createProduct(@RequestBody @Valid SportDTO sportDTO, BindingResult bindingResult) throws Exception {
+    public final HttpEntity<SportResource> createSport(@RequestBody @Valid SportDTO sportDTO, BindingResult bindingResult) throws Exception {
         log.debug("rest createSport()");
         if (bindingResult.hasErrors()) {
             log.error("failed validation {}", bindingResult.toString());
@@ -69,6 +71,26 @@ public class SportRestController {
         } catch (DataAccessException e) {
             throw new ResourceAlreadyExistingException("Sport already exists");
         }
+        SportResource resource = sportResourceAssembler.toResource(sportFacade.load(id));
+        return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<SportResource> updateSport(@RequestBody @Valid SportDTO sportDTO, BindingResult bindingResult) throws Exception {
+        log.debug("rest updateSport()");
+        if (bindingResult.hasErrors()) {
+            log.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+        Long id;
+        try {
+            SportDTO load = sportFacade.load(sportDTO.getId());
+            sportFacade.delete(load);
+            id = sportFacade.create(new SportDTO(null,sportDTO.getName())); // TODO Update
+        } catch (DataAccessException e) {
+            throw new CannotDeleteResourceException("Cannot update or delete resource");
+        }
+
         SportResource resource = sportResourceAssembler.toResource(sportFacade.load(id));
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
@@ -85,4 +107,5 @@ public class SportRestController {
         SportResource sportResource = sportResourceAssembler.toResource(sportDTO);
         return new ResponseEntity<>(sportResource, HttpStatus.OK);
     }
+
 }

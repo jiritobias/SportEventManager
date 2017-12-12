@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165;
+package cz.muni.fi.pa165.restapi;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;

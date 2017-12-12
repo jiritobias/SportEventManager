@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
+import cz.muni.fi.pa165.restapi.exceptions.CannotDeleteResourceException;
 import cz.muni.fi.pa165.restapi.exceptions.ErrorResource;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
 import org.slf4j.Logger;
@@ -28,10 +29,12 @@ public class MyExceptionHandler {
         HttpStatus httpStatus;
         if (e instanceof ResourceAlreadyExistingException) {
             httpStatus = HttpStatus.UNPROCESSABLE_ENTITY;
+        } else if (e instanceof CannotDeleteResourceException) {
+            httpStatus = HttpStatus.UNPROCESSABLE_ENTITY;
         } else {
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        log.debug("handleProblem({}(\"{}\")) httpStatus={}", e.getClass().getName(), e.getMessage(),httpStatus);
+        log.debug("handleProblem({}(\"{}\")) httpStatus={}", e.getClass().getName(), e.getMessage(), httpStatus);
         return new ResponseEntity<>(error, httpStatus);
     }
 

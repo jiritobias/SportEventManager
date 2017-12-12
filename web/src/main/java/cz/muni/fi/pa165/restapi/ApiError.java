@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.rest;
+package cz.muni.fi.pa165.restapi;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;

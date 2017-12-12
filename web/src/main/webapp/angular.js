@@ -13,13 +13,16 @@ pa165semApp.config(['$routeProvider',
         }).when('/admin/sports', {
             templateUrl: 'partials/admin_sports.html',
             controller: 'AdminSportCtrl'
+        }).when('/admin/updatesport', {
+            templateUrl: 'partials/admin_sportupdate.html',
+            controller: 'AdminUpdateSportCtrl'
         }).when('/admin/newsport', {
             templateUrl: 'partials/admin_newsport.html',
             controller: 'AdminNewSportCtrl'
         }).when('/default', {
             templateUrl: 'partials/default.html',
             controller: ''
-        }).otherwise({redirectTo: '/error'});
+        }).otherwise({redirectTo: '/default'});
     }]);
 
 pa165semApp.run(function ($rootScope) {
@@ -66,20 +69,58 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
                     $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
                     break;
                 default:
-                    $rootScope.errorAlert = 'Cannot create product ! Reason given by the server: '+response.data.message;
+                    $rootScope.errorAlert = 'Cannot create product ! Reason given by the server: ' + response.data.message;
                     break;
             }
         });
     };
+
 });
 
-semControllers.controller('AdminSportCtrl', function ($scope, $http) {
+semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+    console.log('updating sport');
+
+    $scope.update = function (sport) {
+
+        $http({
+            method: 'POST',
+            url: apiV1('sports/update'),
+            data: sport
+        }).then(function success(response) {
+            console.log('update sport');
+            var createdSport = response.data;
+            //display confirmation alert
+            $rootScope.successAlert = 'Sport "' + createdSport.name + '" was updated';
+            //change view to list of products
+            $location.path("/admin/sports");
+        }, function error(response) {
+            //display error
+            console.log("error when updating product");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot create product ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    };
+
+});
+
+semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, $rootScope) {
     loadSports($http, $scope);
 
-    $scope.deleteSport = function (sport) {
-        console.log('deleting sport ' + sport);
-        //TODO
-    };
+    $scope.update = function (sport) {
+        console.log('updating  sport');
+        $rootScope.sport = {
+            'name' : sport.name,
+            'id' : sport.id
+        };
+        $location.path("/admin/updatesport");
+    }
 });
 
 function loadSports($http, $scope) {
