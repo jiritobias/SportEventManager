@@ -8,14 +8,14 @@ import org.springframework.hateoas.core.Relation;
 
 @Relation(value = "sportsman", collectionRelation = "sportsmen")
 @JsonPropertyOrder({"id", "firstname", "lastname"})
-public class SportsManResource extends ResourceSupport {
+public class UserResource extends ResourceSupport {
 
     @JsonProperty("id")
     private long dtoId;
     private String firstname;
     private String lastname;
 
-    public SportsManResource(SportsMenDTO sportsMenDTO) {
+    public UserResource(SportsMenDTO sportsMenDTO) {
         this.dtoId = sportsMenDTO.getId();
         this.firstname = sportsMenDTO.getFirstname();
         this.lastname = sportsMenDTO.getLastname();

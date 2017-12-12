@@ -5,5 +5,5 @@ package cz.muni.fi.pa165.restapi;
  */
 public abstract class ApiUris {
     public static final String ROOT_URI_SPORTS   = "/sports";
-    public static final String ROOT_URI_SPORTSMEN = "/sportsmen";
+    public static final String ROOT_URI_USERS = "/users";
 }
