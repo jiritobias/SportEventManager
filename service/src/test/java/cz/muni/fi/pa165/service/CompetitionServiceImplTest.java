@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -46,7 +47,6 @@ public class CompetitionServiceImplTest extends AbstractTestNGSpringContextTests
         sportsMen.setAddress("address");
         sportsMen.setPhone("777666555");
 
-        sportsmenService.registerUser(sportsMen, "password", "abc@test.com");
         sportService.create(sport);
     }
 
@@ -122,6 +122,7 @@ public class CompetitionServiceImplTest extends AbstractTestNGSpringContextTests
 
         sportService.create(sport);
         competitionService.create(competition);
+        sportsmenService.registerUser(sportsMen, "password", "abc@test.com");
 
         competitionService.addSportMen(competition, sportsMen);
 
@@ -129,6 +130,9 @@ public class CompetitionServiceImplTest extends AbstractTestNGSpringContextTests
 
         assertThat(withSportMen.getSportsMen())
                 .containsOnly(sportsMen);
+
+        sportsmenService.unregisterFromCompetition(sportsMen, withSportMen);
+        sportsmenService.delete(sportsMen);
     }
 
 }
