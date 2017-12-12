@@ -3,7 +3,7 @@
 
 var pa165semApp = angular.module('pa165semApp', ['ngRoute', 'semControllers']);
 var semControllers = angular.module('semControllers', []);
-var apiV1Path = '/pa165/api/v1/';
+var apiV1Path = '/pa165/rest/';
 
 pa165semApp.config(['$routeProvider',
     function ($routeProvider) {
