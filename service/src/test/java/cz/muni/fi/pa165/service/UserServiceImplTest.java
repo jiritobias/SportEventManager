@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.service;
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+import cz.fi.muni.pa165.enums.Role;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.assertj.core.api.Assertions;
 import org.hibernate.service.spi.ServiceException;
@@ -16,8 +17,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
+
 
     @Mock
     private UserDao userDao;
@@ -53,6 +59,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         testUser.setLastname("Vader");
         testUser.setGendre(Gendre.MAN);
         testUser.setPasswordHash("666");
+        testUser.setRole(Role.USER);
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date = cal.getTime();
@@ -65,11 +72,21 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         anotherTestUser.setLastname("Solo");
         anotherTestUser.setGendre(Gendre.MAN);
         anotherTestUser.setPasswordHash("1");
+        anotherTestUser.setRole(Role.USER);
         Calendar cal2 = Calendar.getInstance();
         cal.set(2005, Calendar.MARCH, 1, 1, 1, 1);
         Date date2 = cal.getTime();
         anotherTestUser.setBirthdate(date2);
    }
+    @Test
+    public void testMakeUserAdmin() {
+        when(userDao.findById(anyLong())).thenReturn(testUser);
+
+        userService.makeUserAdmin(testUser);
+
+        Assertions.assertThat(testUser.getRole()).isEqualByComparingTo(Role.ADMINISTRATOR);
+        verify(userDao).update(testUser);
+    }
 
     @Test
     public void testFindById(){

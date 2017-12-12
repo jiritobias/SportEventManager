@@ -89,4 +89,11 @@ public interface UserService extends BaseService<User> {
      * @return new password
      */
     String resetPassword(User user, String email);
+
+    /**
+     * Make a user new administrator.
+     *
+     * @param user new aministrator
+     */
+    void makeUserAdmin(User user);
 }
