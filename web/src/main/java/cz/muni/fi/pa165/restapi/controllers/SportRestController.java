@@ -101,7 +101,7 @@ public class SportRestController {
 
         SportDTO sportDTO = sportFacade.load(id);
         if (sportDTO == null) {
-            throw new ResourceNotFoundException("sportsman " + id + " not found");
+            throw new ResourceNotFoundException("sport " + id + " not found");
         }
 
         SportResource sportResource = sportResourceAssembler.toResource(sportDTO);
