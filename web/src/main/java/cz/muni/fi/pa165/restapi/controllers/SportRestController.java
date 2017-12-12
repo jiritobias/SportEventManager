@@ -21,7 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -86,7 +85,7 @@ public class SportRestController {
         try {
             SportDTO load = sportFacade.load(sportDTO.getId());
             sportFacade.delete(load);
-            id = sportFacade.create(new SportDTO(null,sportDTO.getName())); // TODO Update
+            id = sportFacade.create(new SportDTO(null, sportDTO.getName())); // TODO Update
         } catch (DataAccessException e) {
             throw new CannotDeleteResourceException("Cannot update or delete resource");
         }
@@ -95,7 +94,7 @@ public class SportRestController {
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public final HttpEntity<SportResource> getSport(@PathVariable("id") long id) throws Exception {
         logger.debug("restController getSport({})", id);
 
