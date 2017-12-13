@@ -18,13 +18,16 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Sportsmen REST Controller
@@ -47,24 +50,24 @@ public class UserRestController {
     private SportsMenFacade sportsMenFacade;
 
     @RequestMapping(method = RequestMethod.GET)
-    public final HttpEntity<Resources<UserSimpleResource>> getUsers(@RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role) {
+    public final HttpEntity<Resources<UserResource>> getUsers(@RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role) {
         logger.debug("UserRestController getUsers()");
 
-        List<UserSimpleResource> userResources = new ArrayList<>();
+        List<UserResource> userResources = new ArrayList<>();
 
         if (role.equalsIgnoreCase("USER")) {
 
         } else if (role.equalsIgnoreCase("ADMIN")) {
 
         } else if (role.equalsIgnoreCase("SPORTSMEN")) {
-            userResources = userSimpleResourceAssembler.toResources(sportsMenFacade.getAll());
+            userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
         } else if (role.equalsIgnoreCase("ALL")) {
 
         } else {
             throw new InvalidParameterException("Role parameters options: user, admin, sportsmen, all");
         }
 
-        Resources<UserSimpleResource> resources = new Resources<>(
+        Resources<UserResource> resources = new Resources<>(
                 userResources,
                 linkTo(UserRestController.class).withSelfRel(),
                 linkTo(UserRestController.class).slash("/create").withRel("create")
