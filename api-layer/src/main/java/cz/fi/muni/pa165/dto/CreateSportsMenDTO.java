@@ -13,6 +13,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class CreateSportsMenDTO {
 

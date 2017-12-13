@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -62,13 +61,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user, String password, String email) {
-        registerUserWithRole(user, password, email, userDao);
+        registerUserWithRole(user, password, email, Role.USER);
     }
 
-    protected static void registerUserWithRole(User user, String rawPassword, String email, UserDao userDao) {
+    @Override
+    public void makeUserAdmin(User user) {
+        assert user != null;
+        if (findById(user.getId()) != null) {
+            user.setRole(Role.ADMINISTRATOR);
+            userDao.update(user);
+        }
+    }
+
+    protected void registerUserWithRole(User user, String rawPassword, String email, Role role) {
         try {
             user.setPasswordHash(generateStrongPasswordHash(rawPassword));
             user.setEmail(email);
+            user.setRole(role);
             userDao.create(user);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
@@ -152,7 +161,7 @@ public class UserServiceImpl implements UserService {
         byte[] salt = fromHex(parts[1]);
         byte[] hash = fromHex(parts[2]);
 
-        PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, hash.length);
+        PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, hash.length * 8);
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] testHash = secretKeyFactory.generateSecret(keySpec).getEncoded();
 

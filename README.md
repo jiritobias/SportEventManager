@@ -9,3 +9,10 @@ Team No. 4
 - Petra Halová
 - Martin Šmíd
 - Jiří Tobiáš (team leader)
+
+REST
+
+- pa165/rest/ : curl -X GET http://localhost:8080/pa165/rest/
+- pa165/rest/sports : curl -X GET http://localhost:8080/pa165/rest/sports
+- pa165/rest/sports/{id} : curl -X GET http://localhost:8080/pa165/rest/sports/{id}
+

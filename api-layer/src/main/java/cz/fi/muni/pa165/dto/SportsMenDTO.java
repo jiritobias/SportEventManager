@@ -45,9 +45,6 @@ public class SportsMenDTO {
         if (!(o instanceof SportsMenDTO)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
 
         SportsMenDTO that = (SportsMenDTO) o;
 

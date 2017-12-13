@@ -5,12 +5,11 @@ import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
-import cz.muni.fi.pa165.service.UserService;
+import cz.muni.fi.pa165.service.SportsmenService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.assertj.core.api.Assertions;
 import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
@@ -31,35 +30,33 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     private SportsMenFacade sportsMenFacade;
 
     @Autowired
-    @Qualifier("userServiceImpl")
-    private UserService userService;
+    private SportsmenService sportsmenService;
 
-
-    private User sportsman;
+    private User sportman;
     private CreateSportsMenDTO createSportsMenDTO;
     private Long sportsManId;
     private String password;
 
     @BeforeMethod
     public void setUp() {
-        sportsman = new User();
-        sportsman.setAddress("Death Star 1");
-        sportsman.setEmail("darthVader@darkside.com");
-        sportsman.setFirstname("Darth");
-        sportsman.setLastname("Vader");
-        sportsman.setGendre(Gendre.MAN);
-        sportsman.setRole(Role.SPORTSMEN);
+        sportman = new User();
+        sportman.setAddress("Death Star 1");
+        sportman.setEmail("darthVader@darkside.com");
+        sportman.setFirstname("Darth");
+        sportman.setLastname("Vader");
+        sportman.setGendre(Gendre.MAN);
+        sportman.setRole(Role.SPORTSMEN);
         password = "666";
-        sportsman.setPasswordHash(password);
+        sportman.setPasswordHash(password);
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date = cal.getTime();
-        sportsman.setBirthdate(date);
-        sportsman.setPhone("12");
+        sportman.setBirthdate(date);
+        sportman.setPhone("12");
 
         createSportsMenDTO = new CreateSportsMenDTO("password",
-                sportsman.getEmail(), sportsman.getFirstname(), sportsman.getLastname(), sportsman.getGendre(),
-                sportsman.getBirthdate(), sportsman.getPhone(), sportsman.getAddress(), sportsman.getRole());
+                sportman.getEmail(), sportman.getFirstname(), sportman.getLastname(), sportman.getGendre(),
+                sportman.getBirthdate(), sportman.getPhone(), sportman.getAddress(), sportman.getRole());
 
         sportsManId = sportsMenFacade.createSportsMen(createSportsMenDTO);
     }
@@ -87,28 +84,38 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         List<SportsMenDTO> found = sportsMenFacade.findByBirthDay(date);
         Assertions.assertThat(found).isEmpty();
 
-        found = sportsMenFacade.findByBirthDay(sportsman.getBirthdate());
-        Assertions.assertThat(found.size()).isEqualTo(1);
-        Assertions.assertThat(found.get(0).getId()).isEqualTo(sportsManId);
+        cal = Calendar.getInstance();
+        cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
+        date = cal.getTime();
+
+        found = sportsMenFacade.findByBirthDay(date);
+        SportsMenDTO load = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(found).contains(load).hasSize(1);
     }
 
     @Test
     public void testResetPassword() {
         SportsMenDTO dto = sportsMenFacade.load(sportsManId);
-        String resetPass = sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
+        String newPassword = sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
         SportsMenDTO load = sportsMenFacade.load(sportsManId);
         Assertions.assertThat(dto.getPasswordHash()).isNotEqualTo(load.getPasswordHash());
-
-        Assertions.assertThat(userService.authenticate(sportsman, resetPass)).isTrue();
+        sportman.setPasswordHash(load.getPasswordHash());
+        Assertions.assertThat(sportsmenService.authenticate(sportman, newPassword)).isTrue();
     }
 
     @Test
     public void testChangePassword() {
-        String newPassword = "newPassword";
-        ChangePasswordDTO passwordDTO = new ChangePasswordDTO(sportsManId, password, newPassword);
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
+        String oldPasswordHash = sportsMenDTO.getPasswordHash();
+        ChangePasswordDTO passwordDTO = new ChangePasswordDTO(sportsManId, createSportsMenDTO.getPassword(), "newPassword");
+
         sportsMenFacade.changePassword(passwordDTO);
 
-        Assertions.assertThat(userService.authenticate(sportsman, newPassword)).isTrue();
+        String newPasswordHash = sportsMenFacade.load(sportsManId).getPasswordHash();
+        Assertions.assertThat(newPasswordHash).isNotEqualTo(oldPasswordHash);
+
+        sportman.setPasswordHash(newPasswordHash);
+        Assertions.assertThat(sportsmenService.authenticate(sportman, "newPassword")).isTrue();
     }
 
     @Test
