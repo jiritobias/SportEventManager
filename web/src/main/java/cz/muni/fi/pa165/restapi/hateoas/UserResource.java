@@ -8,7 +8,7 @@ import org.springframework.hateoas.core.Relation;
 
 import java.text.SimpleDateFormat;
 
-@Relation(value = "sportsman", collectionRelation = "sportsmen")
+@Relation(value = "user", collectionRelation = "users")
 @JsonPropertyOrder({"id", "firstname", "lastname", "email", "birthdate", "phone", "address", "role", "gender"})
 public class UserResource extends ResourceSupport {
 
