@@ -22,6 +22,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/default', {
             templateUrl: 'partials/default.html',
             controller: ''
+        }).when('/users', {
+            templateUrl: 'partials/user_list.html',
+            controller: 'UsersCtrl'
         }).otherwise({redirectTo: '/default'});
     }]);
 
@@ -125,6 +128,16 @@ semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, 
         };
         $location.path("/admin/updatesport");
     }
+});
+
+semControllers.controller('UsersCtrl', function ($scope, $http) {
+   console.log('calling ' + apiV1('users'));
+
+   $http.get(apiV1('users')).then(function (response) {
+      var users = response.data['_embedded']['users'];
+      console.log('AJAX loaded ' + users.length + ' users');
+      $scope.users = users;
+   });
 });
 
 function loadSports($http, $scope) {
