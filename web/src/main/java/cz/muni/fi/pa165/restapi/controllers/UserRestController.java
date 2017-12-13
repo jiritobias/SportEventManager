@@ -55,7 +55,8 @@ public class UserRestController {
             @RequestParam(value = "limit", required = false, defaultValue = "0") long limit,
             @RequestParam(value = "birthdateBegin", required = false, defaultValue = "0000-00-00") String birthdateBegin,
             @RequestParam(value = "birthdateEnd", required = false, defaultValue = "9999-99-99") String birthdateEnd,
-            @RequestParam(value = "gender", required = false, defaultValue = "ALL") String gender
+            @RequestParam(value = "gender", required = false, defaultValue = "ALL") String gender,
+            @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy
     ) {
         logger.debug("UserRestController getUsers()");
 
@@ -104,6 +105,42 @@ public class UserRestController {
                 filteredResources.add(userResources.get(i));
             }
             userResources = filteredResources;
+        }
+
+        // sort results
+        switch (sortBy.toLowerCase()) {
+            case "role":
+                userResources.sort(Comparator.comparing(UserResource::getGender));
+                break;
+            case "birthdate":
+                userResources.sort(Comparator.comparing(UserResource::getBirthdate));
+                break;
+            case "gender":
+                userResources.sort(Comparator.comparing(UserResource::getGender));
+                break;
+            case "firstname":
+                userResources.sort(Comparator.comparing(o -> o.getFirstname().toLowerCase()));
+                break;
+            case "lastname":
+                userResources.sort(Comparator.comparing(o -> o.getLastname().toLowerCase()));
+                break;
+            case "name":
+                userResources.sort((o1, o2) -> {
+                    int c = o1.getFirstname().toLowerCase().compareTo(o2.getFirstname().toLowerCase());
+                    if (c == 0) {
+                        c = o1.getLastname().toLowerCase().compareTo(o2.getLastname().toLowerCase());
+                    }
+                    return c;
+                });
+            case "email":
+                userResources.sort(Comparator.comparing(UserResource::getEmail));
+                break;
+            case "id":
+                userResources.sort(Comparator.comparing(UserResource::getDtoId));
+                break;
+            default:
+                throw new InvalidParameterException(
+                        "SortBy parameter options: id, name, firstname, lastname, role, gender, birthdate, email");
         }
 
         Resources<UserResource> resources = new Resources<>(
