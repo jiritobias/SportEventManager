@@ -43,7 +43,7 @@ public class UserRestController {
     private SportsMenFacade sportsMenFacade;
 
     @RequestMapping(method = RequestMethod.GET)
-    public final HttpEntity<Resources<UserResource>> getSportsMen(@RequestParam(value = "role") String role) {
+    public final HttpEntity<Resources<UserResource>> getSportsMen(@RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role) {
         logger.debug("SportRestController getSportsMen()");
 
         List<UserResource> userResources = new ArrayList<>();
@@ -52,12 +52,12 @@ public class UserRestController {
 
         } else if (role.equalsIgnoreCase("ADMIN")) {
 
-        } else if (role.equalsIgnoreCase("SPORTSMAN")) {
+        } else if (role.equalsIgnoreCase("SPORTSMEN")) {
             userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
         } else if (role.equalsIgnoreCase("ALL")) {
 
         } else {
-            throw new InvalidParameterException("Role parameters options: user, admin, sportsman, all");
+            throw new InvalidParameterException("Role parameters options: user, admin, sportsmen, all");
         }
 
         Resources<UserResource> resources = new Resources<>(
