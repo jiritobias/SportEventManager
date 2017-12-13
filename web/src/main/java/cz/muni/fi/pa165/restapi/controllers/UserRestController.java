@@ -26,7 +26,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -45,8 +47,6 @@ public class UserRestController {
 
     @Autowired
     private UserResourceAssembler userResourceAssembler;
-    @Autowired
-    private UserSimpleResourceAssembler userSimpleResourceAssembler;
 
     @Autowired
     private SportsMenFacade sportsMenFacade;
@@ -54,8 +54,10 @@ public class UserRestController {
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<UserResource>> getUsers(
             @RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role,
-            @RequestParam(value = "limit", required = false, defaultValue = "0") long limit
-            ) {
+            @RequestParam(value = "limit", required = false, defaultValue = "0") long limit,
+            @RequestParam(value = "birthdateBegin", required = false, defaultValue = "0000-00-00") String birthdateBegin,
+            @RequestParam(value = "birthdateEnd", required = false, defaultValue = "9999-99-99") String birthdateEnd
+    ) {
         logger.debug("UserRestController getUsers()");
 
         List<UserResource> userResources = new ArrayList<>();
@@ -72,12 +74,23 @@ public class UserRestController {
             throw new InvalidParameterException("Role parameters options: user, admin, sportsmen, all");
         }
 
-        if (limit > 0) {
-            List<UserResource> newResource = new ArrayList<>();
-            for (int i = 0; i < limit; i++) {
-                newResource.add(userResources.get(i));
+        List<UserResource> filteredResources = new ArrayList<>();
+
+        for (UserResource resource : userResources) {
+            boolean dateInRange = resource.getBirthdate().compareTo(birthdateBegin) >= 0 &&
+                    resource.getBirthdate().compareTo(birthdateEnd) <= 0;
+            if (dateInRange) {
+                filteredResources.add(resource);
             }
-            userResources = newResource;
+        }
+        userResources = filteredResources;
+
+        if (limit > 0) {
+            filteredResources = new ArrayList<>();
+            for (int i = 0; i < limit; i++) {
+                filteredResources.add(userResources.get(i));
+            }
+            userResources = filteredResources;
         }
 
         Resources<UserResource> resources = new Resources<>(
