@@ -77,27 +77,21 @@ public class UserRestController {
         List<UserResource> filteredResources = new ArrayList<>();
 
         for (UserResource resource : userResources) {
+            // filter birthdate: yyyy-mm-dd
             boolean dateInRange = resource.getBirthdate().compareTo(birthdateBegin) >= 0 &&
                     resource.getBirthdate().compareTo(birthdateEnd) <= 0;
             if (dateInRange) {
-                filteredResources.add(resource);
-            }
-        }
-        userResources = filteredResources;
-
-        // filter gender: ALL, MAN, WOMAN
-        if (!gender.equalsIgnoreCase("ALL")) {
-            filteredResources = new ArrayList<>();
-            for (UserResource resource : userResources) {
-                if (gender.equalsIgnoreCase(resource.getGender())) {
+                // filter gender: ALL, MAN, WOMAN
+                if (!gender.equalsIgnoreCase("ALL")) {
+                    if (gender.equalsIgnoreCase(resource.getGender())) {
+                        filteredResources.add(resource);
+                    }
+                } else {
                     filteredResources.add(resource);
                 }
             }
-            if (filteredResources.isEmpty()) {
-                throw new InvalidParameterException("Gender parameters options: man, woman, all");
-            }
-            userResources = filteredResources;
         }
+        userResources = filteredResources;
 
         if (limit > 0) {
             filteredResources = new ArrayList<>();
