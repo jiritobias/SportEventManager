@@ -10,8 +10,6 @@ import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.restapi.hateoas.UserResource;
 import cz.muni.fi.pa165.restapi.hateoas.UserResourceAssembler;
-import cz.muni.fi.pa165.restapi.hateoas.UserSimpleResource;
-import cz.muni.fi.pa165.restapi.hateoas.UserSimpleResourceAssembler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
