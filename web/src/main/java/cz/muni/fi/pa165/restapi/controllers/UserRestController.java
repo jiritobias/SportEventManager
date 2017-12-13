@@ -176,4 +176,16 @@ public class UserRestController {
         UserResource resource = userResourceAssembler.toResource(sportsMenFacade.load(id));
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    public final HttpEntity<UserResource> deleteUser(@PathVariable("id") long id) {
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
+        if (sportsMenDTO == null) {
+            throw new ResourceNotFoundException("user " + id + " not found");
+        }
+
+        UserResource resource = userResourceAssembler.toResource(sportsMenDTO);
+        sportsMenFacade.delete(sportsMenDTO);
+        return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
 }
