@@ -27,9 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -56,7 +54,8 @@ public class UserRestController {
             @RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role,
             @RequestParam(value = "limit", required = false, defaultValue = "0") long limit,
             @RequestParam(value = "birthdateBegin", required = false, defaultValue = "0000-00-00") String birthdateBegin,
-            @RequestParam(value = "birthdateEnd", required = false, defaultValue = "9999-99-99") String birthdateEnd
+            @RequestParam(value = "birthdateEnd", required = false, defaultValue = "9999-99-99") String birthdateEnd,
+            @RequestParam(value = "gender", required = false, defaultValue = "ALL") String gender
     ) {
         logger.debug("UserRestController getUsers()");
 
@@ -84,6 +83,20 @@ public class UserRestController {
             }
         }
         userResources = filteredResources;
+
+        // filter gender: ALL, MAN, WOMAN
+        if (!gender.equalsIgnoreCase("ALL")) {
+            filteredResources = new ArrayList<>();
+            for (UserResource resource : userResources) {
+                if (gender.equalsIgnoreCase(resource.getGender())) {
+                    filteredResources.add(resource);
+                }
+            }
+            if (filteredResources.isEmpty()) {
+                throw new InvalidParameterException("Gender parameters options: man, woman, all");
+            }
+            userResources = filteredResources;
+        }
 
         if (limit > 0) {
             filteredResources = new ArrayList<>();
