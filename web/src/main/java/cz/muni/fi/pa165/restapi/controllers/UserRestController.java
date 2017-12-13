@@ -100,7 +100,7 @@ public class UserRestController {
 
         if (limit > 0) {
             filteredResources = new ArrayList<>();
-            for (int i = 0; i < limit; i++) {
+            for (int i = 0; i < Math.min(limit, userResources.size()); i++) {
                 filteredResources.add(userResources.get(i));
             }
             userResources = filteredResources;
