@@ -61,17 +61,19 @@ public class UserRestController {
 
         List<UserResource> userResources = new ArrayList<>();
 
-        if (role.equalsIgnoreCase("USER")) {
+//        if (role.equalsIgnoreCase("USER")) {
+//
+//        } else if (role.equalsIgnoreCase("ADMIN")) {
+//
+//        } else if (role.equalsIgnoreCase("SPORTSMEN")) {
+//            userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
+//        } else if (role.equalsIgnoreCase("ALL")) {
+//
+//        } else {
+//            throw new InvalidParameterException("Role parameters options: user, admin, sportsmen, all");
+//        }
 
-        } else if (role.equalsIgnoreCase("ADMIN")) {
-
-        } else if (role.equalsIgnoreCase("SPORTSMEN")) {
-            userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
-        } else if (role.equalsIgnoreCase("ALL")) {
-
-        } else {
-            throw new InvalidParameterException("Role parameters options: user, admin, sportsmen, all");
-        }
+        userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
 
         List<UserResource> filteredResources = new ArrayList<>();
 
