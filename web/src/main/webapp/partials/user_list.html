@@ -6,6 +6,8 @@
         <th>Last name</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Gender</th>
+        <th>Birthday</th>
     </tr>
     </thead>
     <tbody>
@@ -15,6 +17,8 @@
         <td>{{user.lastname}}</td>
         <td>{{user.email}}</td>
         <td>{{user.role}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.birthdate | date:'MMMM d yyyy'}}</td>
     </tr>
     </tbody>
 </table>
