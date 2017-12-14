@@ -25,6 +25,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/users', {
             templateUrl: 'partials/user_list.html',
             controller: 'UsersCtrl'
+        }).when('/user/:userId', {
+            templateUrl: 'partials/user_detail.html',
+            controller: 'UserDetailsCtrl'
         }).otherwise({redirectTo: '/default'});
     }]);
 
@@ -137,7 +140,7 @@ semControllers.controller('UsersCtrl', function ($scope, $http) {
 
     $scope.getUsers = function () {
         var uri = apiV1('users');
-        console.log('calling ' + apiV1(uri));
+        console.log('calling ' + uri);
         $http.get(uri).then(function (response) {
             var users = response.data['_embedded']['users'];
             console.log('AJAX loaded ' + users.length + ' users');
@@ -147,6 +150,17 @@ semControllers.controller('UsersCtrl', function ($scope, $http) {
     };
 
     $scope.getUsers();
+});
+
+semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $http) {
+    var id = $routeParams.userId;
+    var uri = apiV1('users/' + id);
+    console.log('calling ' + uri);
+
+   $http.get(uri).then(function (response) {
+       $scope.user = response.data;
+       console.log($scope.user);
+   });
 });
 
 function loadSports($http, $scope) {

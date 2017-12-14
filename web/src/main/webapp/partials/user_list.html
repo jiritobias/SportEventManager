@@ -49,7 +49,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:searchUser">
-            <td>{{user.id}}</td>
+            <td><a href="#/user/{{user.id}}">{{user.id}}</a></td>
             <td>{{user.firstname}}</td>
             <td>{{user.lastname}}</td>
             <td>{{user.email}}</td>
