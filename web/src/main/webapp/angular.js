@@ -131,13 +131,21 @@ semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, 
 });
 
 semControllers.controller('UsersCtrl', function ($scope, $http) {
-   console.log('calling ' + apiV1('users'));
+    $scope.sortType = 'id';
+    $scope.sortReverse = false;
 
-   $http.get(apiV1('users')).then(function (response) {
-      var users = response.data['_embedded']['users'];
-      console.log('AJAX loaded ' + users.length + ' users');
-      $scope.users = users;
-   });
+    $scope.getUsers = function () {
+        var uri = apiV1('users');
+        console.log('calling ' + apiV1(uri));
+        $http.get(uri).then(function (response) {
+            var users = response.data['_embedded']['users'];
+            console.log('AJAX loaded ' + users.length + ' users');
+            console.log(users);
+            $scope.users = users;
+        });
+    };
+
+    $scope.getUsers();
 });
 
 function loadSports($http, $scope) {

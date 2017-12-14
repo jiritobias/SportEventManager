@@ -1,24 +1,26 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Gender</th>
-        <th>Birthday</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="user in users">
-        <td>{{user.id}}</td>
-        <td>{{user.firstname}}</td>
-        <td>{{user.lastname}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.role}}</td>
-        <td>{{user.gender}}</td>
-        <td>{{user.birthdate | date:'MMMM d yyyy'}}</td>
-    </tr>
-    </tbody>
-</table>
+<div ng-controller="UsersCtrl">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">ID</a></th>
+            <th><a href="" ng-click="sortType = 'firstname'; sortReverse = !sortReverse">First name</a></th>
+            <th><a href="" ng-click="sortType = 'lastname'; sortReverse = !sortReverse">Last name</a></th>
+            <th><a href="" ng-click="sortType = 'email'; sortReverse = !sortReverse">Email</a></th>
+            <th><a href="" ng-click="sortType = 'role'; sortReverse = !sortReverse">Role</a></th>
+            <th><a href="" ng-click="sortType = 'gender'; sortReverse = !sortReverse">Gender</a></th>
+            <th><a href="" ng-click="sortType = 'birthdate'; sortReverse = !sortReverse">Birthday</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | orderBy:sortType:sortReverse">
+            <td>{{user.id}}</td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.birthdate | date:'MMMM d yyyy'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
