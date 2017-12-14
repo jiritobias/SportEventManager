@@ -133,6 +133,7 @@ semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, 
 semControllers.controller('UsersCtrl', function ($scope, $http) {
     $scope.sortType = 'id';
     $scope.sortReverse = false;
+    $scope.searchUser = '';
 
     $scope.getUsers = function () {
         var uri = apiV1('users');
