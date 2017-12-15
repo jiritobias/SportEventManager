@@ -19,6 +19,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/admin/newsport', {
             templateUrl: 'partials/admin_newsport.html',
             controller: 'AdminNewSportCtrl'
+        }).when('/admin/users', {
+            templateUrl: 'partials/admin_users.html',
+            controller: 'AdminUserCtrl'
         }).when('/default', {
             templateUrl: 'partials/default.html',
             controller: ''
@@ -133,23 +136,12 @@ semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, 
     }
 });
 
+semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope) {
+    loadUsers($http, $scope);
+});
+
 semControllers.controller('UsersCtrl', function ($scope, $http) {
-    $scope.sortType = 'id';
-    $scope.sortReverse = false;
-    $scope.searchUser = '';
-
-    $scope.getUsers = function () {
-        var uri = apiV1('users');
-        console.log('calling ' + uri);
-        $http.get(uri).then(function (response) {
-            var users = response.data['_embedded']['users'];
-            console.log('AJAX loaded ' + users.length + ' users');
-            console.log(users);
-            $scope.users = users;
-        });
-    };
-
-    $scope.getUsers();
+    loadUsers($http, $scope);
 });
 
 semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $http) {
@@ -162,6 +154,21 @@ semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $ht
        console.log($scope.user);
    });
 });
+
+function loadUsers($http, $scope) {
+    $scope.sortType = 'id';
+    $scope.sortReverse = false;
+    $scope.searchUser = '';
+
+    var uri = apiV1('users');
+    console.log('calling ' + uri);
+    $http.get(uri).then(function (response) {
+        var users = response.data['_embedded']['users'];
+        console.log('AJAX loaded ' + users.length + ' users');
+        console.log(users);
+        $scope.users = users;
+    });
+}
 
 function loadSports($http, $scope) {
     console.log('calling' + apiV1('sports'));
