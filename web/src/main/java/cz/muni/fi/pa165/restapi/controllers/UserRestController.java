@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -79,12 +80,14 @@ public class UserRestController {
 
         for (UserResource resource : userResources) {
             // filter birthdate: yyyy-mm-dd
-            boolean dateInRange = resource.getBirthdate().compareTo(birthdateBegin) >= 0 &&
-                    resource.getBirthdate().compareTo(birthdateEnd) <= 0;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String birthdate = simpleDateFormat.format(resource.getBirthdate());
+            boolean dateInRange = birthdate.compareTo(birthdateBegin) >= 0 &&
+                    birthdate.compareTo(birthdateEnd) <= 0;
             if (dateInRange) {
                 // filter gender: ALL, MAN, WOMAN
                 if (!gender.equalsIgnoreCase("ALL")) {
-                    if (gender.equalsIgnoreCase(resource.getGender())) {
+                    if (gender.equalsIgnoreCase(resource.getGender().toString())) {
                         filteredResources.add(resource);
                     }
                 } else {

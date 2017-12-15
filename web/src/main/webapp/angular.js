@@ -22,6 +22,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/admin/users', {
             templateUrl: 'partials/admin_users.html',
             controller: 'AdminUserCtrl'
+        }).when('/admin/newuser', {
+            templateUrl: 'partials/admin_newuser.html',
+            controller: 'AdminNewUserCtrl'
         }).when('/default', {
             templateUrl: 'partials/default.html',
             controller: ''
@@ -138,6 +141,60 @@ semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, 
 
 semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope) {
     loadUsers($http, $scope);
+
+    $scope.update = function (user) {
+        console.log('updating  user');
+        $rootScope.user = user;
+        $location.path("/admin/updateuser");
+    }
+});
+
+semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+    console.log('creating new user');
+
+    $scope.user={
+        'name':'',
+        'email': '',
+        'firstname': '',
+        'lastname': '',
+        'gender': '',
+        'birthdate': '',
+        'phone': '',
+        'address': '',
+        'role': '',
+        'password': ''
+    };
+
+    $scope.create = function (user) {
+        user.role = user.role.toUpperCase();
+        user.gender = user.gender.toUpperCase();
+
+        $http({
+            method: 'POST',
+            url: apiV1('users/create'),
+            data: user
+        }).then(function success(response) {
+            console.log('created user');
+            var createdUser = response.data;
+            //display confirmation alert
+            $rootScope.successAlert = 'A new user "' + createdUser.name + '" was created';
+            //change view to list of sports
+            $location.path("/admin/users");
+        }, function error(response) {
+            //display error
+            console.log("error when creating user");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot create user ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    };
+
 });
 
 semControllers.controller('UsersCtrl', function ($scope, $http) {
