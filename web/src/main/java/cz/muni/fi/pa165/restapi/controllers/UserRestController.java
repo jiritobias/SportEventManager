@@ -163,7 +163,7 @@ public class UserRestController {
         return new ResponseEntity<UserResource>(userResource, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public final HttpEntity<UserResource> createUser(@RequestBody @Valid CreateSportsMenDTO sportsMenDTO, BindingResult bindingResult) {
         logger.debug("UserRestController createUser()");
 
