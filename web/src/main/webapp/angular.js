@@ -153,10 +153,9 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
     console.log('creating new user');
 
     $scope.user={
-        'name':'',
-        'email': '',
         'firstname': '',
         'lastname': '',
+        'email': '',
         'gender': '',
         'birthdate': '',
         'phone': '',
@@ -168,6 +167,7 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
     $scope.create = function (user) {
         user.role = user.role.toUpperCase();
         user.gender = user.gender.toUpperCase();
+        console.log(user);
 
         $http({
             method: 'POST',
