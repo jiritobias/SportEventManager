@@ -108,7 +108,7 @@ public class UserRestController {
         // sort results
         switch (sortBy.toLowerCase()) {
             case "role":
-                userResources.sort(Comparator.comparing(UserResource::getGender));
+                userResources.sort(Comparator.comparing(UserResource::getRole));
                 break;
             case "birthdate":
                 userResources.sort(Comparator.comparing(UserResource::getBirthdate));
