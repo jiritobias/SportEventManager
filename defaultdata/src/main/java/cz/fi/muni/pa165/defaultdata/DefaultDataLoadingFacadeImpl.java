@@ -89,7 +89,7 @@ public class DefaultDataLoadingFacadeImpl implements DefaultDataLoadingFacade {
         user.setPhone("800900500");
         user.setAddress("Fake");
         user.setRole(Role.ADMINISTRATOR);
-        sportsmenService.registerUser(user, "adminHeslo", "admin@gmail.com");
+        sportsmenService.registerUser(user, "admin", "admin@gmail.com");
         return user;
     }
 

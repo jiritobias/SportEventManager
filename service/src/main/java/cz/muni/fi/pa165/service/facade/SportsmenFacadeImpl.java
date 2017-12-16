@@ -1,11 +1,6 @@
 package cz.muni.fi.pa165.service.facade;
 
-import cz.fi.muni.pa165.dto.CancelRegistrationDTO;
-import cz.fi.muni.pa165.dto.ChangePasswordDTO;
-import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
-import cz.fi.muni.pa165.dto.RegistToCompetitionDTO;
-import cz.fi.muni.pa165.dto.ResetPasswordDTO;
-import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
@@ -71,6 +66,12 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
     public void changePassword(ChangePasswordDTO changePasswordDTO) {
         User user = sportsmenService.findById(changePasswordDTO.getId());
         sportsmenService.changePassword(user, changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
+    }
+
+    @Override
+    public boolean authenticate(AuthenticateDTO authenticateDTO) {
+        User user = sportsmenService.findByEmail(authenticateDTO.getEmail());
+        return sportsmenService.authenticate(user, authenticateDTO.getPassword());
     }
 
     @Override
