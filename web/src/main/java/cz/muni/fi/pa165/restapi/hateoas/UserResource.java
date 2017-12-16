@@ -8,14 +8,11 @@ import cz.fi.muni.pa165.enums.Role;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Relation(value = "user", collectionRelation = "users")
 @JsonPropertyOrder({"id", "firstname", "lastname", "email", "birthdate", "phone", "address", "role", "gender"})
 public class UserResource extends ResourceSupport {
-
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @JsonProperty("id")
     private long dtoId;
@@ -33,8 +30,6 @@ public class UserResource extends ResourceSupport {
         this.firstname = sportsMenDTO.getFirstname();
         this.lastname = sportsMenDTO.getLastname();
         this.email = sportsMenDTO.getEmail();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
-//        this.birthdate = simpleDateFormat.format(sportsMenDTO.getBirthdate());
         this.birthdate = sportsMenDTO.getBirthdate();
         this.phone = sportsMenDTO.getPhone();
         this.address = sportsMenDTO.getAddress();
