@@ -227,8 +227,8 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
 
 });
 
-semControllers.controller('UsersCtrl', function ($scope, $http, $rootscope) {
-    loadUsers($http, $scope, $rootscope);
+semControllers.controller('UsersCtrl', function ($scope, $http, $rootScope) {
+    loadUsers($http, $scope, $rootScope);
 });
 
 semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $http) {
@@ -242,7 +242,7 @@ semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $ht
    });
 });
 
-function loadUsers($http, $scope, $rootscope) {
+function loadUsers($http, $scope, $rootScope) {
     $scope.sortType = 'id';
     $scope.sortReverse = false;
     $scope.searchUser = '';
@@ -256,7 +256,7 @@ function loadUsers($http, $scope, $rootscope) {
             console.log(users);
             $scope.users = users;
         } catch (e) {
-            $rootscope.warningAlert = 'No users found!';
+            $rootScope.warningAlert = 'No users found!';
         }
     });
 }
