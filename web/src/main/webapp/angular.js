@@ -140,7 +140,7 @@ semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, 
 });
 
 semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope) {
-    loadUsers($http, $scope);
+    loadUsers($http, $scope, $rootScope);
 
     $scope.update = function (user) {
         console.log('updating  user');
@@ -162,7 +162,7 @@ semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $
           console.log('user deleted');
           $rootScope.successAlert = 'User with id ' + response.data.id + ' was deleted';
           // $location.path("/admin/users");
-          loadUsers($http, $scope);
+          loadUsers($http, $scope, $rootScope);
       }, function error(response) {
           //display error
           console.log("error when deletin user");
@@ -227,8 +227,8 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
 
 });
 
-semControllers.controller('UsersCtrl', function ($scope, $http) {
-    loadUsers($http, $scope);
+semControllers.controller('UsersCtrl', function ($scope, $http, $rootscope) {
+    loadUsers($http, $scope, $rootscope);
 });
 
 semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $http) {
@@ -242,7 +242,7 @@ semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $ht
    });
 });
 
-function loadUsers($http, $scope) {
+function loadUsers($http, $scope, $rootscope) {
     $scope.sortType = 'id';
     $scope.sortReverse = false;
     $scope.searchUser = '';
@@ -250,10 +250,14 @@ function loadUsers($http, $scope) {
     var uri = apiV1('users');
     console.log('calling ' + uri);
     $http.get(uri).then(function (response) {
-        var users = response.data['_embedded']['users'];
-        console.log('AJAX loaded ' + users.length + ' users');
-        console.log(users);
-        $scope.users = users;
+        try {
+            var users = response.data['_embedded']['users'];
+            console.log('AJAX loaded ' + users.length + ' users');
+            console.log(users);
+            $scope.users = users;
+        } catch (e) {
+            $rootscope.warningAlert = 'No users found!';
+        }
     });
 }
 
