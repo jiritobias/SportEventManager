@@ -181,22 +181,22 @@ semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $
 
 semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     console.log('creating new user');
+    $scope.roles = ['SPORTSMEN', 'USER', 'ADMINISTRATOR'];
+    $scope.genders = ['MAN', 'WOMAN'];
 
     $scope.user={
         'firstname': '',
         'lastname': '',
         'email': '',
-        'gendre': '',
+        'gendre': $scope.genders[0],
         'birthdate': '',
         'phone': '',
         'address': '',
-        'role': '',
+        'role': $scope.roles[0],
         'password': ''
     };
 
     $scope.create = function (user) {
-        user.role = user.role.toUpperCase();
-        user.gendre = user.gendre.toUpperCase();
         console.log(user);
 
         $http({
