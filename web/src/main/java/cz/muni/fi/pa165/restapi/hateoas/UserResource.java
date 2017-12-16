@@ -10,6 +10,11 @@ import org.springframework.hateoas.core.Relation;
 
 import java.util.Date;
 
+/**
+ * Resource for User entity
+ *
+ * @author Martin Smid
+ */
 @Relation(value = "user", collectionRelation = "users")
 @JsonPropertyOrder({"id", "firstname", "lastname", "email", "birthdate", "phone", "address", "role", "gender"})
 public class UserResource extends ResourceSupport {

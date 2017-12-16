@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * Assembler for User resources.
+ *
+ * @author Martin Smid
+ */
 @Component
 public class UserResourceAssembler extends ResourceAssemblerSupport<SportsMenDTO, UserResource> {
 
