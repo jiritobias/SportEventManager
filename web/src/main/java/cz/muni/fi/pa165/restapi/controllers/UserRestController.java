@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
+import cz.fi.muni.pa165.dto.ChangePasswordDTO;
 import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -224,5 +226,30 @@ public class UserRestController {
         UserResource resource = userResourceAssembler.toResource(sportsMenDTO);
         sportsMenFacade.delete(sportsMenDTO);
         return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
+
+    /**
+     * Change user's password.
+     * $ curl -X PUT -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1
+     *
+     * @param id                ID of the user
+     * @param changePasswordDTO object with ID, old password and new password
+     * @return http response entity with user resource
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public final HttpEntity<UserResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
+        logger.debug("UserRestController changePassword()");
+
+        assert id == changePasswordDTO.getId();
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
+        if (sportsMenDTO == null) {
+            throw new ResourceNotFoundException("user " + id + " not found");
+        }
+
+        sportsMenFacade.changePassword(changePasswordDTO);
+        sportsMenDTO = sportsMenFacade.load(id);
+
+        UserResource resource = userResourceAssembler.toResource(sportsMenDTO);
+        return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
     }
 }
