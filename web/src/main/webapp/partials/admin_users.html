@@ -1,0 +1,77 @@
+<div>
+    <a href="#/admin/newuser" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New sportsmen
+    </a>
+
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search user" ng-model="searchUser">
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">ID</a>
+                <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th>
+                <a href="" ng-click="sortType = 'firstname'; sortReverse = !sortReverse">First name</a>
+                <span ng-show="sortType == 'firstname' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'firstname' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th>
+                <a href="" ng-click="sortType = 'lastname'; sortReverse = !sortReverse">Last name</a>
+                <span ng-show="sortType == 'lastname' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'lastname' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th>
+                <a href="" ng-click="sortType = 'email'; sortReverse = !sortReverse">Email</a>
+                <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th>
+                <a href="" ng-click="sortType = 'role'; sortReverse = !sortReverse">Role</a>
+                <span ng-show="sortType == 'role' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'role' && sortReverse" class="fa fa-caret-up"></span></th>
+            <th>
+                <a href="" ng-click="sortType = 'gender'; sortReverse = !sortReverse">Gender</a>
+                <span ng-show="sortType == 'gender' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'gender' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th>
+                <a href="" ng-click="sortType = 'birthdate'; sortReverse = !sortReverse">Birthday</a>
+                <span ng-show="sortType == 'birthdate' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'birthdate' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:searchUser">
+            <td><a href="#/user/{{user.id}}">{{user.id}}</a></td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.birthdate | date:'MMMM d yyyy'}}</td>
+            <td>
+                <button ng-click="update(user)" class="btn btn-primary" type="submit" ng-disabled="true">
+                    Edit
+                </button>
+            </td>
+            <td>
+                <button ng-click="delete(user)" class="btn btn-primary" type="submit">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

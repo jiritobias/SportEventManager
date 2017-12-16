@@ -56,7 +56,7 @@ public class User extends BaseEntity {
     @Column
     private Date birthdate;
 
-    @Pattern(regexp = "\\+?\\d+")
+    @Pattern(regexp = "\\+?\\d*")
     private String phone;
 
     @Column(nullable = false)
