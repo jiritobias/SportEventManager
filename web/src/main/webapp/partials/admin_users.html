@@ -62,8 +62,13 @@
             <td>{{user.gender}}</td>
             <td>{{user.birthdate | date:'MMMM d yyyy'}}</td>
             <td>
-                <button ng-click="update(user)" class="btn btn-primary" type="submit">
+                <button ng-click="update(user)" class="btn btn-primary" type="submit" ng-disabled="true">
                     Edit
+                </button>
+            </td>
+            <td>
+                <button ng-click="delete(user)" class="btn btn-primary" type="submit">
+                    Delete
                 </button>
             </td>
         </tr>

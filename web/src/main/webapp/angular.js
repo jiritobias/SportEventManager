@@ -146,6 +146,36 @@ semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $
         console.log('updating  user');
         $rootScope.user = user;
         $location.path("/admin/updateuser");
+    };
+
+    $scope.delete = function (user) {
+      console.log('deleting user');
+      console.log(user);
+
+      $http({
+          method: 'POST',
+          url: apiV1('users/'+user.id+'/delete'),
+          data: {
+              'id': Number(user.id)
+          }
+      }).then(function success(response) {
+          console.log('user deleted');
+          $rootScope.successAlert = 'User with id ' + response.data.id + ' was deleted';
+          // $location.path("/admin/users");
+          loadUsers($http, $scope);
+      }, function error(response) {
+          //display error
+          console.log("error when deletin user");
+          console.log(response);
+          switch (response.data.code) {
+              case 'InvalidRequestException':
+                  $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                  break;
+              default:
+                  $rootScope.errorAlert = 'Cannot delete user ! Reason given by the server: ' + response.data.message;
+                  break;
+          }
+      });
     }
 });
 
