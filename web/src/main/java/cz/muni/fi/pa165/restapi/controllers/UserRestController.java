@@ -32,7 +32,7 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**
- * Sportsmen REST Controller
+ * User REST Controller
  *
  * @author Martin Smid
  */
@@ -49,6 +49,18 @@ public class UserRestController {
     @Autowired
     private SportsMenFacade sportsMenFacade;
 
+    /**
+     * Get a list of Users.
+     * curl -i -X http://localhost:8080/pa165/rest/users?role=SPORTSMEN&limit=0&birthdateBegin=0000-00-00&birthdateEnd=9999-99-99&gender=ALL&sortBy=id
+     *
+     * @param role           role {USER, ADMINISTRATOR, SPORTSMEN, ALL}
+     * @param limit          number of results, if limit == 0, all results are displayed
+     * @param birthdateBegin begin of birthday range
+     * @param birthdateEnd   end of birthday range
+     * @param gender         gender {MAN, WOMAN, ALL}
+     * @param sortBy         sorting options {id, role, birthdate, gender, firtsname, lastname, name, email}
+     * @return http response entity with user resources
+     */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<UserResource>> getUsers(
             @RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role,
@@ -64,7 +76,7 @@ public class UserRestController {
 
         switch (role.toUpperCase()) {
             case "USER":
-            case "ADMIN":
+            case "ADMINISTRATOR":
             case "SPORTSMEN":
             case "ALL":
                 userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
@@ -147,7 +159,15 @@ public class UserRestController {
         return new ResponseEntity<>(resources, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * Get a user with given ID.
+     * curl -i -X GET http://localhost:8080/pa165/rest/users/1
+     *
+     * @param id id of a user
+     * @return http response entity with user resource
+     * @throws Exception error while retrieving the user
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<UserResource> getUser(@PathVariable("id") long id) throws Exception {
         logger.debug("UserManRestController getUser({})", id);
 
@@ -160,6 +180,14 @@ public class UserRestController {
         return new ResponseEntity<UserResource>(userResource, HttpStatus.OK);
     }
 
+    /**
+     * Create a new user entity.
+     * curl -i -X POST -H "Content-Type: application/json" --data '{"email":"test@test.com", "password":"password", "firstname":"firstname", "lastname":"lastname", "gendre":"MAN", "birthdate":"2000-01-30", "phone":"111222333", "address":"address", "role":"USER"}' http://localhost:8080/pa165/rest/users/create
+     *
+     * @param sportsMenDTO
+     * @param bindingResult
+     * @return http response user resource with the given data
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public final HttpEntity<UserResource> createUser(@RequestBody @Valid CreateSportsMenDTO sportsMenDTO, BindingResult bindingResult) {
         logger.debug("UserRestController createUser()");
@@ -179,6 +207,13 @@ public class UserRestController {
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
+    /**
+     * Delete a user with given ID.
+     * curl -i -X POST --data '{"id":1}' http://localhost:8080/pa165/rest/users/1/delete
+     *
+     * @param id ID of a user
+     * @return http response entity with the user resource
+     */
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public final HttpEntity<UserResource> deleteUser(@PathVariable("id") long id) {
         SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
