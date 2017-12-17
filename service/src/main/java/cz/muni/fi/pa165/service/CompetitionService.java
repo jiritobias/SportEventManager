@@ -30,4 +30,10 @@ public interface CompetitionService extends BaseService<Competition> {
      * @return competitions
      */
     Set<Competition> listAllCompetitionsWithoutParticipants();
+
+    /**
+     * Updates created competition
+     * @param competition changed competition
+     */
+    void update(Competition competition);
 }

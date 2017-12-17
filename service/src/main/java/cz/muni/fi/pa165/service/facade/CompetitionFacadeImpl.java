@@ -79,4 +79,8 @@ public class CompetitionFacadeImpl implements CompetitionFacade {
         return beanMappingService.mapTo(competitionService.
                 listAllRegisteredSportsMen(competitionService.findById(competitionDTO.getId())), SportsMenDTO.class);
     }
+
+    public void update(CompetitionDTO competitionDTO){
+        competitionService.update(beanMappingService.mapTo(competitionDTO, Competition.class));
+    }
 }
