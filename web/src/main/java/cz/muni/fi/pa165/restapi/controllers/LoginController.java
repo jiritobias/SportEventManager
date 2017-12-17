@@ -1,12 +1,12 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
 import cz.fi.muni.pa165.dto.AuthenticateDTO;
+import cz.fi.muni.pa165.dto.LoginResultDTO;
 import cz.fi.muni.pa165.enums.Role;
-import cz.fi.muni.pa165.facade.SportsMenFacade;
+import cz.fi.muni.pa165.facade.LoginFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
 import cz.muni.fi.pa165.restapi.exceptions.LoginFailedException;
 import cz.muni.fi.pa165.restapi.hateoas.LoginResource;
-import cz.muni.fi.pa165.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -21,10 +21,10 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_AUTH)
-public class AuthController {
+public class LoginController {
 
     @Autowired
-    SportsMenFacade sportsMenFacade;
+    private LoginFacade loginFacade;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public final HttpEntity<LoginResource> login(@RequestBody @Valid AuthenticateDTO authenticateDTO, BindingResult bindingResult) {
@@ -35,15 +35,15 @@ public class AuthController {
             throw new LoginFailedException("Empty input!");
         }
 
-        boolean authenticate = sportsMenFacade.authenticate(authenticateDTO);
-        if(!authenticate){
+        LoginResultDTO loginResultDTO = loginFacade.login(authenticateDTO);
+        if(!loginResultDTO.isResult()){
             throw new LoginFailedException("Login failed!");
         }
 
         LoginResource loginResource = new LoginResource();
         loginResource.setPsswd(password);
         loginResource.setUsername(email);
-        loginResource.setRole(Role.ADMINISTRATOR); // TODO get role
+        loginResource.setRole(loginResultDTO.getRole());
 
         return new ResponseEntity<>(loginResource, HttpStatus.OK);
     }
