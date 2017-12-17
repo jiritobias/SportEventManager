@@ -51,8 +51,6 @@ public class CompetitionRestController {
         Resources<CompetitionResource> resources = new Resources<>(competitionResources,
                 linkTo(CompetitionRestController.class).withSelfRel());
 
-        //,linkTo(CompetitionRestController.class).slash("/create").withRel("create"));
-
         return new ResponseEntity<>(resources, HttpStatus.OK);
     }
 
@@ -103,7 +101,7 @@ public class CompetitionRestController {
         return new ResponseEntity<>(competitionResource, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{sport}", method = RequestMethod.POST)
+    @RequestMapping(value = "/getBySport/{sport}", method = RequestMethod.POST)
     public final HttpEntity<Resources<CompetitionResource>> listCompetitionsBySport(@PathVariable("sport") String sportName) throws Exception {
         logger.debug("rest listCompetitionsBySport()", sportName);
 

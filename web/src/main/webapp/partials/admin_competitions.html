@@ -1,0 +1,24 @@
+<!--<a href="#/admin/newsport" class="btn btn-primary">-->
+    <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+    <!--New sport-->
+<!--</a>-->
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>sport</th>
+        <th>sportsmen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="competition in competitions">
+        <td>{{competition.id}}</td>
+        <td>{{competition.dtoSport.name}}</td>
+        <td>
+            <button ng-click="update(competition)" class="btn btn-primary"
+                    type="submit">Edit
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
