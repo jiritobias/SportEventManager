@@ -22,7 +22,7 @@ public class UserNewPasswordResourceAssembler extends ResourceAssemblerSupport<C
 
     @Override
     public UserNewPasswordResource toResource(ChangePasswordDTO changePasswordDTO) {
-        UserNewPasswordResource userResource = new UserNewPasswordResource(changePasswordDTO.getId(), changePasswordDTO.getNewPassword());
+        UserNewPasswordResource userResource = new UserNewPasswordResource(changePasswordDTO);
         try {
             userResource.add(linkTo(UserRestController.class).slash(changePasswordDTO.getId()).withSelfRel());
         } catch (Exception ex) {

@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.restapi.hateoas;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import cz.fi.muni.pa165.dto.ChangePasswordDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
@@ -23,9 +24,9 @@ public class UserNewPasswordResource extends ResourceSupport {
     private long dtoId;
     private String newPassword;
 
-    public UserNewPasswordResource(long id, String newPassword) {
-        this.dtoId = id;
-        this.newPassword = newPassword;
+    public UserNewPasswordResource(ChangePasswordDTO passwordDTO) {
+        this.dtoId = passwordDTO.getId();
+        this.newPassword = passwordDTO.getNewPassword();
     }
 
     public long getDtoId() {
