@@ -321,6 +321,7 @@ function loadUsers($http, $scope, $rootScope) {
 
     var uri = apiV1('users');
     console.log('calling ' + uri);
+    $scope.users = [];
     $http.get(uri).then(function (response) {
         try {
             var users = response.data['_embedded']['users'];
