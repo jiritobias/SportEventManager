@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.restapi.controllers;
 
 import cz.muni.fi.pa165.restapi.exceptions.CannotDeleteResourceException;
 import cz.muni.fi.pa165.restapi.exceptions.ErrorResource;
+import cz.muni.fi.pa165.restapi.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,8 @@ public class MyExceptionHandler {
             httpStatus = HttpStatus.UNPROCESSABLE_ENTITY;
         } else if (e instanceof CannotDeleteResourceException) {
             httpStatus = HttpStatus.UNPROCESSABLE_ENTITY;
+        } else if (e instanceof InvalidParameterException) {
+           httpStatus = HttpStatus.NOT_ACCEPTABLE;
         } else {
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }

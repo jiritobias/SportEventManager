@@ -44,6 +44,12 @@ public class SportRestController {
 
     final static Logger log = LoggerFactory.getLogger(SportRestController.class);
 
+    /**
+     * Get lists of sports.
+     * curl -i -X GET http://localhost:8080/pa165/rest/sports
+     *
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<SportResource>> getSports() {
         log.debug("resController getSports()");
@@ -94,6 +100,14 @@ public class SportRestController {
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
+    /**
+     * Get a sport with ID.
+     * $ curl -i -X POST http://localhost:8080/pa165/rest/sports/1
+     *
+     * @param id ID of sport
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public final HttpEntity<SportResource> getSport(@PathVariable("id") long id) throws Exception {
         logger.debug("restController getSport({})", id);
