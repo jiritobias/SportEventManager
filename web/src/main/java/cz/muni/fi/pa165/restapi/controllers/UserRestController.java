@@ -9,6 +9,8 @@ import cz.muni.fi.pa165.restapi.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.restapi.exceptions.InvalidRequestException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.restapi.exceptions.ResourceNotFoundException;
+import cz.muni.fi.pa165.restapi.hateoas.UserNewPasswordResource;
+import cz.muni.fi.pa165.restapi.hateoas.UserNewPasswordResourceAssembler;
 import cz.muni.fi.pa165.restapi.hateoas.UserResource;
 import cz.muni.fi.pa165.restapi.hateoas.UserResourceAssembler;
 import org.slf4j.Logger;
@@ -47,6 +49,9 @@ public class UserRestController {
 
     @Autowired
     private UserResourceAssembler userResourceAssembler;
+
+    @Autowired
+    private UserNewPasswordResourceAssembler userNewPasswordResourceAssembler;
 
     @Autowired
     private SportsMenFacade sportsMenFacade;
@@ -230,14 +235,14 @@ public class UserRestController {
 
     /**
      * Change user's password.
-     * $ curl -X PUT -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1
+     * curl -X PUT -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1
      *
      * @param id                ID of the user
      * @param changePasswordDTO object with ID, old password and new password
      * @return http response entity with user resource
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public final HttpEntity<UserResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
+    public final HttpEntity<UserNewPasswordResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
         logger.debug("UserRestController changePassword()");
 
         assert id == changePasswordDTO.getId();
@@ -247,9 +252,8 @@ public class UserRestController {
         }
 
         sportsMenFacade.changePassword(changePasswordDTO);
-        sportsMenDTO = sportsMenFacade.load(id);
 
-        UserResource resource = userResourceAssembler.toResource(sportsMenDTO);
-        return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+        UserNewPasswordResource resource = userNewPasswordResourceAssembler.toResource(changePasswordDTO);
+        return new ResponseEntity<UserNewPasswordResource>(resource, HttpStatus.OK);
     }
 }
