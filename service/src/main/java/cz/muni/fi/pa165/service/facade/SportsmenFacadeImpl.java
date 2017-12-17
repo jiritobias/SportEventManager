@@ -68,11 +68,6 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
         sportsmenService.changePassword(user, changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
     }
 
-    @Override
-    public boolean authenticate(AuthenticateDTO authenticateDTO) {
-        User user = sportsmenService.findByEmail(authenticateDTO.getEmail());
-        return sportsmenService.authenticate(user, authenticateDTO.getPassword());
-    }
 
     @Override
     public void delete(SportsMenDTO dto) {

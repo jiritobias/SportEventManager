@@ -40,11 +40,4 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
      * Change user password.
      */
     void changePassword(ChangePasswordDTO changePasswordDTO);
-
-    /**
-     *
-     */
-    boolean authenticate(AuthenticateDTO authenticateDTO);
-
-
 }
