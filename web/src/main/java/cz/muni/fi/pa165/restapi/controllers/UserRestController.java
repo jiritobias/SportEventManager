@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.restapi.controllers;
 
 import cz.fi.muni.pa165.dto.ChangePasswordDTO;
 import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
+import cz.fi.muni.pa165.dto.ResetPasswordDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
@@ -18,11 +19,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.hateoas.ExposesResourceFor;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -252,6 +252,31 @@ public class UserRestController {
         }
 
         sportsMenFacade.changePassword(changePasswordDTO);
+
+        UserNewPasswordResource resource = userNewPasswordResourceAssembler.toResource(changePasswordDTO);
+        return new ResponseEntity<UserNewPasswordResource>(resource, HttpStatus.OK);
+    }
+
+    /**
+     * Reset user password.
+     * curl -X POST -H 'Content-Type: application/json' --data '{"id":1, "email":"prvni@gmail.com"}' http://localhost:8080/pa165/rest/users/1/resetPassword
+     *
+     * @param id               user ID
+     * @param resetPasswordDTO object with ID and email defining the user
+     * @return response with ID and the new password
+     */
+    @RequestMapping(value = "/{id}/resetPassword", method = RequestMethod.POST)
+    public final HttpEntity<UserNewPasswordResource> resetPassword(@PathVariable("id") long id, @RequestBody @Valid ResetPasswordDTO resetPasswordDTO) {
+        logger.debug("UserRestController resetPassword({})", id);
+
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
+        if (sportsMenDTO == null) {
+            throw new ResourceNotFoundException("user " + id + " not found");
+        }
+        assert Objects.equals(sportsMenDTO.getEmail(), resetPasswordDTO.getEmail());
+
+        String password = sportsMenFacade.resetPassword(resetPasswordDTO);
+        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO(id, "", password);
 
         UserNewPasswordResource resource = userNewPasswordResourceAssembler.toResource(changePasswordDTO);
         return new ResponseEntity<UserNewPasswordResource>(resource, HttpStatus.OK);
