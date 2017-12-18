@@ -1,11 +1,6 @@
 package cz.fi.muni.pa165.facade;
 
-import cz.fi.muni.pa165.dto.CancelRegistrationDTO;
-import cz.fi.muni.pa165.dto.ChangePasswordDTO;
-import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
-import cz.fi.muni.pa165.dto.RegistToCompetitionDTO;
-import cz.fi.muni.pa165.dto.ResetPasswordDTO;
-import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.dto.*;
 
 import java.util.Date;
 import java.util.List;

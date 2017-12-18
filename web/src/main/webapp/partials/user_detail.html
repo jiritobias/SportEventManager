@@ -1,0 +1,13 @@
+<div ng-model="user">
+    <h1>{{user.firstname}} {{user.lastname}}</h1>
+
+    <div>
+        ID: {{user.id}}<br/>
+        Birthday: {{user.birthdate | date:'MMMM d yyyy'}}<br/>
+        Email: {{user.email}}<br/>
+        Phone: {{user.phone}}<br/>
+        Address: {{user.address}}<br/>
+        Gender: {{user.gender}}<br/>
+        Role: {{user.role}}
+    </div>
+</div>
