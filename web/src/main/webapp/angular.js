@@ -37,6 +37,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/admin/updatecompetition', {
             templateUrl: 'partials/admin_competitionupdate.html',
             controller: 'AdminUpdateCompetitionCtrl'
+        }).when('/admin/newcompetition',{
+            templateUrl: 'partials/admin_newcompetition.html',
+            controller: 'CreateCompetitionCtrl'
         }).when('/users', {
             templateUrl: 'partials/user_list.html',
             controller: 'UsersCtrl'
@@ -46,6 +49,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/login', {
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
+         // }).when('/admin/newcompetition/create', {
+         //     templateUrl: 'partials/admin_competitions.html',
+         //     controller: 'CreateCompetitionCtrl'
         }).otherwise({redirectTo: '/default'});
 
     }]);
@@ -88,6 +94,54 @@ semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $loc
         $location.path("/admin/updatecompetition");
     }
 });
+
+semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+    console.log('creating new competition');
+
+    loadSports($http, $scope);
+
+    $scope.competition = {
+        'sport': ''
+    };
+
+    $scope.create = function (competition) {
+        // delete competition.sport['_links'];
+
+        var result = {};
+        var sport = JSON.parse(competition.sport);
+        result.sport = {};
+        result.sport.id = sport.id;
+        result.sport.name = sport.name;
+
+        $http({
+            method: 'POST',
+            url: apiV1('competitions/create'),
+            data: result
+        }).then(function success(response) {
+            console.log('created competition');
+            var createdCompetition = response.data;
+
+            // display confirmation alert
+$rootScope.successAlert = 'A new competition in "' + createdCompetition.dtoSport.name + '" was created';
+// change view to list of sports
+$location.path("/admin/competitions");
+}, function error(response) {
+    // display error
+console.log("error when creating competition");
+console.log(response);
+switch (response.data.code) {
+    case 'InvalidRequestException':
+        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+        break;
+    default:
+        $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
+        break;
+}
+});
+};
+
+});
+
 
 semControllers.controller('AdminUpdateCompetitionCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     console.log('updating competition');
@@ -133,18 +187,18 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
         'name': ''
     };
 
-    $scope.create = function (newsport) {
+    $scope.create = function (competition_sport) {
         $http({
             method: 'POST',
-            url: apiV1('sports/create'),
-            data: newsport
+            url: apiV1('competitions/create'),
+            data: competition_sport
         }).then(function success(response) {
             console.log('created sport');
-            var createdSport = response.data;
+            var createdCompetition = response.data;
             //display confirmation alert
-            $rootScope.successAlert = 'A new sport "' + createdSport.name + '" was created';
-            //change view to list of sports
-            $location.path("/admin/sports");
+            $rootScope.successAlert = 'A new competition "' + createdCompetition.sport.name + '" was created';
+            //change view to list of competitions
+            $location.path("/admin/competitions");
         }, function error(response) {
             //display error
             console.log("error when creating sport");
@@ -159,6 +213,7 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
             }
         });
     };
+
 
 });
 
@@ -400,6 +455,7 @@ function loadSports($http, $scope) {
         var sports = response.data['_embedded']['sports'];
         console.log('AJAX loaded ' + ' sports');
         $scope.sports = sports;
+        console.log(sports);
     });
 }
 
