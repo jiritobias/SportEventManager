@@ -120,4 +120,17 @@ public class CompetitionRestController {
 
         return new ResponseEntity<>(resources, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    public final HttpEntity<CompetitionResource> deleteCompetition(@PathVariable("id") long id) {
+        CompetitionDTO competitionDTO = competitionFacade.load(id);
+        //System.out.print(competitionDTO.getId());
+        if (competitionDTO == null) {
+            throw new ResourceNotFoundException("competition " + id + " not found");
+        }
+
+        CompetitionResource resource = competitionResourceAssembler.toResource(competitionDTO);
+        competitionFacade.delete(competitionDTO);
+        return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
 }

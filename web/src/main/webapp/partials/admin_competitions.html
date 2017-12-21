@@ -1,24 +1,67 @@
-<a href="#/admin/newcompetition" class="btn btn-primary">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    New competition
-</a>
-<table class="table">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>sport</th>
-        <th>sportsmen</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="competition in competitions">
-        <td>{{competition.id}}</td>
-        <td>{{competition.dtoSport.name}}</td>
-        <td>
-            <button ng-click="update(competition)" class="btn btn-primary"
-                    type="submit">Edit
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div>
+    <a href="#/admin/newcompetition" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New competition
+    </a>
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" id ="input" onkeyup="searchCompetition()" class="form-control" placeholder="Search competition by sport">
+            </div>
+        </div>
+    </form>
+        <script>
+        function searchCompetition() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("input");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Competitions");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        </script>
+
+    <table id="Competitions" class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>sport</th>
+            <th>sportsmen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="competition in competitions">
+            <td>{{competition.id}}</td>
+            <td>{{competition.dtoSport.name}}</td>
+            <td>{{competition.dtoSportsmen.name}}</td>
+            <td> </td>
+            <td>
+                <button ng-click="delete(competition)" class="btn btn-primary"
+                        type="submit" style="float: right;">Delete competition
+                </button>
+                <a href="#/admin/registertocompetition"
+                   ng-click="loadCompetition(competition)"
+                   class="btn btn-primary"
+                   style="float: right;"
+                >
+                    <span class="glyphicon glyphicon-plus"
+                          aria-hidden="true"></span>
+                    Register to competition
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
