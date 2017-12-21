@@ -67,7 +67,11 @@ semControllers.controller('SportCtrl', function ($scope, $http) {
     loadSports($http, $scope)
 });
 
-semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     console.log('creating new sport');
 
     $scope.newsport = {
@@ -103,7 +107,11 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
 
 });
 
-semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     console.log('updating sport');
 
     $scope.update = function (sport) {
@@ -136,7 +144,11 @@ semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams
 
 });
 
-semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, $rootScope) {
+semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     loadSports($http, $scope);
 
     $scope.update = function (sport) {
@@ -153,25 +165,36 @@ function isLoggedUser($cookies) {
     var username = $cookies.get('username');
     var psswd = $cookies.get('psswd');
 
-    return username !== undefined && psswd !== undefined;
+    var isLogged = username !== undefined && psswd !== undefined;
+    if (isLogged) {
+        loggedUser = {
+            'username': $cookies.get('username'),
+            'role': $cookies.get('role'),
+            'psswd': $cookies.get('psswd')
+        }
+    }
+
+    return isLogged;
 }
 
 function setLoggedUser(response, $cookies) {
     $cookies.put('username', response.data.username);
     $cookies.put('role', response.data.role);
     $cookies.put('psswd', response.data.psswd);
+    loggedUser = response.data;
 }
 
 function logoutUser($cookies) {
-    $cookies.put('username', undefined);
-    $cookies.put('role', undefined);
-    $cookies.put('psswd', undefined);
+    $cookies.remove('username');
+    $cookies.remove('role');
+    $cookies.remove('psswd');
+    loggedUser = undefined;
 }
 
-function isAdmin($cookies) {
-    var role = $cookies.get('role');
-    return role !== undefined && role === "ADMINISTRATOR";
-}
+// function isAdmin($cookies) {
+//     var role = $cookies.get('role');
+//     return role !== undefined && role === "ADMINISTRATOR";
+// }
 
 semControllers.controller('LoginCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
 
@@ -179,7 +202,15 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
         'email': '',
         'password': ''
     };
-    $scope.isLogged = isLoggedUser($cookies);
+    $rootScope.isLogged = isLoggedUser($cookies);
+    if (isLoggedUser($cookies)) {
+        loggedUser = {
+            'username': $cookies.get('username'),
+            'role': $cookies.get('role'),
+            'psswd': $cookies.get('psswd')
+        }
+    }
+
     $scope.logout = function () {
         logoutUser($cookies);
         $rootScope.successAlert = 'Logout success';
@@ -194,6 +225,7 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
         }).then(function success(response) {
             if (response !== undefined) {
                 setLoggedUser(response, $cookies);
+                loggedUser = response.data;
             }
             $rootScope.hideAll();
             $rootScope.successAlert = 'Login success';
@@ -211,7 +243,11 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
 });
 
 
-semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope) {
+semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     loadUsers($http, $scope, $rootScope);
 
     $scope.update = function (user) {
@@ -251,7 +287,20 @@ semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $
     }
 });
 
-semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+function checkAdminRights($location, $rootScope, $cookies) {
+    if (!isLogged($cookies) || !isAdmin()) {
+        $location.path("/login");
+        $rootScope.errorAlert = 'You are not Admin!';
+        return false;
+    }
+    return true;
+}
+
+semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     console.log('creating new user');
     $scope.roles = ['SPORTSMEN', 'USER', 'ADMINISTRATOR'];
     $scope.genders = ['MAN', 'WOMAN'];
@@ -346,4 +395,14 @@ function loadSports($http, $scope) {
 
 function apiV1(path) {
     return apiV1Path + path;
+}
+
+var loggedUser = undefined;
+
+function isLogged() {
+    return loggedUser !== undefined;
+}
+
+function isAdmin() {
+    return isLogged() && loggedUser.role === 'ADMINISTRATOR';
 }

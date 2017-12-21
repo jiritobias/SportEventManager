@@ -8,9 +8,11 @@ import cz.fi.muni.pa165.enums.Role;
 import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.SportService;
 import cz.muni.fi.pa165.service.SportsmenService;
+import cz.muni.fi.pa165.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
@@ -36,6 +38,10 @@ public class DefaultDataLoadingFacadeImpl implements DefaultDataLoadingFacade {
 
     @Autowired
     private SportsmenService sportsmenService;
+
+    @Qualifier("userServiceImpl")
+    @Autowired
+    private UserService userService;
 
     @Override
     public void loadData() throws IOException {
@@ -89,7 +95,8 @@ public class DefaultDataLoadingFacadeImpl implements DefaultDataLoadingFacade {
         user.setPhone("800900500");
         user.setAddress("Fake");
         user.setRole(Role.ADMINISTRATOR);
-        sportsmenService.registerUser(user, "admin", "admin@gmail.com");
+        userService.registerUser(user, "admin", "admin@gmail.com");
+        userService.makeUserAdmin(user);
         return user;
     }
 
