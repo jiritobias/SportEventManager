@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 id="sporteventmanager">SportEventManager</h1>
+<p>Create an information system allowing sportsmen to sign up for a sporting event. As an example, let's consider a system for registration of swimmers in a swimming competition. The system should store details about the competition, individual competitors and their results in the competition. It should be able to present people taking part in each competition and the results they achieved. The system should handle multiple types of sport simultaneously. Consider Sport, Sportsman and Event as basic entities in your application.</p>
+<h4 id="team-members">Team Members</h4>
+<p>Team No. 4</p>
+<ul>
+    <li>Petra Halová</li>
+    <li>Martin Šmíd</li>
+    <li>Jiří Tobiáš (team leader)</li>
+</ul>
+<p>REST</p>
+<ul>
+    <li>pa165/rest/sports : curl -X GET http://localhost:8080/pa165/rest/sports</li>
+    <li>pa165/rest/sports/{id} : curl -X POST http://localhost:8080/pa165/rest/sports/{id}</li>
+    <li>pa165/rest/sports/create/{sport} : curl -X POST http://localhost:8080/pa165/rest/sports/create/{sport}</li>
+    <li>pa165/rest/sports/update/{sport} : curl -X POST http://localhost:8080/pa165/rest/sports/update/{sport}</li>
+    <li>pa165/rest/competitions : curl -X GET http://localhost:8080/pa165/rest/competitions</li>
+    <li>pa165/rest/competitions/{id} : curl -X POST http://localhost:8080/pa165/rest/competitions/{id}</li>
+    <li>pa165/rest/competitions/create/{competition} : curl -X POST http://localhost:8080/pa165/rest/competitions/create/{competition}</li>
+    <li>pa165/rest/competitions/getBySport/{name} : curl -X POST http://localhost:8080/pa165/rest/competitions/getBySport/{name}</li>
+    </li>
+
+</ul>
+</body>
+</html>

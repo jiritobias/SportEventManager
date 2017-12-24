@@ -1,0 +1,46 @@
+<form>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input type="text" id ="input" onkeyup="searchCompetition()" class="form-control" placeholder="Search competition by sport">
+        </div>
+    </div>
+</form>
+<script>
+    function searchCompetition() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("Competitions");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<table id ="Competitions" class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>sport</th>
+        <th>sportsmen</th>>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="competition in competitions">
+        <td>{{competition.dtoId}}</td>
+        <td>{{competition.dtoSport.name}}</td>
+        <td>{{competition.dtoSportsmen.email}}</td>
+    </tr>
+    </tbody>
+</table>

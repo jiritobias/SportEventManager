@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+import cz.fi.muni.pa165.enums.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         cal1.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date1 = cal1.getTime();
         user1.setBirthdate(date1);
+        user1.setRole(Role.USER);
         userDao.create(user1);
 
         user2 = new User();
@@ -63,6 +65,7 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         cal2.set(2000, Calendar.FEBRUARY, 1, 1, 1, 1);
         Date date2 = cal2.getTime();
         user2.setBirthdate(date2);
+        user2.setRole(Role.USER);
         userDao.create(user2);
     }
 

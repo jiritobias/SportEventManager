@@ -57,8 +57,10 @@
     </build>
 
     <modules>
+        <module>api-layer</module>
         <module>persistence</module>
         <module>service</module>
-        <module>api-layer</module>
+        <module>defaultdata</module>
+        <module>web</module>
     </modules>
 </project>

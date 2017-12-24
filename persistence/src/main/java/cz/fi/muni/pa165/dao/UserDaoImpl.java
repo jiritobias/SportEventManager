@@ -21,13 +21,6 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public void create(User entity) {
-        entity.setRole(Role.USER);
-
-        super.create(entity);
-    }
-
-    @Override
     public List<User> findByGendre(Gendre gendre) {
         assert gendre != null;
 

@@ -1,15 +1,10 @@
 package cz.muni.fi.pa165.service.facade;
 
 import cz.fi.muni.pa165.dto.*;
-import cz.fi.muni.pa165.entity.Competition;
-import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
-import cz.fi.muni.pa165.facade.CompetitionFacade;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
-import cz.muni.fi.pa165.service.CompetitionService;
-import cz.muni.fi.pa165.service.SportService;
 import cz.muni.fi.pa165.service.SportsmenService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.assertj.core.api.Assertions;
@@ -17,10 +12,10 @@ import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,9 +29,15 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private SportsMenFacade sportsMenFacade;
 
-    private User sportman;
+    @Autowired
+    private SportsmenService sportsmenService;
 
-    @BeforeClass
+    private User sportman;
+    private CreateSportsMenDTO createSportsMenDTO;
+    private Long sportsManId;
+    private String password;
+
+    @BeforeMethod
     public void setUp() {
         sportman = new User();
         sportman.setAddress("Death Star 1");
@@ -45,23 +46,98 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         sportman.setLastname("Vader");
         sportman.setGendre(Gendre.MAN);
         sportman.setRole(Role.SPORTSMEN);
-        sportman.setPasswordHash("666");
+        password = "666";
+        sportman.setPasswordHash(password);
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date = cal.getTime();
         sportman.setBirthdate(date);
         sportman.setPhone("12");
+
+        createSportsMenDTO = new CreateSportsMenDTO("password",
+                sportman.getEmail(), sportman.getFirstname(), sportman.getLastname(), sportman.getGendre(),
+                sportman.getBirthdate(), sportman.getPhone(), sportman.getAddress(), sportman.getRole());
+
+        sportsManId = sportsMenFacade.createSportsMen(createSportsMenDTO);
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        try {
+            sportsMenFacade.delete(sportsMenFacade.load(sportsManId));
+        } catch (Exception e) {
+        }
     }
 
     @Test
     public void testCreateSportsMen() {
-        CreateSportsMenDTO createdSportsMan = new CreateSportsMenDTO(sportman.getPasswordHash(),
-                sportman.getEmail(), sportman.getFirstname(), sportman.getLastname(), sportman.getGendre(),
-                sportman.getBirthdate(), sportman.getPhone(), sportman.getAddress(), sportman.getRole());
-        Long sportsMan = sportsMenFacade.createSportsMen(createdSportsMan);
-        Assertions.assertThat(sportsMan)
+        Assertions.assertThat(sportsManId)
                 .isNotNull();
+    }
 
-        sportsMenFacade.delete(new SportsMenDTO(sportsMan, ""));
+    @Test
+    public void testFindByBirthDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2000, Calendar.FEBRUARY, 1, 1, 1, 1);
+        Date date = cal.getTime();
+
+        List<SportsMenDTO> found = sportsMenFacade.findByBirthDay(date);
+        Assertions.assertThat(found).isEmpty();
+
+        cal = Calendar.getInstance();
+        cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
+        date = cal.getTime();
+
+        found = sportsMenFacade.findByBirthDay(date);
+        SportsMenDTO load = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(found).contains(load).hasSize(1);
+    }
+
+    @Test
+    public void testResetPassword() {
+        SportsMenDTO dto = sportsMenFacade.load(sportsManId);
+        String newPassword = sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
+        SportsMenDTO load = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(dto.getPasswordHash()).isNotEqualTo(load.getPasswordHash());
+        sportman.setPasswordHash(load.getPasswordHash());
+        Assertions.assertThat(sportsmenService.authenticate(sportman, newPassword)).isTrue();
+    }
+
+    @Test
+    public void testChangePassword() {
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
+        String oldPasswordHash = sportsMenDTO.getPasswordHash();
+        ChangePasswordDTO passwordDTO = new ChangePasswordDTO(sportsManId, createSportsMenDTO.getPassword(), "newPassword");
+
+        sportsMenFacade.changePassword(passwordDTO);
+
+        String newPasswordHash = sportsMenFacade.load(sportsManId).getPasswordHash();
+        Assertions.assertThat(newPasswordHash).isNotEqualTo(oldPasswordHash);
+
+        sportman.setPasswordHash(newPasswordHash);
+        Assertions.assertThat(sportsmenService.authenticate(sportman, "newPassword")).isTrue();
+    }
+
+    @Test
+    public void testDelete() {
+        SportsMenDTO dto = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(dto.getId()).isNotNull();
+
+        sportsMenFacade.delete(dto);
+        Assertions.assertThatThrownBy(() -> sportsMenFacade.load(sportsManId)).isInstanceOf(MappingException.class);
+    }
+
+    @Test
+    public void testLoad() {
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(sportsMenDTO.getFirstname()).isEqualTo(createSportsMenDTO.getFirstname());
+        Assertions.assertThat(sportsMenDTO.getLastname()).isEqualTo(createSportsMenDTO.getLastname());
+    }
+
+    @Test
+    public void testGetAll() {
+        List<SportsMenDTO> all = sportsMenFacade.getAll();
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(all).containsOnly(sportsMenDTO);
     }
 }
