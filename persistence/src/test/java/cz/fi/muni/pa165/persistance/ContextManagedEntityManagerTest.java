@@ -39,6 +39,13 @@ public class ContextManagedEntityManagerTest extends AbstractTransactionalTestNG
 
         Assertions.assertThatThrownBy(() -> sportDao.create(sport1))
                 .isInstanceOf(DataAccessException.class);
+//        try {
+//            sportDao.create(sport1);
+//        } catch (Exception e) {
+//            if ((e instanceof DataAccessException)){
+//                throw new UnsupportedOperationException();
+//            }
+//        }
 
     }
 
