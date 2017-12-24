@@ -47,6 +47,10 @@ public class CompetitionServiceImpl implements CompetitionService {
         competitionDao.delete(entity);
     }
 
+    public void update(Competition entity){
+        competitionDao.update(entity);
+    }
+
     @Override
     public void addSportMen(Competition competition, User sportsMan) {
         if(!competition.getSportsMen().contains(sportsMan)){
@@ -70,5 +74,6 @@ public class CompetitionServiceImpl implements CompetitionService {
         }
         return emptyCompetitions;
     }
+
 }
 

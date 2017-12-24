@@ -35,6 +35,7 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     private User sportman;
     private CreateSportsMenDTO createSportsMenDTO;
     private Long sportsManId;
+    private String password;
 
     @BeforeMethod
     public void setUp() {
@@ -45,7 +46,8 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         sportman.setLastname("Vader");
         sportman.setGendre(Gendre.MAN);
         sportman.setRole(Role.SPORTSMEN);
-        sportman.setPasswordHash("666");
+        password = "666";
+        sportman.setPasswordHash(password);
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.MARCH, 1, 1, 1, 1);
         Date date = cal.getTime();
@@ -96,7 +98,6 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         SportsMenDTO dto = sportsMenFacade.load(sportsManId);
         String newPassword = sportsMenFacade.resetPassword(new ResetPasswordDTO(sportsManId, createSportsMenDTO.getEmail()));
         SportsMenDTO load = sportsMenFacade.load(sportsManId);
-
         Assertions.assertThat(dto.getPasswordHash()).isNotEqualTo(load.getPasswordHash());
         sportman.setPasswordHash(load.getPasswordHash());
         Assertions.assertThat(sportsmenService.authenticate(sportman, newPassword)).isTrue();
@@ -137,6 +138,6 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
     public void testGetAll() {
         List<SportsMenDTO> all = sportsMenFacade.getAll();
         SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
-        Assertions.assertThat(all).hasSize(1).contains(sportsMenDTO);
+        Assertions.assertThat(all).containsOnly(sportsMenDTO);
     }
 }

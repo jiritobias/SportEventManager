@@ -28,6 +28,18 @@ pa165semApp.config(['$routeProvider',
         }).when('/default', {
             templateUrl: 'partials/default.html',
             controller: ''
+        }).when('/competition', {
+            templateUrl: 'partials/competition.html',
+            controller: 'CompetitionCtrl'
+        }).when('/admin/competitions', {
+            templateUrl: 'partials/admin_competitions.html',
+            controller: 'AdminCompetitionsCtrl'
+        }).when('/admin/newcompetition',{
+            templateUrl: 'partials/admin_newcompetition.html',
+            controller: 'CreateCompetitionCtrl'
+        }).when('/admin/registertocompetition', {
+            templateUrl: 'partials/admin_registertocompetition.html',
+            controller: 'RegisterToCompetitionCtrl'
         }).when('/users', {
             templateUrl: 'partials/user_list.html',
             controller: 'UsersCtrl'
@@ -37,7 +49,7 @@ pa165semApp.config(['$routeProvider',
         }).when('/login', {
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
-        }).otherwise({redirectTo: '/default'});
+          }).otherwise({redirectTo: '/default'});
 
     }]);
 
@@ -63,6 +75,168 @@ pa165semApp.run(function ($rootScope) {
 /*
  *
  */
+semControllers.controller('CompetitionCtrl', function ($scope, $http) {
+    loadCompetitions($http, $scope)
+});
+
+semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ) {
+    loadCompetitions($http, $scope);
+
+    $scope.update = function (competition) {
+        console.log('updating  competition');
+        $rootScope.competition = {
+            'sport' : competition.dtoSport.name,
+            'id' : competition.id,
+        };
+        $location.path("/admin/updatecompetition");
+    };
+
+    $scope.loadCompetition = function (competition) {
+        console.log("setting competition");
+        console.log(competitionServ);
+        competitionServ.competition = competition;
+    };
+
+    $scope.delete = function (competition) {
+        console.log('deleting competition');
+        console.log(competition);
+
+        $http({
+            method: 'POST',
+            url: apiV1('competitions/' + competition.id + '/delete'),
+            data: {
+                'id': Number(competition.id)
+            }
+        }).then(function success(response) {
+            console.log('competition deleted');
+           // $location.path("/admin/competitions");
+            $rootScope.successAlert = 'Competition with id ' + response.data.id + ' was deleted';
+            loadCompetitions($http, $scope, $rootScope);
+        }, function error(response) {
+            //display error
+            console.log("error when deleting competition");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot delete competition ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    }
+
+
+});
+
+semControllers.service('competitionServ', function () {
+    this.currentCompetiton = {};
+
+    return this.currentCompetiton;
+});
+
+semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, $rootScope, $location, competitionServ) {
+    console.log('register to competition');
+
+
+    loadUsers($http, $scope);
+
+
+    $scope.registertocomp = function (users) {
+        var competition = competitionServ.competition;
+
+        users.forEach(function (u, index) {
+            if(competition.dtoSportsmen.indexOf(u) === -1){
+                delete u['_links'];
+                u.passwordHash = '666';
+                competition.dtoSportsmen.push(u);
+            }
+        });
+
+        competition.sportsmen = competition.dtoSportsmen;
+        competition.sport = competition.dtoSport;
+        //
+        delete competition.dtoSport;
+        delete competition.dtoSportsmen;
+        delete competition.dtoId;
+        delete competition['_links'];
+
+        console.log(competition);
+
+        $http({
+            method: 'POST',
+            url: apiV1('competitions/update'),
+            data: competition
+        }).then(function success(response) {
+            console.log('users added to competition');
+            // display confirmation alert
+            $rootScope.successAlert = 'Selected users was added to competition.';
+// change view to list of sports
+            $location.path("/admin/competitions");
+        }, function error(response) {
+            // display error
+            console.log("error when updating competition");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    };
+});
+
+semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+    console.log('creating new competition');
+
+    loadSports($http, $scope);
+
+    $scope.competition = {
+        'sport': ''
+    };
+
+    $scope.create = function (competition) {
+        // delete competition.sport['_links'];
+
+        var result = {};
+        var sport = JSON.parse(competition.sport);
+        result.sport = {};
+        result.sport.id = sport.id;
+        result.sport.name = sport.name;
+
+        $http({
+            method: 'POST',
+            url: apiV1('competitions/create'),
+            data: result
+        }).then(function success(response) {
+            console.log('created competition');
+            var createdCompetition = response.data;
+
+            // display confirmation alert
+$rootScope.successAlert = 'A new competition in "' + createdCompetition.dtoSport.name + '" was created';
+// change view to list of sports
+$location.path("/admin/competitions");
+}, function error(response) {
+    // display error
+console.log("error when creating competition");
+console.log(response);
+switch (response.data.code) {
+    case 'InvalidRequestException':
+        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+        break;
+    default:
+        $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
+        break;
+}
+});
+};
+
+});
+
 semControllers.controller('SportCtrl', function ($scope, $http) {
     loadSports($http, $scope)
 });
@@ -78,18 +252,18 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
         'name': ''
     };
 
-    $scope.create = function (newsport) {
+    $scope.create = function (competition_sport) {
         $http({
             method: 'POST',
-            url: apiV1('sports/create'),
-            data: newsport
+            url: apiV1('competitions/create'),
+            data: competition_sport
         }).then(function success(response) {
             console.log('created sport');
-            var createdSport = response.data;
+            var createdCompetition = response.data;
             //display confirmation alert
-            $rootScope.successAlert = 'A new sport "' + createdSport.name + '" was created';
-            //change view to list of sports
-            $location.path("/admin/sports");
+            $rootScope.successAlert = 'A new competition "' + createdCompetition.sport.name + '" was created';
+            //change view to list of competitions
+            $location.path("/admin/competitions");
         }, function error(response) {
             //display error
             console.log("error when creating sport");
@@ -104,6 +278,7 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
             }
         });
     };
+
 
 });
 
@@ -384,12 +559,23 @@ function loadUsers($http, $scope, $rootScope) {
 }
 
 function loadSports($http, $scope) {
-    console.log('calling' + apiV1('sports'));
+    console.log('calling ' + apiV1('sports'));
 
     $http.get(apiV1('sports')).then(function (response) {
         var sports = response.data['_embedded']['sports'];
         console.log('AJAX loaded ' + ' sports');
         $scope.sports = sports;
+        console.log(sports);
+    });
+}
+
+function loadCompetitions($http, $scope){
+    console.log('calling ' + apiV1('competitions'));
+
+    $http.get(apiV1('competitions')).then(function (response) {
+        var competitions = response.data['_embedded']['competitions'];
+        console.log(competitions);
+        $scope.competitions = competitions;
     });
 }
 
