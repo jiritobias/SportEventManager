@@ -79,7 +79,11 @@ semControllers.controller('CompetitionCtrl', function ($scope, $http) {
     loadCompetitions($http, $scope)
 });
 
-semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ) {
+semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ, $cookies) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     loadCompetitions($http, $scope);
 
     $scope.update = function (competition) {
@@ -137,6 +141,7 @@ semControllers.service('competitionServ', function () {
 });
 
 semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, $rootScope, $location, competitionServ) {
+
     console.log('register to competition');
 
 
