@@ -110,7 +110,7 @@ public class DefaultDataLoadingFacadeImpl implements DefaultDataLoadingFacade {
         user.setAddress("Fake");
         user.setRole(Role.USER);
 
-        sportsmenService.registerUser(user, "userHeslo", "user@gmail.com");
+        userService.registerUser(user, "userHeslo", "user@gmail.com");
         return user;
     }
 
