@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dto.ChangePasswordDTO;
 import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
 import cz.fi.muni.pa165.dto.ResetPasswordDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
 import cz.muni.fi.pa165.restapi.exceptions.InvalidParameterException;
@@ -70,7 +71,7 @@ public class UserRestController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<UserResource>> getUsers(
-            @RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role,
+            @RequestParam(value = "role", required = false, defaultValue = "ALL") String role,
             @RequestParam(value = "limit", required = false, defaultValue = "0") long limit,
             @RequestParam(value = "birthdateBegin", required = false, defaultValue = "0000-00-00") String birthdateBegin,
             @RequestParam(value = "birthdateEnd", required = false, defaultValue = "9999-99-99") String birthdateEnd,
@@ -83,8 +84,14 @@ public class UserRestController {
 
         switch (role.toUpperCase()) {
             case "USER":
+                userResources = userResourceAssembler.toResources(sportsMenFacade.getAll(Role.USER));
+                break;
             case "ADMINISTRATOR":
+                userResources = userResourceAssembler.toResources(sportsMenFacade.getAll(Role.ADMINISTRATOR));
+                break;
             case "SPORTSMEN":
+                userResources = userResourceAssembler.toResources(sportsMenFacade.getAll(Role.SPORTSMEN));
+                break;
             case "ALL":
                 userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
                 break;
