@@ -39,7 +39,7 @@ public class SportsMenDTO {
     @NonNull
     private Role role;
     private Gendre gendre;
-    private List<CompetitionDTO> competitionDTOS;
+    private List<CompetitionDTO> competitions;
 
     @Override
     public int hashCode() {
@@ -54,7 +54,7 @@ public class SportsMenDTO {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
-        result = 31 * result + (competitionDTOS != null ? competitionDTOS.hashCode() : 0);
+        result = 31 * result + (competitions != null ? competitions.hashCode() : 0);
         return result;
     }
 
@@ -99,6 +99,6 @@ public class SportsMenDTO {
         if (gendre != that.gendre) {
             return false;
         }
-        return competitionDTOS != null ? competitionDTOS.equals(that.competitionDTOS) : that.competitionDTOS == null;
+        return competitions != null ? competitions.equals(that.competitions) : that.competitions == null;
     }
 }
