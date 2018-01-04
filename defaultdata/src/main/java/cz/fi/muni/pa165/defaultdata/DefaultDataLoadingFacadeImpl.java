@@ -18,7 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -63,9 +66,21 @@ public class DefaultDataLoadingFacadeImpl implements DefaultDataLoadingFacade {
 
         log.debug("crating users and sportsmen");
         User sportsMen = createSportsMan();
+        User sportsMen2 = createSportsMan("Jan", "Druhy", Gendre.MAN, createDate(1999, 2, 2), "111222333",
+                "Dlouha ulice", "jan@druhy.com", "druheHeslo", new HashSet<>(
+                        Arrays.asList(competitionService.findById(icehockeyCompetition),
+                                competitionService.findById(basketBallCompetition))));
+        User sportsMen3 = createSportsMan("Jana", "Treti", Gendre.WOMAN, createDate(1995, 2, 2), "111222555",
+                "Kratka ulice", "jana@treti.com", "tretiHeslo", new HashSet<>(
+                        Arrays.asList(competitionService.findById(icehockeyCompetition),
+                                competitionService.findById(volleybalCompetiton), competitionService.findById(tennisCompetition))));
+
         User admin = createAdmin();
         User user = createUser();
 
+        Competition competition = new Competition();
+        competition.setSport(sportService.findById(voleyball));
+        competition.setDate(createDate(2000, 10, 10));
 
         log.debug("registering sportsmen to competiton");
 
@@ -82,6 +97,22 @@ public class DefaultDataLoadingFacadeImpl implements DefaultDataLoadingFacade {
         user.setAddress("Fake");
         user.setRole(Role.SPORTSMEN);
         sportsmenService.registerUser(user, "sportsmenHeslo", "prvni@gmail.com");
+        return user;
+    }
+
+    private User createSportsMan(String firstname, String lastname, Gendre gendre, Date birthdate, String phone, String address, String email, String password, Set<Competition> competitions) {
+        User user = new User();
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setGendre(gendre);
+        user.setEmail(email);
+        user.setBirthdate(birthdate);
+        user.setPhone(phone);
+        user.setAddress(address);
+        for (Competition competition : competitions) {
+            user.addToCompetition(competition);
+        }
+        sportsmenService.registerUser(user, password, email);
         return user;
     }
 
