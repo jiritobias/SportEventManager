@@ -10,7 +10,6 @@ import lombok.NonNull;
 
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author jiritobias
@@ -39,7 +38,6 @@ public class SportsMenDTO {
     @NonNull
     private Role role;
     private Gendre gendre;
-    private List<CompetitionDTO> competitions;
 
     @Override
     public int hashCode() {
@@ -54,7 +52,6 @@ public class SportsMenDTO {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (gendre != null ? gendre.hashCode() : 0);
-        result = 31 * result + (competitions != null ? competitions.hashCode() : 0);
         return result;
     }
 
@@ -96,9 +93,7 @@ public class SportsMenDTO {
         if (role != that.role) {
             return false;
         }
-        if (gendre != that.gendre) {
-            return false;
-        }
-        return competitions != null ? competitions.equals(that.competitions) : that.competitions == null;
+        return gendre == that.gendre;
     }
+
 }
