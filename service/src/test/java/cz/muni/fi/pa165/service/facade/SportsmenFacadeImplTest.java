@@ -140,4 +140,17 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
         Assertions.assertThat(all).containsOnly(sportsMenDTO);
     }
+
+    @Test
+    public void testGetAllByRole() {
+        List<SportsMenDTO> all = sportsMenFacade.getAll(Role.SPORTSMEN);
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
+        Assertions.assertThat(all).containsOnly(sportsMenDTO);
+
+        all = sportsMenFacade.getAll(Role.USER);
+        Assertions.assertThat(all).isEmpty();
+
+        all = sportsMenFacade.getAll(Role.ADMINISTRATOR);
+        Assertions.assertThat(all).isEmpty();
+    }
 }

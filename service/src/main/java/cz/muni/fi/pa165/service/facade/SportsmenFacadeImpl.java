@@ -3,10 +3,12 @@ package cz.muni.fi.pa165.service.facade;
 import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.SportsmenService;
+import cz.muni.fi.pa165.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +70,10 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
         sportsmenService.changePassword(user, changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
     }
 
+    @Override
+    public List<SportsMenDTO> getAll(Role role) {
+        return beanMappingService.mapTo(sportsmenService.findAll(role), SportsMenDTO.class);
+    }
 
     @Override
     public void delete(SportsMenDTO dto) {

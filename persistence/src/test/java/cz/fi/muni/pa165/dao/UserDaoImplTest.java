@@ -97,6 +97,18 @@ public class UserDaoImplTest extends BaseDaoImplTest {
     }
 
     @Test
+    public void findAllByRole() {
+        Assertions.assertThat(userDao.findAll(Role.USER))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(user1,user2);
+
+        user2.setRole(Role.SPORTSMEN);
+        userDao.update(user2);
+        Assertions.assertThat(userDao.findAll(Role.SPORTSMEN)).containsOnly(user2);
+        Assertions.assertThat(userDao.findAll(Role.USER)).containsOnly(user1);
+    }
+
+    @Test
     public void findByGendre() {
         Assertions.assertThat(userDao.findByGendre(Gendre.MAN))
                 .usingFieldByFieldElementComparator()

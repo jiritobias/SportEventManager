@@ -56,8 +56,14 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
     @Override
     public List<User> findAll() {
+        return entityManager.createQuery("SELECT s FROM User s", User.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<User> findAll(Role role) {
         return entityManager.createQuery("SELECT s FROM User s where s.role = :role", User.class)
-                .setParameter("role", Role.USER)
+                .setParameter("role", role)
                 .getResultList();
     }
 }

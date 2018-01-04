@@ -104,6 +104,18 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
                 .containsOnly(testUser, anotherTestUser);
     }
 
+
+    @Test
+    public void testFindAllByRole(){
+        when(userDao.findAll(Role.USER)).thenReturn(Arrays.asList(testUser, anotherTestUser));
+        Assertions.assertThat(userService.findAll(Role.USER))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(testUser, anotherTestUser);
+
+        when(userDao.findAll(Role.SPORTSMEN)).thenReturn(Collections.emptyList());
+        Assertions.assertThat(userService.findAll(Role.SPORTSMEN)).isEmpty();
+    }
+
     @Test
     public void testDelete(){
         userService.delete(testUser);

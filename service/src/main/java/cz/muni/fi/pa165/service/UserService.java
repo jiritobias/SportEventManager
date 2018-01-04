@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.service;
 
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
+import cz.fi.muni.pa165.enums.Role;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -96,4 +97,12 @@ public interface UserService extends BaseService<User> {
      * @param user new aministrator
      */
     void makeUserAdmin(User user);
+
+    /**
+     * Finds all users with the role.
+     *
+     * @param role role
+     * @return collection of users
+     */
+    List<User> findAll(Role role);
 }
