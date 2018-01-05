@@ -242,13 +242,13 @@ public class UserRestController {
 
     /**
      * Change user's password.
-     * curl -X PUT -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1
+     * curl -X POST -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1/changePassword
      *
      * @param id                ID of the user
      * @param changePasswordDTO object with ID, old password and new password
      * @return http response entity with user resource
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/changePassword", method = RequestMethod.POST)
     public final HttpEntity<UserNewPasswordResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
         logger.debug("UserRestController changePassword()");
 
