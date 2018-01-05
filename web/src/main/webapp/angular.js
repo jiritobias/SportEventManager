@@ -257,18 +257,18 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
         'name': ''
     };
 
-    $scope.create = function (competition_sport) {
+    $scope.create = function (newsport) {
         $http({
             method: 'POST',
-            url: apiV1('competitions/create'),
-            data: competition_sport
+            url: apiV1('sports/create'),
+            data: newsport
         }).then(function success(response) {
             console.log('created sport');
-            var createdCompetition = response.data;
+            var createdSport = response.data;
             //display confirmation alert
-            $rootScope.successAlert = 'A new competition "' + createdCompetition.sport.name + '" was created';
-            //change view to list of competitions
-            $location.path("/admin/competitions");
+            $rootScope.successAlert = 'A new sport "' + createdSport.name + '" was created';
+            //change view to list of sports
+            $location.path("/admin/sports");
         }, function error(response) {
             //display error
             console.log("error when creating sport");
@@ -283,8 +283,6 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
             }
         });
     };
-
-
 });
 
 semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
