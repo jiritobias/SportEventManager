@@ -23,8 +23,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Petra Halová on 26.11.17.
@@ -187,6 +186,28 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
     public void testAuthenticate(){
         userService.registerUser(testUser, password, testUser.getEmail());
         Assertions.assertThat(userService.authenticate(testUser, password)).isTrue();
+    }
+
+    @Test
+    public void testUpdate() {
+        Assertions.assertThat(testUser.getAddress()).isEqualToIgnoringCase("Death Star 1");
+        Assertions.assertThat(testUser.getFirstname()).isEqualToIgnoringCase("Darth");
+
+        doAnswer(invocationOnMock -> {
+            testUser.setFirstname("Jmeno");
+            testUser.setAddress("Hvezda");
+            testUser.setRole(Role.SPORTSMEN);
+            testUser.setEmail("novy@email.com");
+            return null;
+        }).when(userDao).update(testUser);
+
+        userDao.update(testUser);
+
+        Assertions.assertThat(testUser.getAddress()).isEqualToIgnoringCase("Hvezda");
+        Assertions.assertThat(testUser.getFirstname()).isEqualToIgnoringCase("Jmeno");
+        Assertions.assertThat(testUser.getRole()).isEqualByComparingTo(Role.SPORTSMEN);
+        Assertions.assertThat(testUser.getEmail()).isEqualToIgnoringCase("novy@email.com");
+        verify(userDao).update(testUser);
     }
 }
 

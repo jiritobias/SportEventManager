@@ -49,4 +49,9 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
      * @return collection of users with role
      */
     List<SportsMenDTO> getAll(Role role);
+
+    /**
+     * Updates user.
+     */
+    void update(SportsMenDTO sportsMenDTO);
 }

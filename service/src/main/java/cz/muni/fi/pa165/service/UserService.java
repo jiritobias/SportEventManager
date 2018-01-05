@@ -105,4 +105,11 @@ public interface UserService extends BaseService<User> {
      * @return collection of users
      */
     List<User> findAll(Role role);
+
+    /**
+     * Updates user.
+     *
+     * @param user user
+     */
+    void update(User user);
 }

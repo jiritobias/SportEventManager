@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
     public void makeUserAdmin(User user) {
         assert user != null;
         if (findById(user.getId()) != null) {

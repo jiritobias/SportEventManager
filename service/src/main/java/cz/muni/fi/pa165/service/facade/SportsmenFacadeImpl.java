@@ -37,6 +37,11 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
     private BeanMappingService beanMappingService;
 
     @Override
+    public void update(SportsMenDTO sportsMenDTO) {
+        sportsmenService.update(beanMappingService.mapTo(sportsMenDTO, User.class));
+    }
+
+    @Override
     public Long createSportsMen(CreateSportsMenDTO createSportsMenDTO) {
         User sportsman = beanMappingService.mapTo(createSportsMenDTO, User.class);
         sportsmenService.registerUser(sportsman, createSportsMenDTO.getPassword(), createSportsMenDTO.getEmail());

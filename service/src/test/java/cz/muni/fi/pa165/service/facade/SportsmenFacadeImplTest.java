@@ -153,4 +153,26 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         all = sportsMenFacade.getAll(Role.ADMINISTRATOR);
         Assertions.assertThat(all).isEmpty();
     }
+
+    @Test
+    public void testUpdate() {
+        SportsMenDTO sportsMenDTO = sportsMenFacade.load(sportsManId);
+
+        Assertions.assertThat(sportsMenDTO.getFirstname()).isEqualToIgnoringCase("Darth");
+        Assertions.assertThat(sportsMenDTO.getLastname()).isEqualToIgnoringCase("Vader");
+        Assertions.assertThat(sportsMenDTO.getRole()).isEqualByComparingTo(Role.SPORTSMEN);
+        Assertions.assertThat(sportsMenDTO.getGendre()).isEqualByComparingTo(Gendre.MAN);
+
+        sportsMenDTO.setFirstname("Test");
+        sportsMenDTO.setLastname("Name");
+        sportsMenDTO.setRole(Role.USER);
+        sportsMenDTO.setGendre(Gendre.WOMAN);
+
+        sportsMenFacade.update(sportsMenDTO);
+
+        Assertions.assertThat(sportsMenDTO.getFirstname()).isEqualToIgnoringCase("Test");
+        Assertions.assertThat(sportsMenDTO.getLastname()).isEqualToIgnoringCase("Name");
+        Assertions.assertThat(sportsMenDTO.getRole()).isEqualByComparingTo(Role.USER);
+        Assertions.assertThat(sportsMenDTO.getGendre()).isEqualByComparingTo(Gendre.WOMAN);
+    }
 }
