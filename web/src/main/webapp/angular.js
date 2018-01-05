@@ -570,6 +570,7 @@ function loadUsers($http, $scope, $rootScope) {
 function loadSports($http, $scope) {
     console.log('calling ' + apiV1('sports'));
 
+    $scope.sports = [];
     $http.get(apiV1('sports')).then(function (response) {
         var sports = response.data['_embedded']['sports'];
         console.log('AJAX loaded ' + ' sports');
@@ -581,6 +582,7 @@ function loadSports($http, $scope) {
 function loadCompetitions($http, $scope){
     console.log('calling ' + apiV1('competitions'));
 
+    $scope.competitions = [];
     $http.get(apiV1('competitions')).then(function (response) {
         var competitions = response.data['_embedded']['competitions'];
         console.log(competitions);
