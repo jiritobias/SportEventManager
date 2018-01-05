@@ -27,7 +27,7 @@ pa165semApp.config(['$routeProvider',
             controller: 'AdminNewUserCtrl'
         }).when('/default', {
             templateUrl: 'partials/default.html',
-            controller: ''
+            controller: 'HomeCtrl'
         }).when('/competition', {
             templateUrl: 'partials/competition.html',
             controller: 'CompetitionCtrl'
@@ -63,7 +63,7 @@ pa165semApp.run(function ($rootScope) {
     $rootScope.hideErrorAlert = function () {
         $rootScope.errorAlert = undefined;
     };
-    $rootScope.hideAll = function () {
+    $rootScope.hideAllAlerts = function () {
         $rootScope.hideErrorAlert();
         $rootScope.hideWarningAlert();
         $rootScope.hideSuccessAlert();
@@ -71,15 +71,20 @@ pa165semApp.run(function ($rootScope) {
     };
 });
 
+semControllers.controller('HomeCtrl', function ($scope, $http) {
+    $scope.hideAllAlerts();
+});
 
 /*
  *
  */
 semControllers.controller('CompetitionCtrl', function ($scope, $http) {
+    $scope.hideAllAlerts();
     loadCompetitions($http, $scope)
 });
 
 semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -144,7 +149,7 @@ semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, 
 
     console.log('register to competition');
 
-
+    $scope.hideAllAlerts();
     loadUsers($http, $scope);
 
 
@@ -198,6 +203,7 @@ semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, 
 semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     console.log('creating new competition');
 
+    $scope.hideAllAlerts();
     loadSports($http, $scope);
 
     $scope.competition = {
@@ -243,10 +249,12 @@ switch (response.data.code) {
 });
 
 semControllers.controller('SportCtrl', function ($scope, $http) {
+    $scope.hideAllAlerts();
     loadSports($http, $scope)
 });
 
 semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -286,6 +294,7 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
 });
 
 semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -323,6 +332,7 @@ semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams
 });
 
 semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -375,7 +385,7 @@ function logoutUser($cookies) {
 // }
 
 semControllers.controller('LoginCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
-
+    $scope.hideAllAlerts();
     $scope.lg = {
         'email': '',
         'password': ''
@@ -405,7 +415,7 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
                 setLoggedUser(response, $cookies);
                 loggedUser = response.data;
             }
-            $rootScope.hideAll();
+            $rootScope.hideAllAlerts();
             $rootScope.successAlert = 'Login success';
             if (isAdmin($cookies)) {
                 $location.path('/sport')
@@ -422,6 +432,7 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
 
 
 semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -475,6 +486,7 @@ function checkAdminRights($location, $rootScope, $cookies) {
 }
 
 semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -527,10 +539,12 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
 });
 
 semControllers.controller('UsersCtrl', function ($scope, $http, $rootScope) {
+    $scope.hideAllAlerts();
     loadUsers($http, $scope, $rootScope);
 });
 
 semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $http) {
+    $scope.hideAllAlerts();
     var id = $routeParams.userId;
     var uri = apiV1('users/' + id);
     console.log('calling ' + uri);
