@@ -548,7 +548,11 @@ function loadUsers($http, $scope, $rootScope) {
     $scope.sortReverse = false;
     $scope.searchUser = '';
 
-    var uri = apiV1('users');
+    if (!isAdmin()) {
+        var uri = apiV1('users?role=SPORTSMEN')
+    } else {
+        var uri = apiV1('users');
+    }
     console.log('calling ' + uri);
     $scope.users = [];
     $http.get(uri).then(function (response) {
