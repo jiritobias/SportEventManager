@@ -18,4 +18,11 @@ public interface SportService extends BaseService<Sport> {
      * @return found Sport object
      */
     Sport findByName(String name);
+
+    /**
+     * Update sport Entity.
+     *
+     * @param sport sport
+     */
+    void update(Sport sport);
 }

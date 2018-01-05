@@ -48,4 +48,12 @@ public class SportFacadeImpl implements SportFacade {
         sportService.create(sport);
         return sport.getId();
     }
+
+    @Override
+    public void update(SportDTO sportDTO) {
+        assert sportDTO != null;
+        Sport sport = sportService.findById(sportDTO.getId());
+        sport.setName(sportDTO.getName());
+        sportService.update(sport);
+    }
 }
