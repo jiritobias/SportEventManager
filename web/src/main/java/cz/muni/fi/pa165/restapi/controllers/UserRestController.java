@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dto.ChangePasswordDTO;
 import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
 import cz.fi.muni.pa165.dto.ResetPasswordDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
@@ -33,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -287,5 +290,64 @@ public class UserRestController {
 
         UserNewPasswordResource resource = userNewPasswordResourceAssembler.toResource(changePasswordDTO);
         return new ResponseEntity<UserNewPasswordResource>(resource, HttpStatus.OK);
+    }
+
+    /**
+     * Update user.
+     *
+     * curl -i -X PUT -H "Content-Type: application/json" --data '{"email":"new@email.com","id":1, "firstname":"newFirstname", "lastname":"newLastname", "gendre":"MAN", "birthdate":"2020-01-30", "phone":"111222333", "address":"NEWaddress", "role":"USER", "passwordHash":""}' http://localhost:8080/pa165/rest/users/1
+     *
+     * @param id
+     * @param sportsMenDTO
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public final HttpEntity<UserResource> updateUser(@PathVariable("id") long id, @RequestBody @Valid SportsMenDTO sportsMenDTO) {
+        logger.debug("UserRestController updateUser({})", id);
+
+        assert id == sportsMenDTO.getId();
+
+        SportsMenDTO menDTO;
+        try {
+            menDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("user " + id + " not found");
+        }
+
+        if (!(sportsMenDTO.getFirstname() == null || sportsMenDTO.getFirstname().isEmpty())) {
+            menDTO.setFirstname(sportsMenDTO.getFirstname());
+        }
+        if (!(sportsMenDTO.getLastname() == null || sportsMenDTO.getLastname().isEmpty())) {
+            menDTO.setLastname(sportsMenDTO.getLastname());
+        }
+        if (!(sportsMenDTO.getPhone() == null || sportsMenDTO.getPhone().isEmpty())) {
+            menDTO.setPhone(sportsMenDTO.getPhone());
+        }
+        String email = sportsMenDTO.getEmail();
+        if (!(email == null || email.isEmpty())) {
+            Pattern pattern = Pattern.compile(User.EMAIL_REGEX);
+            Matcher matcher = pattern.matcher(email);
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("Wrong email format " + email);
+            }
+            menDTO.setEmail(email);
+        }
+        if (!(sportsMenDTO.getAddress() == null || sportsMenDTO.getAddress().isEmpty())) {
+            menDTO.setAddress(sportsMenDTO.getAddress());
+        }
+        if (sportsMenDTO.getBirthdate() != null) {
+            menDTO.setBirthdate(sportsMenDTO.getBirthdate());
+        }
+        if (sportsMenDTO.getRole() != null) {
+            menDTO.setRole(sportsMenDTO.getRole());
+        }
+        if (sportsMenDTO.getGendre() != null) {
+            menDTO.setGendre(sportsMenDTO.getGendre());
+        }
+
+        sportsMenFacade.update(menDTO);
+
+        UserResource resource = userResourceAssembler.toResource(menDTO);
+        return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
     }
 }
