@@ -14,4 +14,11 @@ public interface SportFacade extends BaseFacade<SportDTO> {
      * @return ID of the object
      */
     Long create(SportDTO sportDTO);
+
+    /**
+     * Update sport
+     *
+     * @param sportDTO sport DTO
+     */
+    void update(SportDTO sportDTO);
 }

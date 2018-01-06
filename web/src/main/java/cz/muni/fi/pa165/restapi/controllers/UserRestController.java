@@ -4,6 +4,8 @@ import cz.fi.muni.pa165.dto.ChangePasswordDTO;
 import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
 import cz.fi.muni.pa165.dto.ResetPasswordDTO;
 import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
 import cz.muni.fi.pa165.restapi.exceptions.InvalidParameterException;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -70,7 +74,7 @@ public class UserRestController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<UserResource>> getUsers(
-            @RequestParam(value = "role", required = false, defaultValue = "SPORTSMEN") String role,
+            @RequestParam(value = "role", required = false, defaultValue = "ALL") String role,
             @RequestParam(value = "limit", required = false, defaultValue = "0") long limit,
             @RequestParam(value = "birthdateBegin", required = false, defaultValue = "0000-00-00") String birthdateBegin,
             @RequestParam(value = "birthdateEnd", required = false, defaultValue = "9999-99-99") String birthdateEnd,
@@ -83,8 +87,14 @@ public class UserRestController {
 
         switch (role.toUpperCase()) {
             case "USER":
+                userResources = userResourceAssembler.toResources(sportsMenFacade.getAll(Role.USER));
+                break;
             case "ADMINISTRATOR":
+                userResources = userResourceAssembler.toResources(sportsMenFacade.getAll(Role.ADMINISTRATOR));
+                break;
             case "SPORTSMEN":
+                userResources = userResourceAssembler.toResources(sportsMenFacade.getAll(Role.SPORTSMEN));
+                break;
             case "ALL":
                 userResources = userResourceAssembler.toResources(sportsMenFacade.getAll());
                 break;
@@ -223,8 +233,10 @@ public class UserRestController {
      */
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public final HttpEntity<UserResource> deleteUser(@PathVariable("id") long id) {
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
-        if (sportsMenDTO == null) {
+        SportsMenDTO sportsMenDTO;
+        try {
+            sportsMenDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
 
@@ -235,19 +247,26 @@ public class UserRestController {
 
     /**
      * Change user's password.
-     * curl -X PUT -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1
+     * curl -X POST -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1/changePassword
      *
      * @param id                ID of the user
      * @param changePasswordDTO object with ID, old password and new password
      * @return http response entity with user resource
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public final HttpEntity<UserNewPasswordResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
+    @RequestMapping(value = "/{id}/changePassword", method = RequestMethod.POST)
+    public final HttpEntity<UserNewPasswordResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO, BindingResult bindingResult) {
         logger.debug("UserRestController changePassword()");
 
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+
         assert id == changePasswordDTO.getId();
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
-        if (sportsMenDTO == null) {
+        SportsMenDTO sportsMenDTO;
+        try {
+            sportsMenDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
 
@@ -266,11 +285,18 @@ public class UserRestController {
      * @return response with ID and the new password
      */
     @RequestMapping(value = "/{id}/resetPassword", method = RequestMethod.POST)
-    public final HttpEntity<UserNewPasswordResource> resetPassword(@PathVariable("id") long id, @RequestBody @Valid ResetPasswordDTO resetPasswordDTO) {
+    public final HttpEntity<UserNewPasswordResource> resetPassword(@PathVariable("id") long id, @RequestBody @Valid ResetPasswordDTO resetPasswordDTO, BindingResult bindingResult) {
         logger.debug("UserRestController resetPassword({})", id);
 
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
-        if (sportsMenDTO == null) {
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+
+        SportsMenDTO sportsMenDTO;
+        try {
+            sportsMenDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
         assert Objects.equals(sportsMenDTO.getEmail(), resetPasswordDTO.getEmail());
@@ -280,5 +306,69 @@ public class UserRestController {
 
         UserNewPasswordResource resource = userNewPasswordResourceAssembler.toResource(changePasswordDTO);
         return new ResponseEntity<UserNewPasswordResource>(resource, HttpStatus.OK);
+    }
+
+    /**
+     * Update user.
+     *
+     * curl -i -X PUT -H "Content-Type: application/json" --data '{"email":"new@email.com","id":1, "firstname":"newFirstname", "lastname":"newLastname", "gendre":"MAN", "birthdate":"2020-01-30", "phone":"111222333", "address":"NEWaddress", "role":"USER", "passwordHash":""}' http://localhost:8080/pa165/rest/users/1
+     *
+     * @param id
+     * @param sportsMenDTO
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public final HttpEntity<UserResource> updateUser(@PathVariable("id") long id, @RequestBody @Valid SportsMenDTO sportsMenDTO, BindingResult bindingResult) {
+        logger.debug("UserRestController updateUser({})", id);
+
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+
+        assert id == sportsMenDTO.getId();
+
+        SportsMenDTO menDTO;
+        try {
+            menDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("user " + id + " not found");
+        }
+
+        if (!(sportsMenDTO.getFirstname() == null || sportsMenDTO.getFirstname().isEmpty())) {
+            menDTO.setFirstname(sportsMenDTO.getFirstname());
+        }
+        if (!(sportsMenDTO.getLastname() == null || sportsMenDTO.getLastname().isEmpty())) {
+            menDTO.setLastname(sportsMenDTO.getLastname());
+        }
+        if (!(sportsMenDTO.getPhone() == null || sportsMenDTO.getPhone().isEmpty())) {
+            menDTO.setPhone(sportsMenDTO.getPhone());
+        }
+        String email = sportsMenDTO.getEmail();
+        if (!(email == null || email.isEmpty())) {
+            Pattern pattern = Pattern.compile(User.EMAIL_REGEX);
+            Matcher matcher = pattern.matcher(email);
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("Wrong email format " + email);
+            }
+            menDTO.setEmail(email);
+        }
+        if (!(sportsMenDTO.getAddress() == null || sportsMenDTO.getAddress().isEmpty())) {
+            menDTO.setAddress(sportsMenDTO.getAddress());
+        }
+        if (sportsMenDTO.getBirthdate() != null) {
+            menDTO.setBirthdate(sportsMenDTO.getBirthdate());
+        }
+        if (sportsMenDTO.getRole() != null) {
+            menDTO.setRole(sportsMenDTO.getRole());
+        }
+        if (sportsMenDTO.getGendre() != null) {
+            menDTO.setGendre(sportsMenDTO.getGendre());
+        }
+
+        sportsMenFacade.update(menDTO);
+
+        UserResource resource = userResourceAssembler.toResource(menDTO);
+        return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
     }
 }

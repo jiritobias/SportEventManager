@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.*;
+import cz.fi.muni.pa165.enums.Role;
 
 import java.util.Date;
 import java.util.List;
@@ -40,4 +41,17 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
      * Change user password.
      */
     void changePassword(ChangePasswordDTO changePasswordDTO);
+
+    /**
+     * Gets all users by role.
+     *
+     * @param role role
+     * @return collection of users with role
+     */
+    List<SportsMenDTO> getAll(Role role);
+
+    /**
+     * Updates user.
+     */
+    void update(SportsMenDTO sportsMenDTO);
 }

@@ -19,6 +19,11 @@ public class SportServiceImpl implements SportService {
     private SportDao sportDao;
 
     @Override
+    public void update(Sport sport) {
+        sportDao.update(sport);
+    }
+
+    @Override
     public void create(Sport entity) {
         sportDao.create(entity);
     }

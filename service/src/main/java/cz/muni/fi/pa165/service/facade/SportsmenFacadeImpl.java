@@ -3,11 +3,14 @@ package cz.muni.fi.pa165.service.facade;
 import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
+import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.CompetitionService;
 import cz.muni.fi.pa165.service.SportsmenService;
+import cz.muni.fi.pa165.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
@@ -23,11 +26,20 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
     @Autowired
     private SportsmenService sportsmenService;
 
+    @Qualifier("userServiceImpl")
+    @Autowired
+    private UserService userService;
+
     @Autowired
     private CompetitionService competitionService;
 
     @Autowired
     private BeanMappingService beanMappingService;
+
+    @Override
+    public void update(SportsMenDTO sportsMenDTO) {
+        sportsmenService.update(beanMappingService.mapTo(sportsMenDTO, User.class));
+    }
 
     @Override
     public Long createSportsMen(CreateSportsMenDTO createSportsMenDTO) {
@@ -68,6 +80,10 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
         sportsmenService.changePassword(user, changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
     }
 
+    @Override
+    public List<SportsMenDTO> getAll(Role role) {
+        return beanMappingService.mapTo(userService.findAll(role), SportsMenDTO.class);
+    }
 
     @Override
     public void delete(SportsMenDTO dto) {
@@ -83,6 +99,6 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
 
     @Override
     public List<SportsMenDTO> getAll() {
-        return beanMappingService.mapTo(sportsmenService.findAll(), SportsMenDTO.class);
+        return beanMappingService.mapTo(userService.findAll(), SportsMenDTO.class);
     }
 }

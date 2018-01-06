@@ -23,8 +23,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Petra Halová on 26.11.17.
@@ -104,6 +103,18 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
                 .containsOnly(testUser, anotherTestUser);
     }
 
+
+    @Test
+    public void testFindAllByRole(){
+        when(userDao.findAll(Role.USER)).thenReturn(Arrays.asList(testUser, anotherTestUser));
+        Assertions.assertThat(userService.findAll(Role.USER))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(testUser, anotherTestUser);
+
+        when(userDao.findAll(Role.SPORTSMEN)).thenReturn(Collections.emptyList());
+        Assertions.assertThat(userService.findAll(Role.SPORTSMEN)).isEmpty();
+    }
+
     @Test
     public void testDelete(){
         userService.delete(testUser);
@@ -175,6 +186,28 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
     public void testAuthenticate(){
         userService.registerUser(testUser, password, testUser.getEmail());
         Assertions.assertThat(userService.authenticate(testUser, password)).isTrue();
+    }
+
+    @Test
+    public void testUpdate() {
+        Assertions.assertThat(testUser.getAddress()).isEqualToIgnoringCase("Death Star 1");
+        Assertions.assertThat(testUser.getFirstname()).isEqualToIgnoringCase("Darth");
+
+        doAnswer(invocationOnMock -> {
+            testUser.setFirstname("Jmeno");
+            testUser.setAddress("Hvezda");
+            testUser.setRole(Role.SPORTSMEN);
+            testUser.setEmail("novy@email.com");
+            return null;
+        }).when(userDao).update(testUser);
+
+        userDao.update(testUser);
+
+        Assertions.assertThat(testUser.getAddress()).isEqualToIgnoringCase("Hvezda");
+        Assertions.assertThat(testUser.getFirstname()).isEqualToIgnoringCase("Jmeno");
+        Assertions.assertThat(testUser.getRole()).isEqualByComparingTo(Role.SPORTSMEN);
+        Assertions.assertThat(testUser.getEmail()).isEqualToIgnoringCase("novy@email.com");
+        verify(userDao).update(testUser);
     }
 }
 

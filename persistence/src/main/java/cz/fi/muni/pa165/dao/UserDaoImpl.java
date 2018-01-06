@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.Competition;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author jiritobias
@@ -56,8 +58,26 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("SELECT s FROM User s where s.role = :role", User.class)
-                .setParameter("role", Role.USER)
+        return entityManager.createQuery("SELECT s FROM User s", User.class)
                 .getResultList();
+    }
+
+    @Override
+    public List<User> findAll(Role role) {
+        return entityManager.createQuery("SELECT s FROM User s where s.role = :role", User.class)
+                .setParameter("role", role)
+                .getResultList();
+    }
+
+    @Override
+    public void delete(User user) {
+        Set<Competition> competitions = user.getCompetitions();
+        for (Competition competition : competitions) {
+            competition.removeSportman(user);
+            if (entityManager.contains(competition)) {
+                entityManager.merge(competition);
+            }
+        }
+        super.delete(user);
     }
 }

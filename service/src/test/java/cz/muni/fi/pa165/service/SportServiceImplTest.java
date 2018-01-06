@@ -87,4 +87,20 @@ public class SportServiceImplTest extends AbstractTestNGSpringContextTests {
 
         sportService.delete(sport); // restore the state
     }
+
+    @Test
+    public void testUpdate() {
+        Sport sport = new Sport();
+        sport.setName("Volleyball");
+
+        sportService.create(sport);
+        sport.setName("New Tennis");
+        sportService.update(sport);
+
+        Sport updatedSport = sportService.findByName("New Tennis");
+
+        Assertions.assertThat(updatedSport).isEqualTo(sport);
+
+        sportService.delete(sport);
+    }
 }

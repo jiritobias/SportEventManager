@@ -87,16 +87,14 @@ public class SportRestController {
             log.error("failed validation {}", bindingResult.toString());
             throw new InvalidRequestException("Failed validation");
         }
-        Long id;
+
         try {
-            SportDTO load = sportFacade.load(sportDTO.getId());
-            sportFacade.delete(load);
-            id = sportFacade.create(new SportDTO(null, sportDTO.getName())); // TODO Update
+            sportFacade.update(sportDTO);
         } catch (DataAccessException e) {
             throw new CannotDeleteResourceException("Cannot update or delete resource");
         }
 
-        SportResource resource = sportResourceAssembler.toResource(sportFacade.load(id));
+        SportResource resource = sportResourceAssembler.toResource(sportDTO);
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 

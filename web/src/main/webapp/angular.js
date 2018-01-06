@@ -27,7 +27,7 @@ pa165semApp.config(['$routeProvider',
             controller: 'AdminNewUserCtrl'
         }).when('/default', {
             templateUrl: 'partials/default.html',
-            controller: ''
+            controller: 'HomeCtrl'
         }).when('/competition', {
             templateUrl: 'partials/competition.html',
             controller: 'CompetitionCtrl'
@@ -63,7 +63,7 @@ pa165semApp.run(function ($rootScope) {
     $rootScope.hideErrorAlert = function () {
         $rootScope.errorAlert = undefined;
     };
-    $rootScope.hideAll = function () {
+    $rootScope.hideAllAlerts = function () {
         $rootScope.hideErrorAlert();
         $rootScope.hideWarningAlert();
         $rootScope.hideSuccessAlert();
@@ -71,15 +71,20 @@ pa165semApp.run(function ($rootScope) {
     };
 });
 
+semControllers.controller('HomeCtrl', function ($scope, $http) {
+    $scope.hideAllAlerts();
+});
 
 /*
  *
  */
 semControllers.controller('CompetitionCtrl', function ($scope, $http) {
+    $scope.hideAllAlerts();
     loadCompetitions($http, $scope)
 });
 
 semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -144,7 +149,7 @@ semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, 
 
     console.log('register to competition');
 
-
+    $scope.hideAllAlerts();
     loadUsers($http, $scope);
 
 
@@ -198,6 +203,7 @@ semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, 
 semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     console.log('creating new competition');
 
+    $scope.hideAllAlerts();
     loadSports($http, $scope);
 
     $scope.competition = {
@@ -243,10 +249,12 @@ switch (response.data.code) {
 });
 
 semControllers.controller('SportCtrl', function ($scope, $http) {
+    $scope.hideAllAlerts();
     loadSports($http, $scope)
 });
 
 semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -257,18 +265,18 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
         'name': ''
     };
 
-    $scope.create = function (competition_sport) {
+    $scope.create = function (newsport) {
         $http({
             method: 'POST',
-            url: apiV1('competitions/create'),
-            data: competition_sport
+            url: apiV1('sports/create'),
+            data: newsport
         }).then(function success(response) {
             console.log('created sport');
-            var createdCompetition = response.data;
+            var createdSport = response.data;
             //display confirmation alert
-            $rootScope.successAlert = 'A new competition "' + createdCompetition.sport.name + '" was created';
-            //change view to list of competitions
-            $location.path("/admin/competitions");
+            $rootScope.successAlert = 'A new sport "' + createdSport.name + '" was created';
+            //change view to list of sports
+            $location.path("/admin/sports");
         }, function error(response) {
             //display error
             console.log("error when creating sport");
@@ -283,11 +291,10 @@ semControllers.controller('AdminNewSportCtrl', function ($scope, $routeParams, $
             }
         });
     };
-
-
 });
 
 semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -325,6 +332,7 @@ semControllers.controller('AdminUpdateSportCtrl', function ($scope, $routeParams
 });
 
 semControllers.controller('AdminSportCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -377,7 +385,7 @@ function logoutUser($cookies) {
 // }
 
 semControllers.controller('LoginCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
-
+    $scope.hideAllAlerts();
     $scope.lg = {
         'email': '',
         'password': ''
@@ -407,7 +415,7 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
                 setLoggedUser(response, $cookies);
                 loggedUser = response.data;
             }
-            $rootScope.hideAll();
+            $rootScope.hideAllAlerts();
             $rootScope.successAlert = 'Login success';
             if (isAdmin($cookies)) {
                 $location.path('/sport')
@@ -424,6 +432,7 @@ semControllers.controller('LoginCtrl', function ($scope, $http, $location, $root
 
 
 semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -477,6 +486,7 @@ function checkAdminRights($location, $rootScope, $cookies) {
 }
 
 semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
     if(!checkAdminRights($location, $rootScope, $cookies)){
         return
     }
@@ -529,10 +539,12 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
 });
 
 semControllers.controller('UsersCtrl', function ($scope, $http, $rootScope) {
+    $scope.hideAllAlerts();
     loadUsers($http, $scope, $rootScope);
 });
 
 semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $http) {
+    $scope.hideAllAlerts();
     var id = $routeParams.userId;
     var uri = apiV1('users/' + id);
     console.log('calling ' + uri);
@@ -548,7 +560,11 @@ function loadUsers($http, $scope, $rootScope) {
     $scope.sortReverse = false;
     $scope.searchUser = '';
 
-    var uri = apiV1('users');
+    if (!isAdmin()) {
+        var uri = apiV1('users?role=SPORTSMEN')
+    } else {
+        var uri = apiV1('users');
+    }
     console.log('calling ' + uri);
     $scope.users = [];
     $http.get(uri).then(function (response) {
@@ -566,6 +582,7 @@ function loadUsers($http, $scope, $rootScope) {
 function loadSports($http, $scope) {
     console.log('calling ' + apiV1('sports'));
 
+    $scope.sports = [];
     $http.get(apiV1('sports')).then(function (response) {
         var sports = response.data['_embedded']['sports'];
         console.log('AJAX loaded ' + ' sports');
@@ -577,6 +594,7 @@ function loadSports($http, $scope) {
 function loadCompetitions($http, $scope){
     console.log('calling ' + apiV1('competitions'));
 
+    $scope.competitions = [];
     $http.get(apiV1('competitions')).then(function (response) {
         var competitions = response.data['_embedded']['competitions'];
         console.log(competitions);

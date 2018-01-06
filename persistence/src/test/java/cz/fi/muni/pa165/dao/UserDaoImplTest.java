@@ -37,6 +37,7 @@ public class UserDaoImplTest extends BaseDaoImplTest {
 
     private User user1;
     private User user2;
+    private User userWithCompetition;
 
     @BeforeMethod
     public void createUsers() {
@@ -97,6 +98,18 @@ public class UserDaoImplTest extends BaseDaoImplTest {
     }
 
     @Test
+    public void findAllByRole() {
+        Assertions.assertThat(userDao.findAll(Role.USER))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(user1,user2);
+
+        user2.setRole(Role.SPORTSMEN);
+        userDao.update(user2);
+        Assertions.assertThat(userDao.findAll(Role.SPORTSMEN)).containsOnly(user2);
+        Assertions.assertThat(userDao.findAll(Role.USER)).containsOnly(user1);
+    }
+
+    @Test
     public void findByGendre() {
         Assertions.assertThat(userDao.findByGendre(Gendre.MAN))
                 .usingFieldByFieldElementComparator()
@@ -130,6 +143,22 @@ public class UserDaoImplTest extends BaseDaoImplTest {
         userDao.delete(user1);
         Assertions.assertThat(userDao.findById(user2.getId())).isNotNull();
         Assertions.assertThat(userDao.findById(user1.getId())).isNull();
+    }
+
+    @Test
+    public void testDeleteUserWithCompetition() {
+        Competition competition = createCompetition("Sport");
+        user1.addToCompetition(competition);
+
+        User byId = userDao.findById(user1.getId());
+        Assertions.assertThat(byId).isNotNull();
+        Set<User> sportsMen = competition.getSportsMen();
+        Assertions.assertThat(sportsMen).contains(user1);
+
+        userDao.delete(user1);
+
+        Assertions.assertThat(userDao.findById(user1.getId())).isNull();
+        Assertions.assertThat(competition.getSportsMen()).doesNotContain(user1);
     }
 
     @Test

@@ -84,4 +84,13 @@ public class SportFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     }
 
+    @Test
+    public void testUpdate() {
+        SportDTO dto = sportFacade.load(sport.getId());
+        dto.setName("Unique Sport");
+        sportFacade.update(dto);
+
+        SportDTO found = sportFacade.load(dto.getId());
+        Assertions.assertThat(found.getName()).isEqualTo("Unique Sport");
+    }
 }

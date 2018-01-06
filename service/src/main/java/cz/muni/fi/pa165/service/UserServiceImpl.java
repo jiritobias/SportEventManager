@@ -60,8 +60,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll(Role role) {
+        return userDao.findAll(role);
+    }
+
+    @Override
     public void registerUser(User user, String password, String email) {
         registerUserWithRole(user, password, email, Role.USER);
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
     }
 
     @Override
