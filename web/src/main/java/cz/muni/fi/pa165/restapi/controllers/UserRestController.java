@@ -233,8 +233,10 @@ public class UserRestController {
      */
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public final HttpEntity<UserResource> deleteUser(@PathVariable("id") long id) {
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
-        if (sportsMenDTO == null) {
+        SportsMenDTO sportsMenDTO;
+        try {
+            sportsMenDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
 
@@ -252,12 +254,19 @@ public class UserRestController {
      * @return http response entity with user resource
      */
     @RequestMapping(value = "/{id}/changePassword", method = RequestMethod.POST)
-    public final HttpEntity<UserNewPasswordResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
+    public final HttpEntity<UserNewPasswordResource> changePassword(@PathVariable("id") long id, @RequestBody @Valid ChangePasswordDTO changePasswordDTO, BindingResult bindingResult) {
         logger.debug("UserRestController changePassword()");
 
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+
         assert id == changePasswordDTO.getId();
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
-        if (sportsMenDTO == null) {
+        SportsMenDTO sportsMenDTO;
+        try {
+            sportsMenDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
 
@@ -276,11 +285,18 @@ public class UserRestController {
      * @return response with ID and the new password
      */
     @RequestMapping(value = "/{id}/resetPassword", method = RequestMethod.POST)
-    public final HttpEntity<UserNewPasswordResource> resetPassword(@PathVariable("id") long id, @RequestBody @Valid ResetPasswordDTO resetPasswordDTO) {
+    public final HttpEntity<UserNewPasswordResource> resetPassword(@PathVariable("id") long id, @RequestBody @Valid ResetPasswordDTO resetPasswordDTO, BindingResult bindingResult) {
         logger.debug("UserRestController resetPassword({})", id);
 
-        SportsMenDTO sportsMenDTO = sportsMenFacade.load(id);
-        if (sportsMenDTO == null) {
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+
+        SportsMenDTO sportsMenDTO;
+        try {
+            sportsMenDTO = sportsMenFacade.load(id);
+        } catch (Exception e) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
         assert Objects.equals(sportsMenDTO.getEmail(), resetPasswordDTO.getEmail());
@@ -302,8 +318,13 @@ public class UserRestController {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public final HttpEntity<UserResource> updateUser(@PathVariable("id") long id, @RequestBody @Valid SportsMenDTO sportsMenDTO) {
+    public final HttpEntity<UserResource> updateUser(@PathVariable("id") long id, @RequestBody @Valid SportsMenDTO sportsMenDTO, BindingResult bindingResult) {
         logger.debug("UserRestController updateUser({})", id);
+
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
 
         assert id == sportsMenDTO.getId();
 
