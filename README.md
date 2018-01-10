@@ -32,3 +32,7 @@ To run : `mvn clean install && cd web && mvn tomcat7:run`
 - pa165/rest/users/{id}/delete : `curl -i -X POST --data '{"id":1}' http://localhost:8080/pa165/rest/users/1/delete`
 - pa165/rest/users/{id}/changePassword : `curl -X POST -H 'Content-Type: application/json' --data '{"id":1, "oldPassword":"sportsmenHeslo", "newPassword":"heslo"}' http://localhost:8080/pa165/rest/users/1`
 - pa165/rest/users/{id}/resetPassword : `curl -X POST -H 'Content-Type: application/json' --data '{"id":1, "email":"prvni@gmail.com"}' http://localhost:8080/pa165/rest/users/1/resetPassword`
+
+ROLES - username - password
+ - ADMINISTRATOR- admin@gmail.com : admin
+ - SPORTSMEN - sportsmen@gmail.com : sportsmenPass
