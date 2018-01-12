@@ -1,0 +1,22 @@
+<div ng-model="user">
+    <h1>{{sport.name}}</h1>
+
+    <div>
+        ID: {{sport.id}}<br/>
+        <h2>SportsMen</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="sportsman in sport.sportsmen">
+                <td>{{sportsman}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

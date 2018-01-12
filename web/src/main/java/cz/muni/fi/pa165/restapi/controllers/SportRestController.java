@@ -1,6 +1,9 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
+import cz.fi.muni.pa165.dto.CompetitionDTO;
 import cz.fi.muni.pa165.dto.SportDTO;
+import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.facade.CompetitionFacade;
 import cz.fi.muni.pa165.facade.SportFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
 import cz.muni.fi.pa165.restapi.exceptions.CannotDeleteResourceException;
@@ -22,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -41,6 +45,8 @@ public class SportRestController {
     @Autowired
     private SportFacade sportFacade;
 
+    @Autowired
+    private CompetitionFacade CompetitionFacade;
 
     final static Logger log = LoggerFactory.getLogger(SportRestController.class);
 
@@ -114,9 +120,24 @@ public class SportRestController {
         if (sportDTO == null) {
             throw new ResourceNotFoundException("sport " + id + " not found");
         }
+        List<SportsMenDTO> sportsmen = getSportsmen(id);
+        sportDTO.setSportsMenDTOList(sportsmen);
 
         SportResource sportResource = sportResourceAssembler.toResource(sportDTO);
         return new ResponseEntity<>(sportResource, HttpStatus.OK);
+    }
+
+    private List<SportsMenDTO> getSportsmen(long id) {
+        List<SportsMenDTO> sportsMenDTOS = new ArrayList<>();
+
+        List<CompetitionDTO> competitions = CompetitionFacade.getAll();
+        competitions.forEach(c-> {
+            if(c.getSport().getId() == id){
+                sportsMenDTOS.addAll(c.getSportsMen());
+            }
+        });
+
+        return sportsMenDTOS;
     }
 
 }

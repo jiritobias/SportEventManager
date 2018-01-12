@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dto;
 
 import lombok.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * @author jiritobias, Martin Smid
@@ -17,6 +18,13 @@ public class SportDTO {
     @NonNull
     @Size(max = 40)
     private String name;
+
+    private List<SportsMenDTO> sportsMenDTOList;
+
+    public SportDTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {
