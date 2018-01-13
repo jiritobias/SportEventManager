@@ -54,4 +54,11 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
      * Updates user.
      */
     void update(SportsMenDTO sportsMenDTO);
+
+    /**
+     * Load sportsman with given email
+     * @param email
+     * @return sportsman
+     */
+    SportsMenDTO loadByEmail(String email);
 }

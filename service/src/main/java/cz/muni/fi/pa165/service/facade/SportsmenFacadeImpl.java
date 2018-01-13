@@ -101,4 +101,9 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
     public List<SportsMenDTO> getAll() {
         return beanMappingService.mapTo(userService.findAll(), SportsMenDTO.class);
     }
+
+    @Override
+    public SportsMenDTO loadByEmail(String email){
+        return beanMappingService.mapTo(userService.findByEmail(email), SportsMenDTO.class);
+    }
 }

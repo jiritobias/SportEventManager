@@ -371,4 +371,15 @@ public class UserRestController {
         UserResource resource = userResourceAssembler.toResource(menDTO);
         return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/loadByEmail/{email}", method = RequestMethod.GET)
+    public final HttpEntity<UserResource> getUserByEmail(@PathVariable("email") String email) throws Exception {
+        SportsMenDTO sportsman =  sportsMenFacade.loadByEmail(email);
+        if (sportsman == null) {
+            throw new ResourceNotFoundException("user " + email + " not found");
+        }
+
+        UserResource resource = userResourceAssembler.toResource(sportsman);
+        return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+    }
 }
