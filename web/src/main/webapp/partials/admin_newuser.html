@@ -22,12 +22,12 @@
             <p class="help-block" ng-show="form.lastname.$error.minlength">lastname must be at least 3 characters</p>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': !(form.password.$valid)}">
+    <div class="form-group" ng-class="{'has-error': !(form.password.$valid)}" ng-hide="updating">
         <label for="password" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
             <input placeholder="password" id="password" type="text" ng-minlength="8" name="password"
                    class="form-control"
-                   ng-model="user.password" required/>
+                   ng-model="user.password" ng-required="!updating"/>
             <p class="help-block" ng-show="form.password.$error.required">password is required</p>
             <p class="help-block" ng-show="form.password.$error.minlength">name must be at least 8 characters</p>
         </div>
@@ -72,11 +72,13 @@
     <div class="form-group row" ng-class="{'has-error': !(form.gender.$valid)}">
         <label for="gender" class="col-sm-2 control-label">Gender</label>
         <div class="col-sm-10">
-            <select class="form-control" id="gender" name="gender" ng-model="user.gendre" ng-options="gender for gender in genders"></select>
+            <select class="form-control" id="gender" name="gender" ng-model="user.gender" ng-options="gender for gender in genders"></select>
         </div>
     </div>
 
     <!-- show disabled button if form is not valid -->
-    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="create(user)">Create user
+    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="create(user)" ng-show="!updating">Create user
+</button>
+    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="update(user)" ng-show="updating">Update user
     </button>
 </form>
