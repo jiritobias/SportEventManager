@@ -49,10 +49,10 @@ pa165semApp.config(['$routeProvider',
         }).when('/login', {
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
-          }).when('/sport/:sportId', {
+        }).when('/sport/:sportId', {
             templateUrl: 'partials/sport_detail.html',
             controller: 'SportDetailCtrl'
-          }).otherwise({redirectTo: '/default'});
+        }).otherwise({redirectTo: '/default'});
 
     }]);
 
@@ -81,9 +81,35 @@ semControllers.controller('HomeCtrl', function ($scope, $http) {
 /*
  *
  */
-semControllers.controller('CompetitionCtrl', function ($scope, $http) {
+semControllers.controller('CompetitionCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
     $scope.hideAllAlerts();
     loadCompetitions($http, $scope)
+
+    $scope.unregisterFromCompUser = function(competition){
+
+        var loggedUser = getLoggedUser($cookies);
+        // $http({
+        //     method: 'POST',
+        //     url: apiV1('competitions/unregister'),
+        //     data: msg
+        // })
+        $http({
+            method: 'GET',
+            url: apiV1('users/loadByEmail/'+loggedUser.username),
+        }).then(function (response) {
+            try {
+                console.log(response.data);
+                loggedUser.email = response.data['_embedded']['userId'];
+                console.log('AJAX loaded userId ' + userId);
+                console.log(userId);
+            } catch (e) {
+                $rootScope.warningAlert = 'No users found!';
+            }
+        });
+
+        console.log(loggedUser.id);
+    };
+    $location.path("/competition");
 });
 
 semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ, $cookies) {
@@ -253,23 +279,23 @@ semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParam
             var createdCompetition = response.data;
 
             // display confirmation alert
-$rootScope.successAlert = 'A new competition in "' + createdCompetition.dtoSport.name + '" was created';
+            $rootScope.successAlert = 'A new competition in "' + createdCompetition.dtoSport.name + '" was created';
 // change view to list of sports
-$location.path("/admin/competitions");
-}, function error(response) {
-    // display error
-console.log("error when creating competition");
-console.log(response);
-switch (response.data.code) {
-    case 'InvalidRequestException':
-        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
-        break;
-    default:
-        $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
-        break;
-}
-});
-};
+            $location.path("/admin/competitions");
+        }, function error(response) {
+            // display error
+            console.log("error when creating competition");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    };
 
 });
 
@@ -591,6 +617,22 @@ semControllers.controller('SportDetailCtrl', function ($scope, $routeParams, $ht
         console.log($scope.sport);
     });
 });
+
+
+function getUserIdByEmail($http, $scope, $rootScope, email){
+    var userId = false;
+    $http.get(apiV1('users/loadByEmail/'+email)).then(function (response) {
+        try {
+            console.log(response.data['_embedded']);
+            userId = response.data['_embedded']['userId'];
+            console.log('AJAX loaded userId ' + userId);
+            console.log(userId);
+        } catch (e) {
+            $rootScope.warningAlert = 'No users found!';
+        }
+    });
+    return userId
+}
 
 function loadUsers($http, $scope, $rootScope, $cookies) {
     $scope.sortType = 'id';

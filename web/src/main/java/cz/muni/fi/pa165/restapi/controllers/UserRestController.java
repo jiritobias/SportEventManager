@@ -374,7 +374,9 @@ public class UserRestController {
 
     @RequestMapping(value = "/loadByEmail/{email}", method = RequestMethod.GET)
     public final HttpEntity<UserResource> getUserByEmail(@PathVariable("email") String email) throws Exception {
+        System.out.println(email);
         SportsMenDTO sportsman =  sportsMenFacade.loadByEmail(email);
+
         if (sportsman == null) {
             throw new ResourceNotFoundException("user " + email + " not found");
         }
