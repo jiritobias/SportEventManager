@@ -642,7 +642,7 @@ semControllers.controller('AdminUpdateUserCtrl', function ($scope, $routeParams,
     console.log('updating user');
 });
 
-semControllers.controller('UsersCtrl', function ($scope, $http, $rootScope) {
+semControllers.controller('UsersCtrl', function ($scope, $http, $rootScope, $cookies) {
     $scope.hideAllAlerts();
     loadUsers($http, $scope, $rootScope, $cookies);
 });
