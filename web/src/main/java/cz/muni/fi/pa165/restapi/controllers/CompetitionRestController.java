@@ -4,6 +4,8 @@ import cz.fi.muni.pa165.dto.AddSportsMenDTO;
 import cz.fi.muni.pa165.dto.CancelRegistrationDTO;
 import cz.fi.muni.pa165.dto.CompetitionDTO;
 import cz.fi.muni.pa165.dto.CreateCompetitionDTO;
+import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.entity.Sport;
 import cz.fi.muni.pa165.facade.CompetitionFacade;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -52,12 +55,24 @@ public class CompetitionRestController {
     public final HttpEntity<Resources<CompetitionResource>> getCompetitions() {
         logger.debug("rest getCompetitions()");
 
-        List<CompetitionResource> competitionResources = competitionResourceAssembler.toResources(competitionFacade.getAll());
+        List<CompetitionDTO> competitionDTOList = competitionFacade.getAll();
+        sportsmenCompetitionsNull(competitionDTOList);
+        List<CompetitionResource> competitionResources = competitionResourceAssembler.toResources(
+                competitionDTOList);
 
         Resources<CompetitionResource> resources = new Resources<>(competitionResources,
                 linkTo(CompetitionRestController.class).withSelfRel());
 
         return new ResponseEntity<>(resources, HttpStatus.OK);
+    }
+
+    private void sportsmenCompetitionsNull(Iterable<CompetitionDTO> competitionDTOList) {
+        for (CompetitionDTO competitionDTO : competitionDTOList) {
+            List<SportsMenDTO> sportsMen = competitionDTO.getSportsMen();
+            for (SportsMenDTO sportsMenDTO : sportsMen) {
+                sportsMenDTO.setCompetitions(null);
+            }
+        }
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -103,6 +118,8 @@ public class CompetitionRestController {
             throw new ResourceNotFoundException("competition with id " + id + " not found");
         }
 
+        sportsmenCompetitionsNull(Arrays.asList(competitionDTO));
+
         CompetitionResource competitionResource = competitionResourceAssembler.toResource(competitionDTO);
         return new ResponseEntity<>(competitionResource, HttpStatus.OK);
     }
@@ -119,6 +136,8 @@ public class CompetitionRestController {
                 result.add(comp);
             }
         }
+
+        sportsmenCompetitionsNull(result);
 
         List<CompetitionResource> competitionResources = competitionResourceAssembler.toResources(result);
         Resources<CompetitionResource> resources = new Resources<>(competitionResources,

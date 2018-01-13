@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author jiritobias
