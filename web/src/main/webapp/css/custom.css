@@ -1,0 +1,18 @@
+.body {
+    margin-bottom: 60px;
+}
+
+.html {
+    min-height: 100%;
+    position: relative;
+}
+
+.footer {
+    position: absolute;
+    height: 60px;
+    margin: 0px auto;
+    padding: 20px 0px;
+    bottom: 0;
+    width: 100%;
+    background: #e0e0e0;
+}

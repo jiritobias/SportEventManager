@@ -9,15 +9,7 @@
     <title>Sport Event Manager</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-cookies.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/ee7c940648.js"></script>
-    <!--<script src="${pageContext.request.contextPath}/angular.js"></script>-->
-    <script src="angular.js"></script>
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body>
@@ -62,6 +54,8 @@
                             </li>
                         </ul>
                     </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#/login">Login</a>
                     </li>
@@ -102,11 +96,27 @@
             <!-- the place where HTML templates are replaced by AngularJS routing -->
             <div ng-view></div>
         </div>
-
-        <footer class="footer">
-            <p>&copy;&nbsp;Masaryk University</p>
-        </footer>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-auto">
+                    <p>&copy;&nbsp;Masaryk University</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-cookies.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/ee7c940648.js"></script>
+    <!--<script src="${pageContext.request.contextPath}/angular.js"></script>-->
+    <script src="angular.js"></script>
 </body>
 
 </html>
