@@ -1,8 +1,11 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
+import cz.fi.muni.pa165.dto.AddSportsMenDTO;
+import cz.fi.muni.pa165.dto.CancelRegistrationDTO;
 import cz.fi.muni.pa165.dto.CompetitionDTO;
 import cz.fi.muni.pa165.dto.CreateCompetitionDTO;
 import cz.fi.muni.pa165.facade.CompetitionFacade;
+import cz.fi.muni.pa165.facade.SportsMenFacade;
 import cz.muni.fi.pa165.restapi.ApiUris;
 import cz.muni.fi.pa165.restapi.exceptions.*;
 import cz.muni.fi.pa165.restapi.hateoas.CompetitionResource;
@@ -41,6 +44,9 @@ public class CompetitionRestController {
 
     @Autowired
     private CompetitionFacade competitionFacade;
+
+    @Autowired
+    private SportsMenFacade sportsMenFacade;
 
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<Resources<CompetitionResource>> getCompetitions() {
@@ -131,6 +137,30 @@ public class CompetitionRestController {
 
         CompetitionResource resource = competitionResourceAssembler.toResource(competitionDTO);
         competitionFacade.delete(competitionDTO);
+        return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<CompetitionResource> registerToCompetition(@RequestBody @Valid AddSportsMenDTO addSportsMenDTO, BindingResult bindingResult) throws Exception {
+        logger.debug("rest registerToCompetition()");
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+        competitionFacade.addSportsMen(addSportsMenDTO);
+        CompetitionResource resource = competitionResourceAssembler.toResource(competitionFacade.load(addSportsMenDTO.getCompetition()));
+        return new ResponseEntity<>(resource, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/unregister", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<CompetitionResource> unregisterFromCompetition(@RequestBody @Valid CancelRegistrationDTO cancelRegistrationDTO, BindingResult bindingResult) throws Exception {
+        logger.debug("rest unregisterFromCompetition()");
+        if (bindingResult.hasErrors()) {
+            logger.error("failed validation {}", bindingResult.toString());
+            throw new InvalidRequestException("Failed validation");
+        }
+        sportsMenFacade.cancelRegistration(cancelRegistrationDTO);
+        CompetitionResource resource = competitionResourceAssembler.toResource(competitionFacade.load(cancelRegistrationDTO.getCompetition()));
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 }
