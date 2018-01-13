@@ -602,6 +602,11 @@ semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $ht
 
     $http.get(uri).then(function (response) {
         $scope.user = response.data;
+        $scope.user.comps = [];
+        $scope.user.competitions.forEach((t, number) => {
+            $scope.user.comps.push("Competition " + t.id + " (" + t.sport.name + ", " + t.date + ")");
+        });
+        $scope.user.comps = $scope.user.comps.join(", ");
         console.log($scope.user);
     });
 });
