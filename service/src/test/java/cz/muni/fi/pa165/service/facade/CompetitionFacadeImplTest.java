@@ -17,6 +17,8 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +52,7 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
         competitionService.create(competition);
 
         sportDTO = new SportDTO(sport.getId(), "Tennis");
-        competitionDTO = new CompetitionDTO(competition.getId(), sportDTO, null);
+        competitionDTO = new CompetitionDTO(competition.getId(), sportDTO, null, new Date());
     }
 
     @AfterMethod
@@ -73,7 +75,7 @@ public class CompetitionFacadeImplTest extends AbstractTestNGSpringContextTests 
         competition.setSport(sport);
         competitionService.create(competition);
 
-        CompetitionDTO competitionDTO = new CompetitionDTO(competition.getId(), new SportDTO(sport.getId(), sport.getName()), null);
+        CompetitionDTO competitionDTO = new CompetitionDTO(competition.getId(), new SportDTO(sport.getId(), sport.getName()), null, new Date());
 
         List<CompetitionDTO> all = competitionFacade.getAll();
 
