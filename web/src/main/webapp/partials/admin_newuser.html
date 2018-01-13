@@ -36,7 +36,7 @@
         <label for="email" class="col-sm-2 control-label">Email</label>
         <div class="col-sm-10">
             <input placeholder="email" id="email" type="email" name="email" class="form-control" ng-model="user.email"
-                   required/>
+                   ng-pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/" required/>
             <p class="help-block" ng-show="form.email.$error.required">email is required</p>
             <p class="help-block" ng-show="form.email.$error.email">email is not valid</p>
         </div>
