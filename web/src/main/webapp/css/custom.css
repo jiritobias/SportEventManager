@@ -1,13 +1,14 @@
-.body {
+body {
     margin-bottom: 60px;
+    padding-bottom: 20px;
 }
 
-.html {
+html {
     min-height: 100%;
     position: relative;
 }
 
-.footer {
+footer {
     position: absolute;
     height: 60px;
     margin: 0px auto;
