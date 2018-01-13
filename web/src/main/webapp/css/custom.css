@@ -16,3 +16,13 @@
     width: 100%;
     background: #e0e0e0;
 }
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+.table td.fit,
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}

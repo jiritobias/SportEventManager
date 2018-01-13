@@ -1,23 +1,35 @@
-<a href="#/admin/newsport" class="btn btn-primary">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    New sport
-</a>
-<table class="table">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>sport name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="sport in sports">
-        <td>{{sport.id}}</td>
-        <td>{{sport.name}}</td>
-        <td>
-            <button ng-click="update(sport)" class="btn btn-primary"
-                    type="submit">Edit
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-12">
+        <h2 class="col">
+            <span>Sports</span>
+            <a href="#/admin/newsport" class="btn btn-primary pull-right" type="button">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                New sport
+            </a>
+        </h2>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sport name</th>
+                        <th class="fit"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="sport in sports">
+                        <td>
+                            <a href="#/sport/{{sport.id}}">{{sport.id}}</a>
+                        </td>
+                        <td>{{sport.name}}</td>
+                        <td class="fit">
+                            <button ng-click="update(sport)" class="btn btn-primary" type="submit">Edit
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

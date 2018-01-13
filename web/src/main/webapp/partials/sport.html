@@ -1,14 +1,23 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>sport name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="sport in sports">
-        <td><a href="#/sport/{{sport.id}}">{{sport.id}}</a></td>
-        <td>{{sport.name}}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-12">
+        <h2>Sports</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sport name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="sport in sports">
+                        <td>
+                            <a href="#/sport/{{sport.id}}">{{sport.id}}</a>
+                        </td>
+                        <td>{{sport.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
