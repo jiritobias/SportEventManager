@@ -45,21 +45,34 @@
         <tr ng-repeat="competition in competitions">
             <td>{{competition.dtoId}}</td>
             <td>{{competition.dtoSport.name}}</td>
-            <td>{{competition.dtoSportsmen.email}}</td>
+            <td><li ng-repeat="sportsman in competition.dtoSportsmen">
+                {{sportsman.email}}
+                <a href="#refreshAdminCompetitions"
+                   ng-click="unregisterFromComp(sportsman, competition)"
+                   class="btn btn-primary"
+                   style="float: right;"
+                >
+                    <span class="glyphicon glyphicon-plus"
+                          aria-hidden="true"></span>
+                    Unregister from competition
+                </a>
+            </li>
+
+            </td>
             <td> </td>
             <td>
                 <button ng-click="delete(competition)" class="btn btn-primary"
                         type="submit" style="float: right;">Delete competition
                 </button>
-                <!--<a href="#/admin/registertocompetition"-->
-                   <!--ng-click="loadCompetition(competition)"-->
-                   <!--class="btn btn-primary"-->
-                   <!--style="float: right;"-->
-                <!--&gt;-->
-                    <!--<span class="glyphicon glyphicon-plus"-->
-                          <!--aria-hidden="true"></span>-->
-                    <!--Register to competition-->
-                <!--</a>-->
+                <a href="#/admin/registertocompetition"
+                   ng-click="loadCompetition(competition)"
+                   class="btn btn-primary"
+                   style="float: right;"
+                >
+                    <span class="glyphicon glyphicon-plus"
+                          aria-hidden="true"></span>
+                    Register to competition
+                </a>
             </td>
         </tr>
         </tbody>

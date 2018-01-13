@@ -49,7 +49,12 @@ pa165semApp.config(['$routeProvider',
         }).when('/login', {
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
-          }).otherwise({redirectTo: '/default'});
+        }).when('/refreshAdminCompetitions', {
+            templateUrl: 'partials/admin_competitions',
+            controller: 'AdminCompetitionsCtrl'
+        })
+
+            .otherwise({redirectTo: '/default'});
 
     }]);
 
@@ -79,7 +84,11 @@ semControllers.controller('CompetitionCtrl', function ($scope, $http) {
     loadCompetitions($http, $scope)
 });
 
-semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ) {
+semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, $cookies, competitionServ) {
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
     loadCompetitions($http, $scope);
 
     $scope.update = function (competition) {
@@ -109,7 +118,7 @@ semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $loc
             }
         }).then(function success(response) {
             console.log('competition deleted');
-           // $location.path("/admin/competitions");
+            // $location.path("/admin/competitions");
             $rootScope.successAlert = 'Competition with id ' + response.data.id + ' was deleted';
             loadCompetitions($http, $scope, $rootScope);
         }, function error(response) {
@@ -127,6 +136,35 @@ semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $loc
         });
     }
 
+    $scope.unregisterFromComp = function (sportsman, competition) {
+        var msg = '{"sportsMen":' + sportsman.id + ',"competition":' + competition.id + '}';
+        console.log(msg);
+
+        $http({
+            method: 'POST',
+            url: apiV1('competitions/unregister'),
+            data: msg
+        }).then(function success(response) {
+            console.log('users unregistred from competition');
+            // display confirmation alert
+            $rootScope.successAlert = 'User was unregistered successfully.';
+            // change view to list of sports
+            $location.path("/admin/competitions");
+        }, function error(response) {
+            // display error
+            console.log("error when updating competition");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot unregister from competition ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    }
+
 
 });
 
@@ -139,40 +177,34 @@ semControllers.service('competitionServ', function () {
 semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, $rootScope, $location, competitionServ) {
     console.log('register to competition');
 
+    $scope.result = {
+        checked:''
+    };
 
     loadUsers($http, $scope);
 
 
-    $scope.registertocomp = function (users) {
+    $scope.registertocomp = function (result) {
+
         var competition = competitionServ.competition;
 
-        users.forEach(function (u, index) {
-            if(competition.dtoSportsmen.indexOf(u) === -1){
-                delete u['_links'];
-                u.passwordHash = '666';
-                competition.dtoSportsmen.push(u);
-            }
-        });
+        if(competition.dtoSportsmen.indexOf(result) !== -1){
+            $rootScope.errorAlert('User already at competition');
+            return;
+        }
 
-        competition.sportsmen = competition.dtoSportsmen;
-        competition.sport = competition.dtoSport;
-        //
-        delete competition.dtoSport;
-        delete competition.dtoSportsmen;
-        delete competition.dtoId;
-        delete competition['_links'];
-
-        console.log(competition);
+        var msg = '{"sportsMan":' + result.id + ',"competition":' + competition.id + '}';
+        console.log(msg);
 
         $http({
             method: 'POST',
-            url: apiV1('competitions/update'),
-            data: competition
+            url: apiV1('competitions/register'),
+            data: msg
         }).then(function success(response) {
             console.log('users added to competition');
             // display confirmation alert
             $rootScope.successAlert = 'Selected users was added to competition.';
-// change view to list of sports
+            // change view to list of sports
             $location.path("/admin/competitions");
         }, function error(response) {
             // display error
@@ -189,6 +221,7 @@ semControllers.controller('RegisterToCompetitionCtrl', function ($scope, $http, 
         });
     };
 });
+
 
 semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     console.log('creating new competition');
@@ -217,23 +250,23 @@ semControllers.controller('CreateCompetitionCtrl', function ($scope, $routeParam
             var createdCompetition = response.data;
 
             // display confirmation alert
-$rootScope.successAlert = 'A new competition in "' + createdCompetition.dtoSport.name + '" was created';
+            $rootScope.successAlert = 'A new competition in "' + createdCompetition.dtoSport.name + '" was created';
 // change view to list of sports
-$location.path("/admin/competitions");
-}, function error(response) {
-    // display error
-console.log("error when creating competition");
-console.log(response);
-switch (response.data.code) {
-    case 'InvalidRequestException':
-        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
-        break;
-    default:
-        $rootScope.errorAlert = 'Cannot create sport ! Reason given by the server: ' + response.data.message;
-        break;
-}
-});
-};
+            $location.path("/admin/competitions");
+        }, function error(response) {
+            // display error
+            console.log("error when creating competition");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot create competition ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    };
 
 });
 
@@ -586,6 +619,7 @@ function apiV1(path) {
 var loggedUser = undefined;
 
 function isLogged() {
+    console.log('asdasdasdsad ' +loggedUser);
     return loggedUser !== undefined;
 }
 

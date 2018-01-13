@@ -7,11 +7,12 @@
             <table>
                 <tr ng-repeat="user in users">
                     <td>
-                        <input type="checkbox" name="name" value="{{user}}">{{" " + user.firstname + " " + user.lastname + ", " + user.email}}<br>
+                        <input type="radio" ng-model="result.checked" name="name" ng-value="{{user}}" value="{{user}}">{{" " + user.firstname + " " + user.lastname + ", " + user.email}}<br>
                     </td>
                 </tr>
             </table>
         </div>
+
     <!--</div>-->
-    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="registertocomp(users)">Register to competition</button>
+    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="registertocomp(result.checked)">Register to competition</button>
 </form>
