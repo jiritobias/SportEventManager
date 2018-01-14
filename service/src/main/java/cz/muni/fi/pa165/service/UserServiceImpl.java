@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void registerUser(User user, String password, String email, Role role) {
+        registerUserWithRole(user, password, email, role);
+    }
+
+    @Override
     public void update(User user) {
         userDao.update(user);
     }
