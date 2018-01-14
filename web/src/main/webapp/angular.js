@@ -25,6 +25,9 @@ pa165semApp.config(['$routeProvider',
         }).when('/admin/newuser', {
             templateUrl: 'partials/admin_newuser.html',
             controller: 'AdminNewUserCtrl'
+        }).when('/admin/updateuser', {
+            templateUrl: 'partials/admin_newuser.html',
+            controller: 'AdminUpdateUserCtrl'
         }).when('/default', {
             templateUrl: 'partials/default.html',
             controller: 'HomeCtrl'
@@ -493,6 +496,7 @@ semControllers.controller('AdminUserCtrl', function ($scope, $http, $location, $
     $scope.update = function (user) {
         console.log('updating  user');
         $rootScope.user = user;
+        $rootScope.user.birthdate = new Date($rootScope.user.birthdate);
         $location.path("/admin/updateuser");
     };
 
@@ -545,12 +549,13 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
     console.log('creating new user');
     $scope.roles = ['SPORTSMEN', 'USER', 'ADMINISTRATOR'];
     $scope.genders = ['MAN', 'WOMAN'];
+    $scope.updating = false;
 
     $scope.user = {
         'firstname': '',
         'lastname': '',
         'email': '',
-        'gendre': $scope.genders[0],
+        'gender': $scope.genders[0],
         'birthdate': '',
         'phone': '',
         'address': '',
@@ -589,6 +594,54 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
 
 });
 
+semControllers.controller('AdminUpdateUserCtrl', function ($scope, $routeParams, $http, $location, $rootScope, $cookies) {
+    $scope.hideAllAlerts();
+    if(!checkAdminRights($location, $rootScope, $cookies)){
+        return
+    }
+
+    $scope.roles = ['SPORTSMEN', 'USER', 'ADMINISTRATOR'];
+    $scope.genders = ['MAN', 'WOMAN'];
+    $scope.updating = true;
+
+    $scope.update = function (user) {
+        $http({
+            method: 'PUT',
+            url: apiV1('users/' + user.id),
+            data: {
+                "id": user.id,
+                "email": user.email,
+                "firstname": user.firstname,
+                "lastname": user.lastname,
+                "gendre": user.gender,
+                "birthdate": user.birthdate,
+                "phone": user.phone,
+                "address": user.address,
+                "role": user.role,
+                "passwordHash": ""
+            }
+        }).then(function success(response) {
+            var updatedUser = response.data;
+            $rootScope.successAlert = 'User ' + updatedUser.id + ' was updated';
+            $location.path('/admin/users');
+        }, function error(response) {
+            //display error
+            console.log("error when updating user");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot update user ! Reason given by the server: ' + response.data.message;
+                    break;
+            }
+        });
+    };
+
+    console.log('updating user');
+});
+
 semControllers.controller('UsersCtrl', function ($scope, $http, $rootScope, $cookies) {
     $scope.hideAllAlerts();
     loadUsers($http, $scope, $rootScope, $cookies);
@@ -602,6 +655,11 @@ semControllers.controller('UserDetailsCtrl', function ($scope, $routeParams, $ht
 
     $http.get(uri).then(function (response) {
         $scope.user = response.data;
+        $scope.user.comps = [];
+        $scope.user.competitions.forEach((t, number) => {
+            $scope.user.comps.push("Competition " + t.id + " (" + t.sport.name + ", " + t.date + ")");
+        });
+        $scope.user.comps = $scope.user.comps.join(", ");
         console.log($scope.user);
     });
 });

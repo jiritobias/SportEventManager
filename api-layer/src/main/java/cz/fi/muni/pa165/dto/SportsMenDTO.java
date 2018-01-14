@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author jiritobias
@@ -38,6 +40,7 @@ public class SportsMenDTO {
     @NonNull
     private Role role;
     private Gendre gendre;
+    private List<CompetitionDTO> competitions = new ArrayList<>();
 
     @Override
     public int hashCode() {

@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.dto;
 
 import lombok.*;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +18,7 @@ public class CompetitionDTO {
     private Long id;
     private SportDTO sport;
     private List<SportsMenDTO> sportsMen;
+    private Date date;
 
     @Override
     public boolean equals(Object o) {

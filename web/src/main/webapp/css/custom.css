@@ -1,0 +1,29 @@
+body {
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+footer {
+    position: absolute;
+    height: 60px;
+    margin: 0px auto;
+    padding: 20px 0px;
+    bottom: 0;
+    width: 100%;
+    background: #e0e0e0;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+.table td.fit,
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
