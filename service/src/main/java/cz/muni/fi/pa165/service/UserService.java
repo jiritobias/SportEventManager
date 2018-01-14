@@ -65,6 +65,16 @@ public interface UserService extends BaseService<User> {
     void registerUser(User user, String password, String email);
 
     /**
+     * Registers a new user with the given unencrypted password and email address.
+     *
+     * @param user     user to register
+     * @param password unencrypted password
+     * @param email    email address
+     * @param role     user role
+     */
+    void registerUser(User user, String password, String email, Role role);
+
+    /**
      * Authenticates the user. It checks that the password hash in the records.
      *
      * @param user     user to authenticate
