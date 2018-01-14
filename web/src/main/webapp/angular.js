@@ -439,7 +439,6 @@ function logoutUser($cookies) {
 // }
 
 semControllers.controller('LoginCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
-    $scope.hideAllAlerts();
     $scope.lg = {
         'email': '',
         'password': ''
