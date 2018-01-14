@@ -568,7 +568,17 @@ semControllers.controller('AdminNewUserCtrl', function ($scope, $routeParams, $h
         $http({
             method: 'POST',
             url: apiV1('users/create'),
-            data: user
+            data: {
+                'firstname': user.firstname,
+                'lastname': user.lastname,
+                'email': user.email,
+                'gendre': user.gender,
+                'birthdate': user.birthdate,
+                'phone': user.phone,
+                'address': user.address,
+                'role': user.role,
+                'password': user.password
+            }
         }).then(function success(response) {
             console.log('created user');
             var createdUser = response.data;
