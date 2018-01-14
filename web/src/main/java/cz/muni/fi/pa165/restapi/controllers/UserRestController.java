@@ -1,6 +1,9 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
-import cz.fi.muni.pa165.dto.*;
+import cz.fi.muni.pa165.dto.ChangePasswordDTO;
+import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
+import cz.fi.muni.pa165.dto.ResetPasswordDTO;
+import cz.fi.muni.pa165.dto.SportsMenDTO;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
@@ -164,10 +167,6 @@ public class UserRestController {
                         "SortBy parameter options: id, name, firstname, lastname, role, gender, birthdate, email");
         }
 
-        for (UserResource userResource : userResources) {
-            competitionSportsmenNull(userResource.getCompetitions());
-        }
-
         Resources<UserResource> resources = new Resources<>(
                 userResources,
                 linkTo(UserRestController.class).withSelfRel(),
@@ -194,16 +193,8 @@ public class UserRestController {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
 
-        competitionSportsmenNull(sportsMenDTO.getCompetitions());
-
         UserResource userResource = userResourceAssembler.toResource(sportsMenDTO);
         return new ResponseEntity<UserResource>(userResource, HttpStatus.OK);
-    }
-
-    private void competitionSportsmenNull(Iterable<CompetitionDTO> competitions) {
-        for (CompetitionDTO competitionDTO : competitions) {
-            competitionDTO.setSportsMen(null);
-        }
     }
 
     /**
