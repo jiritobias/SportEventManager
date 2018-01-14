@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import cz.fi.muni.pa165.enums.Gendre;
 import cz.fi.muni.pa165.enums.Role;
 import lombok.AllArgsConstructor;
@@ -10,10 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author jiritobias
@@ -42,7 +38,6 @@ public class SportsMenDTO {
     @NonNull
     private Role role;
     private Gendre gendre;
-    private List<CompetitionDTO> competitions = new ArrayList<>();
 
     @Override
     public int hashCode() {

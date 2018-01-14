@@ -2,9 +2,7 @@ package cz.muni.fi.pa165.service.config;
 
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.dto.SportDTO;
-import cz.fi.muni.pa165.dto.SportsMenDTO;
 import cz.fi.muni.pa165.entity.Sport;
-import cz.fi.muni.pa165.entity.User;
 import cz.muni.fi.pa165.service.SportServiceImpl;
 import cz.muni.fi.pa165.service.SportsmenServiceImpl;
 import cz.muni.fi.pa165.service.UserServiceImpl;
@@ -25,7 +23,6 @@ public class ServiceConfiguration {
     public Mapper dozer() {
         DozerBeanMapper dozer = new DozerBeanMapper();
         dozer.addMapping(new DozerCustomConfig());
-        dozer.addMapping(new DozerSportsmenConfig());
         return dozer;
     }
 
@@ -36,11 +33,4 @@ public class ServiceConfiguration {
         }
     }
 
-    public class DozerSportsmenConfig extends BeanMappingBuilder {
-
-        @Override
-        protected void configure() {
-            mapping(User.class, SportsMenDTO.class).fields(field("competitions").accessible(), field("competitions").accessible());
-        }
-    }
 }
