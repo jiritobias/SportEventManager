@@ -9,7 +9,6 @@ import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,20 +16,18 @@ import java.util.List;
  */
 
 @Relation(value = "competition", collectionRelation = "competitions")
-@JsonPropertyOrder({"id", "sport", "sportsmen", "date"})
+@JsonPropertyOrder({"id", "sport", "sportsmen"})
 public class CompetitionResource extends ResourceSupport {
 
     @JsonProperty
     private Long id;
     private SportDTO sport;
     private List<SportsMenDTO> sportsmen;
-    private Date date;
 
     public CompetitionResource(CompetitionDTO competition) {
         id = competition.getId();
         sport = competition.getSport();
         sportsmen = competition.getSportsMen();
-        date = competition.getDate();
     }
 
     public Long getDtoId(){
@@ -56,9 +53,5 @@ public class CompetitionResource extends ResourceSupport {
     public void setDtoSportsmen(List<SportsMenDTO> sportsmen){
         this.sportsmen = new ArrayList<>();
         this.sportsmen.addAll(sportsmen);
-    }
-
-    public Date getDate() {
-        return date;
     }
 }
