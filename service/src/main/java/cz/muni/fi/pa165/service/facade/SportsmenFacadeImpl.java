@@ -103,7 +103,7 @@ public class SportsmenFacadeImpl implements SportsMenFacade {
     }
 
     @Override
-    public SportsMenDTO loadByEmail(String email){
-        return beanMappingService.mapTo(userService.findByEmail(email), SportsMenDTO.class);
+    public SportsMenDTO loadByEmail(FindByEmailDTO email){
+        return beanMappingService.mapTo(userService.findByEmail(email.getEmail()), SportsMenDTO.class);
     }
 }

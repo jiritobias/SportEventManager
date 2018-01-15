@@ -175,4 +175,11 @@ public class SportsmenFacadeImplTest extends AbstractTestNGSpringContextTests {
         Assertions.assertThat(sportsMenDTO.getRole()).isEqualByComparingTo(Role.USER);
         Assertions.assertThat(sportsMenDTO.getGendre()).isEqualByComparingTo(Gendre.WOMAN);
     }
+
+//    @Test
+//    public void testFindByEmail() {
+//        SportsMenDTO sportsman = sportsMenFacade.loadByEmail(sportman.getEmail());
+//        Assertions.assertThat(sportsman).isEqualToComparingFieldByField(sportman);
+//    }
+
 }

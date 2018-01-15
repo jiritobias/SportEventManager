@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.restapi.controllers;
 
-import cz.fi.muni.pa165.dto.ChangePasswordDTO;
-import cz.fi.muni.pa165.dto.CreateSportsMenDTO;
-import cz.fi.muni.pa165.dto.ResetPasswordDTO;
-import cz.fi.muni.pa165.dto.SportsMenDTO;
+import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.facade.SportsMenFacade;
@@ -372,9 +369,9 @@ public class UserRestController {
         return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/loadByEmail/{email}", method = RequestMethod.GET)
-    public final HttpEntity<UserResource> getUserByEmail(@PathVariable("email") String email) throws Exception {
-        System.out.println(email);
+    @RequestMapping(value = "/loadByEmail", method = RequestMethod.POST)
+    public final HttpEntity<UserResource> getUserByEmail(@RequestBody @Valid FindByEmailDTO email) throws Exception {
+        logger.debug(" rest loadByEmail", email.getEmail());
         SportsMenDTO sportsman =  sportsMenFacade.loadByEmail(email);
 
         if (sportsman == null) {
