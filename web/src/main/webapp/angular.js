@@ -84,35 +84,133 @@ semControllers.controller('HomeCtrl', function ($scope, $http) {
 /*
  *
  */
-semControllers.controller('CompetitionCtrl', function ($scope, $http, $location, $rootScope, $cookies) {
+semControllers.controller('CompetitionCtrl', function ($scope, $http, $location, $rootScope, $cookies, $window) {
     $scope.hideAllAlerts();
     loadCompetitions($http, $scope)
 
-    $scope.unregisterFromCompUser = function(competition){
+    $scope.unregisterWithEmail = function (competition, sportsmen) {
 
         var loggedUser = getLoggedUser($cookies);
-        // $http({
-        //     method: 'POST',
-        //     url: apiV1('competitions/unregister'),
-        //     data: msg
-        // })
-        $http({
-            method: 'GET',
-            url: apiV1('users/loadByEmail/'+loggedUser.username),
-        }).then(function (response) {
-            try {
-                console.log(response.data);
-                loggedUser.email = response.data['_embedded']['userId'];
-                console.log('AJAX loaded userId ' + userId);
-                console.log(userId);
-            } catch (e) {
-                $rootScope.warningAlert = 'No users found!';
-            }
-        });
+        if (!isLogged($cookies)) {
+            $rootScope.warningAlert = 'You have to be logged in to perform this action';
+            $location.path("/login");
+            $scope.$apply()
+        }
 
-        console.log(loggedUser.id);
+        var bool = true;
+        competition.dtoSportsmen.forEach(function(sportsman){
+            if(sportsman.email === loggedUser.username){
+               bool = false;
+            }});
+        if(bool){
+            alert('You are not registered in this competition');
+            return;
+        }
+
+
+        $http({
+            method: 'POST',
+            url: apiV1('users/loadByEmail'),
+            data: {'email': loggedUser.username}
+        }).then(function (response) {
+            var id = response.data.id;
+
+            var msg = '{"sportsMen":' + id + ',"competition":' + competition.id + '}';
+
+            console.log(msg);
+
+            $http({
+                method: 'POST',
+                url: apiV1('competitions/unregister'),
+                data: msg
+            }).then(function success(response) {
+                console.log('users unregistred from competition');
+
+                // display confirmation alert
+                $rootScope.successAlert = 'User was unregistered successfully.';
+                // change view to list of sports
+            }, function error(response) {
+                // display error
+                console.log("error when updating competition");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot unregister from competition ! Reason given by the server: ' + response.data.message;
+                        break;
+                }
+            });
+        });
+        $window.location.reload();
+
+        // $location.path("/competition");
+        // $scope.$apply()
     };
-    $location.path("/competition");
+
+
+    $scope.registerWithEmail = function (competition) {
+
+        var loggedUser = getLoggedUser($cookies);
+        if (!isLogged($cookies)) {
+            $rootScope.warningAlert = 'You have to be logged in to perform this action';
+            $location.path("/login");
+            $scope.$apply()
+        }
+
+        var bool = true;
+        competition.dtoSportsmen.forEach(function(sportsman){
+            if(sportsman.email === loggedUser.username){
+                bool = false;
+            }});
+        if(!bool){
+            alert('You are already registered in this competition');
+            return;
+        }
+
+        $http({
+            method: 'POST',
+            url: apiV1('users/loadByEmail'),
+            data: {'email': loggedUser.username}
+        }).then(function (response) {
+            var id = response.data.id;
+
+            var msg = '{"sportsMan":' + id + ',"competition":' + competition.id + '}';
+
+            console.log(msg);
+
+            $http({
+                method: 'POST',
+                url: apiV1('competitions/register'),
+                data: msg
+            }).then(function success(response) {
+                console.log('users registered to competition');
+
+                // display confirmation alert
+                $rootScope.successAlert = 'User was registered successfully.';
+                // change view to list of sports
+                $location.path("/competition");
+                $scope.$apply();
+
+            }, function error(response) {
+                // display error
+                console.log("error when updating competition");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot register from competition ! Reason given by the server: ' + response.data.message;
+                        break;
+                }
+            });
+        });
+        $window.location.reload();
+
+    };
+
 });
 
 semControllers.controller('AdminCompetitionsCtrl', function ($scope, $http, $location, $rootScope, competitionServ, $cookies) {
@@ -758,7 +856,7 @@ function getLoggedUser($cookies) {
 }
 
 function isLogged($cookies) {
-    return getLoggedUser($cookies) !== undefined;
+    return getLoggedUser($cookies).username !== undefined;
 }
 
 function isAdmin($cookies) {

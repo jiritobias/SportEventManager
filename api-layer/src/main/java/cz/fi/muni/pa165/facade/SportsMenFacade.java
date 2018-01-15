@@ -60,5 +60,5 @@ public interface SportsMenFacade extends BaseFacade<SportsMenDTO> {
      * @param email
      * @return sportsman
      */
-    SportsMenDTO loadByEmail(String email);
+    SportsMenDTO loadByEmail(FindByEmailDTO email);
 }
